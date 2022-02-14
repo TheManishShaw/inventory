@@ -1,43 +1,61 @@
 <?php  include "../cores/inc/config_c.php" ?>
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <title>POS – <?php echo $sys_title ?></title>
+      <?php include "../cores/inc/header_c.php" ?>
+   </head>
+   <!--end::Head-->
+   <!--begin::Body-->
+   <body id="kt_body" class="aside-enabled" style="overflow-x: hidden; margin-left:10px">
+      <!--begin::Main-->
+      <!--begin::Root-->
+      <div class="d-flex flex-column flex-root"  >
+      <div class="row">
+      <div class="col-lg-12 mt-2">
+      <div class="col-6 float-end">
+     <!--begin::Action wrapper-->
+     <a href="#" class="btn btn-primary">All </a>
+                  <a href="#" class="btn btn-primary">Category</a>	
+                  <a href="#" class="btn btn-primary">Brand</a>	
+                  <a href="#" class="btn btn-danger">Reset</a>			
+             </div>
+      <div class="col-6 float-left">
+        <a href="">
+<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="black"/>
+<path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="black"/>
+<path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="black"/>
+<path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="black"/>
+</svg></span></a>
+<a href="#">
+  
+</a>
+<a href="">
+  <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr035.svg-->
+<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path opacity="0.3" d="M2 9.09998V3C2 2.4 2.4 2 3 2H9.10001L2 9.09998ZM22 9.09998V3C22 2.4 21.6 2 21 2H14.9L22 9.09998ZM2 14.9V21C2 21.6 2.4 22 3 22H9.10001L2 14.9ZM14.9 22H21C21.6 22 22 21.6 22 21V14.9L14.9 22Z" fill="black"/>
+<path d="M19.2 17.8L13.4 12L19.2 6.20001L17.8 4.79999L12 10.6L6.2 4.79999L4.8 6.20001L10.6 12L4.8 17.8L6.2 19.2L12 13.4L17.8 19.2L19.2 17.8Z" fill="black"/>
+</svg></span>
+<!--end::Svg Icon-->
+</a>
 
-<head>
-		<title>POS – <?php echo $sys_title ?></title>
-		
-        <?php include "../cores/inc/header_c.php" ?>
-	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
-	<body id="kt_body" class="aside-enabled">
-		<!--begin::Main-->
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
-			<div class="page d-flex flex-row flex-column-fluid">
-				<!--begin::Aside-->
-				
-				<!--end::Aside-->
-				<!--begin::Wrapper-->
-				<div class=" flex-row-fluid" id="">
-					<!--begin::Header-->
-                    <div id="kt_header"  class="header align-items-stretch">
-						<!--begin::Brand-->
-						
-						<!--end::Brand-->
-						<div class="toolbar">
-							<!--begin::Toolbar-->
-							<div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
-								<!--begin::Page title-->
-								<div class="page-title d-flex flex-column me-5">
+
+
+
+
+
+             </div>
+             
+             <div class="page-title d-flex flex-column me-5">
 									<!--begin::Title-->
-									<h1 class="d-flex flex-column text-dark fw-bolder fs-3 mb-0">Dashboard</h1>
+									<h1 class="d-flex flex-column text-dark fw-bolder fs-3 mb-0">Roles List</h1>
 									<!--end::Title-->
 									<!--begin::Breadcrumb-->
 									<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
 										<!--begin::Item-->
 										<li class="breadcrumb-item text-muted">
-											<a href="index.php" class="text-muted text-hover-primary">Home</a>
+											<a href="../../../index-2.html" class="text-muted text-hover-primary">Home</a>
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
@@ -46,470 +64,317 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-dark">Dashboard</li>
+										<li class="breadcrumb-item text-muted">Applications</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item">
+											<span class="bullet bg-gray-200 w-5px h-2px"></span>
+										</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item text-muted">User Management</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item">
+											<span class="bullet bg-gray-200 w-5px h-2px"></span>
+										</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item text-muted">Roles</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item">
+											<span class="bullet bg-gray-200 w-5px h-2px"></span>
+										</li>
+										<!--end::Item-->
+										<!--begin::Item-->
+										<li class="breadcrumb-item text-dark">Roles List</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
 								</div>
-								<!--end::Page title-->
-								<!--begin::Action group-->
-								<div class="d-flex align-items-center overflow-auto pt-3 pt-sm-0">
-									<div class="d-flex">
-										<!--begin::Notifications-->
-										<div class="d-flex align-items-center me-4">
-										
-											<a href="#" class="btn btn-icon btn-active-light btn-outline btn-outline-default btn-icon-gray-700 btn-active-icon-primary" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-												
-												<span class="svg-icon svg-icon-1">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<rect x="8" y="9" width="3" height="10" rx="1.5" fill="black" />
-														<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black" />
-														<rect x="18" y="11" width="3" height="8" rx="1.5" fill="black" />
-														<rect x="3" y="13" width="3" height="6" rx="1.5" fill="black" />
-													</svg>
-												</span>
-											
-											</a>
-											
-										</div>
-										
-									</div>
-									<!--end::Actions-->
-								</div>
-								<!--end::Action group-->
-							</div>
-							<!--end::Toolbar-->
-						</div>
-					</div>
-					<!--end::Header-->
-			
-                    <div class="content d-flex flex-column flex-column-fluid" id="" style="overflow: hidden;">
-						<!--begin::Container-->
-                        
-                        <div class="row" style="margin-left: 0px;margin-right:0px;">							
-							
-                                <!--begin::Col-->
-								<div class="col-xl-6"> 
-                                <div class="d-flex align-items-center flex-stack"style="margin-bottom:20px;">
-                                                <!--begin::Select-->
-                                                <div class="row">
-                                                    <div class="col-lg-12" style="width:650px!important;" >
-                                                <select name="currnecy" aria-label="Select a Timezone" data-control="select2" data-placeholder="Select a currency.." class="form-select form-select-solid form-select-lg" >
-																<option value="">Select a currency..</option>
-																<option data-kt-flag="flags/united-states.svg" value="USD">
-																<b>USD</b>&#160;-&#160;USA dollar</option>
-																<option data-kt-flag="flags/united-kingdom.svg" value="GBP">
-																<b>GBP</b>&#160;-&#160;British pound</option>
-																<option data-kt-flag="flags/australia.svg" value="AUD">
-																<b>AUD</b>&#160;-&#160;Australian dollar</option>
-																<option data-kt-flag="flags/japan.svg" value="JPY">
-																<b>JPY</b>&#160;-&#160;Japanese yen</option>
-																<option data-kt-flag="flags/sweden.svg" value="SEK">
-																<b>SEK</b>&#160;-&#160;Swedish krona</option>
-																<option data-kt-flag="flags/canada.svg" value="CAD">
-																<b>CAD</b>&#160;-&#160;Canadian dollar</option>
-																<option data-kt-flag="flags/switzerland.svg" value="CHF">
-																<b>CHF</b>&#160;-&#160;Swiss franc</option>
-															</select>
-                                                </div>
-                                                </div>
-                                                <!--end::Select-->
-                                                <a href="#" class="btn btn-icon border-0 btn-custom flex-shrink-0" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                                    <span class="svg-icon svg-icon-2hx">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                            </div>                                
-                                <div class="card" id="kt_chat_messenger ">
-									
-										<div class="card-body" id="kt_chat_messenger_body h-200px">
-                                       
-											<div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
-                                            
-                                          <!--begin::Card-->
-                                          <table class="table">
-                                            <thead>
-                                                <tr class="fw-bolder fs-6 text-gray-800">
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Salary</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>63</td>
-                                                    <td>2011/07/25</td>
-                                                    <td>$170,750</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
 
-											</div>
-											<!--end::Messages-->
-										</div>
-										<!--end::Card body-->
-										<!--begin::Card footer-->
-										<div class="card-footer pt-4" id="kt_chat_messenger_footer">
-											
-											<div class="d-flex flex-stack">
-												<!--begin::Actions-->
-												<div class="d-flex align-items-center me-2">
-													<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-														<i class="bi bi-paperclip fs-3"></i>
-													</button>
-													<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-														<i class="bi bi-upload fs-3"></i>
-													</button>
-												</div>
-												<!--end::Actions-->
-												<!--begin::Send-->
-												<button class="btn btn-primary" type="button" data-kt-element="send">Send</button>
-												<!--end::Send-->
-											</div>
-											<!--end::Toolbar-->
-										</div>
-										<!--end::Card footer-->
+
+
+
+     </div>
+            </div>
+         <!--begin::Page-->
+         <div class="page d-flex flex-row flex-column-fluid">
+            <!--begin::Aside-->
+            <!--end::Aside-->
+            <!--begin::Wrapper-->
+            
+            <div class=" flex-row-fluid mt-2" id="">
+               <div class="content d-flex flex-column flex-column-fluid" id="">
+                  <!--begin::Container-->
+                  <div class="row" style="margin-left: 0px;margin-right:0px;">
+                     <!--begin::Col-->
+                     <div class="col-xl-6 col-md-6">
+                        <div class="d-flex align-items-center flex-stack"style="margin-bottom:20px;">
+                           <!--begin::Select-->
+                           <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option">
+                              <option></option>
+                              <option value="1">Option 1</option>
+                              <option value="2">Option 2</option>
+                          </select>
+                           <!--end::Select-->
+                           <a href="#" class="btn btn-icon border-0 btn-custom flex-shrink-0" data-bs-target="#kt_modal_create_project" data-bs-toggle="tooltip" title="Add User">
+                              <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
+                              <span class="svg-icon svg-icon-2hx">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
+                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
+                                 </svg>
+                              </span>
+                              <!--end::Svg Icon-->
+                           </a>
+                        </div>
+                        <div class="border" id="kt_chat_messenger " style="border-radius:10px;" >
+                           <div class="" id="kt_chat_messenger_body h-200px" >
+                              <div style="height:500px;" class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
+                                 <!--begin::Card-->
+                                 <table class="table table-row-bordered" >
+                                    <thead class="" >
+                                       <tr class="fw-bold fs-4 bg-secondary  text-white border-bottom border-gray-200 " >
+                                          <th>Product</th>
+                                          <th>Price</th>
+                                          <th>Quantity</th>
+                                          <th>Subtotal</th>
+                                          <th>Action</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                          <td>Tiger Nixon</td>
+                                          <td>34343t</td>
+                                          <td>
+                                             <!--begin::Dialer-->
+                                             <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                                                <!--begin::Decrease control-->
+                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                                                   <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                   <span class="svg-icon svg-icon-1">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                         <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                      </svg>
+                                                   </span>
+                                                   <!--end::Svg Icon-->
+                                                </button>
+                                                <!--end::Decrease control-->
+                                                <!--begin::Input control-->
+                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="36" />
+                                                <!--end::Input control-->
+                                                <!--begin::Increase control-->
+                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                                                   <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                   <span class="svg-icon svg-icon-1">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                         <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                                         <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                      </svg>
+                                                   </span>
+                                                   <!--end::Svg Icon-->
+                                                </button>
+                                                <!--end::Increase control-->
+                                             </div>
+                                          </td>
+                                          <td>$320,800</td>
+                                          <td>
+                                             <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
+                                                <span class="svg-icon svg-icon-3">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                      <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                      <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                             <button class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-permissions-table-filter="delete_row" data-bs-toggle="tooltip" title="Delete Item">
+                                                <span class="svg-icon svg-icon-3">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                      <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
+                                                      <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
+                                                      <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </td>
+                                        </tr>                                  
+                                        <tr>
+                                          <td>Tiger Nixon</td>
+                                          <td>34343t</td>
+                                          <td>
+                                             <!--begin::Dialer-->
+                                             <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                                                <!--begin::Decrease control-->
+                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                                                   <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                   <span class="svg-icon svg-icon-1">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                         <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                      </svg>
+                                                   </span>
+                                                   <!--end::Svg Icon-->
+                                                </button>
+                                                <!--end::Decrease control-->
+                                                <!--begin::Input control-->
+                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="36" />
+                                                <!--end::Input control-->
+                                                <!--begin::Increase control-->
+                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                                                   <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                   <span class="svg-icon svg-icon-1">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                         <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                                         <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                      </svg>
+                                                   </span>
+                                                   <!--end::Svg Icon-->
+                                                </button>
+                                                <!--end::Increase control-->
+                                             </div>
+                                          </td>
+                                          <td>$320,800</td>
+                                          <td>
+                                             <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission" >
+                                                <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
+                                                <span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
+                                                <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="black"/>
+                                                <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="black"/>
+                                                </svg></span>
+                                                <!--end::Svg Icon-->
+                                             </button>
+                                             <button class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-permissions-table-filter="delete_row" data-bs-toggle="tooltip" title="Delete Item">
+                                                <span class="svg-icon svg-icon-3">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                      <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
+                                                      <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
+                                                      <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </td>
+                                        </tr>                                  
+
+
+
+
+                                      
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <!--end::Messages-->
+                           </div>
+                           <!--end::Card body-->
+                           <!--begin::Card footer-->
+                           <div class="card-footer pt-4" id="kt_chat_messenger_footer" style="postion:bottom">
+                              <div class="d-flex flex-stack">
+                                 <!--begin::Actions-->
+                                 <div class="d-flex align-items-center me-2">
+                                 <button class="btn btn-danger" type="button" data-kt-element="send"  data-bs-toggle="tooltip" title="Cancel Order"> <i class="f fa-xmark"></i> Cancel</button>
+                                    <a class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
+                                    <i class="bi bi-paperclip fs-3"></i>
+</a>
+                                    <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
+                                    <i class="bi bi-upload fs-3"></i>
+                                    </button>
+                                 </div>
+                                 <!--end::Actions-->
+                                 <!--begin::Send-->
+                                
+                                 <button class="btn btn-primary" type="button" data-kt-element="send"> <i class="fa fa-receipt"></i> Bill Now</button>
+                                 <!--end::Send-->
+                              </div>
+                              <!--end::Toolbar-->
+                           </div>
+                           <!--end::Card footer-->
+                        </div>
+                     </div>
+                     <!--begin::Col-->
+                     <div class="col-xl-6 col-md-6 mb-3">
+                       
+                        <div class="header-search me-4 mb-3">
+										<!--begin::Menu- wrapper-->
+										<!--begin::Search-->
+										<div id="kt_header_search" width="100%" class="d-flex align-items-center" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+											<!--begin::Form-->
+											<form data-kt-search-element="form" class="w-100 position-relative" autocomplete="off">								
+												<input type="hidden" />										
+												<span class="svg-icon svg-icon-3 search-icon position-absolute top-50 translate-middle-y ms-4">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black" />
+														<path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="black" />
+													</svg>
+												</span>											
+												<input type="text" class="form-control bg-transparent ps-12" name="search" value="" placeholder="Search" data-kt-search-element="input" />									
+											</form>											
+										</div>									
 									</div>
-								</div>
-                                	<!--begin::Col-->
-								<div class="col-xl-6 mb-3">
-                                <div class="d-flex"style="margin-bottom:20px;">
-                                                <!--begin::Select-->
-                                                <div class="row">
-                                                    <div class="col-lg-12" style="" >
-                                                <select name="currnecy" aria-label="Select a Timezone" data-control="select2" data-placeholder="Select a currency.." class="form-select form-select-solid form-select-lg" >
-																<option value="">Select a currency..</option>
-																<option data-kt-flag="flags/united-states.svg" value="USD">
-																<b>USD</b>&#160;-&#160;USA dollar</option>
-																<option data-kt-flag="flags/united-kingdom.svg" value="GBP">
-																<b>GBP</b>&#160;-&#160;British pound</option>
-																<option data-kt-flag="flags/australia.svg" value="AUD">
-																<b>AUD</b>&#160;-&#160;Australian dollar</option>
-																<option data-kt-flag="flags/japan.svg" value="JPY">
-																<b>JPY</b>&#160;-&#160;Japanese yen</option>
-																<option data-kt-flag="flags/sweden.svg" value="SEK">
-																<b>SEK</b>&#160;-&#160;Swedish krona</option>
-																<option data-kt-flag="flags/canada.svg" value="CAD">
-																<b>CAD</b>&#160;-&#160;Canadian dollar</option>
-																<option data-kt-flag="flags/switzerland.svg" value="CHF">
-																<b>CHF</b>&#160;-&#160;Swiss franc</option>
-															</select>
-                                                </div>
-                                                </div>
-                                                <!--end::Select-->
-                                                <a href="#" class="btn btn-icon border-0 btn-custom flex-shrink-0" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                                    <span class="svg-icon svg-icon-2hx">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <button class="btn btn-primary"  data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">Category</button>&nbsp;
-                                                <button class="btn btn-warning" type="button" data-kt-element="send">Brand</button>
-                                                <button class="btn btn-icon btn-color-gray-300 btn-active-color-primary w-auto px-0" >
-													<!--begin::Svg Icon | path: icons/duotune/general/gen023.svg-->
-												
-												Category</button>
-                        <!--begin::Menu 2-->
-												<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px" data-kt-menu="true">
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Quick Actions</div>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu separator-->
-													<div class="separator mb-3 opacity-75"></div>
-													<!--end::Menu separator-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" class="menu-link px-3">New Ticket</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" class="menu-link px-3">New Customer</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
-														<!--begin::Menu item-->
-														<a href="#" class="menu-link px-3">
-															<span class="menu-title">New Group</span>
-															<span class="menu-arrow"></span>
-														</a>
-														<!--end::Menu item-->
-														<!--begin::Menu sub-->
-														<div class="menu-sub menu-sub-dropdown w-175px py-4">
-															<!--begin::Menu item-->
-															<div class="menu-item px-3">
-																<a href="#" class="menu-link px-3">Admin Group</a>
-															</div>
-															<!--end::Menu item-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3">
-																<a href="#" class="menu-link px-3">Staff Group</a>
-															</div>
-															<!--end::Menu item-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3">
-																<a href="#" class="menu-link px-3">Member Group</a>
-															</div>
-															<!--end::Menu item-->
-														</div>
-														<!--end::Menu sub-->
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<a href="#" class="menu-link px-3">New Contact</a>
-													</div>
-													<!--end::Menu item-->
-													<!--begin::Menu separator-->
-													<div class="separator mt-3 opacity-75"></div>
-													<!--end::Menu separator-->
-													<!--begin::Menu item-->
-													<div class="menu-item px-3">
-														<div class="menu-content px-3 py-3">
-															<a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
-														</div>
-													</div>
-													<!--end::Menu item-->
-												</div>
-												<!--end::Menu 2-->
-                                            </div> 
-								<div class="card card-flush">
-                              
-									
-										
-										
-											<div class="scroll-y me-n5 pe-5 h-180px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="0px">
-											
-                                            <div class="row">
-                                              <div class="col-lg-4 mb-1">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6 class="badge badge-primary">Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4 mb-1">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6 class="badge badge-primary">Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4 mb-1">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6 class="badge badge-primary">Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                              <div class="col-lg-4">
-                                              <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
-                                              <div class="ribbon-label bg-danger">
-                                                        60
-                                                    </div>
-                                              <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                                <div class="card-body ">
-                                                
-                                                    <h3>Testing</h3>
-                                                  <p>Cake</p> 
-                                                  <h6>Price:900</h6>
-                                                </div>
-                                            </div>
-                                              </div>
-                                          </div>	
-											
-											
-												
-												
-											</div>
-											<!--end::List-->
-										
-									</div>
-								</div>
-								<!--end::Col-->					
-                              </div>					
-					    </div>        	
-				</div>
-				<!--end::Wrapper-->
-			</div>
-			<!--end::Page-->
-		</div>
-		
-		
-		<!--end::Scrolltop-->		
-	</body><?php include "../cores/inc/footer_c.php" ?>
-	<!--end::Body-->
+                        
+                        <div class="">
+                           <div class="scroll-y me-n5 pe-5 h-180px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="0px">
+                              <div class="row">
+                                 <div class="col-lg-4 mb-1">
+                                    <div class="card  ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                          <h3>Testing</h3>
+                                          <p>Cake</p>
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body ">
+                                          <h3>Testing</h3>
+                                          <p>Cake</p>
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body ">
+                                          <h3>Testing</h3>
+                                          <p>Cake</p>
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                    </div>
+                                 </div>                               
+                                 
+                                
+                              </div>
+                           </div>
+                           <!--end::List-->
+                        </div>
+                     </div>
+                     <!--end::Col-->					
+                  </div>
+               </div>
+            </div>
+            <!--end::Wrapper-->
+         </div>
+         <!--end::Page-->
+      </div>
+      <!--end::Scrolltop-->		
+   </body>
+   <?php include "../cores/inc/footer_c.php" ?>
+   <!--end::Body-->
 </html>

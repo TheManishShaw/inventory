@@ -9,7 +9,7 @@
 		<meta property="og:url" content="" />
 		<meta property="og:site_name" content="Trapo | Inventory" />
 		<link rel="canonical" href="https://preview.keenthemes.com/good" />
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="<?php echo $sys_link ?>/assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">

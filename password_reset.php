@@ -58,7 +58,7 @@
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
 									<label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
-									<input class="form-control form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+									<input class="form-control form-control-solid" type="email" placeholder="demo@example.com" name="email" autocomplete="off" />
 								</div>
 								<!--end::Input group-->
 								<!--begin::Actions-->
@@ -68,7 +68,7 @@
 										<span class="indicator-progress">Please wait... 
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
-									<a href="../sign-up/basic.html" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
+									<a href="index.php" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
 								</div>
 								<!--end::Actions-->
 							</form>
