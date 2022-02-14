@@ -11,49 +11,9 @@
       <!--begin::Main-->
       <!--begin::Root-->
       <div class="d-flex flex-column flex-root"  >
-      <div class="row">
-      <div class="col-lg-12 mt-2">
-      <div class="col-6 float-end">
-     <!--begin::Action wrapper-->
-     <a href="#" class="btn btn-primary">All </a>
-                  <a href="#" class="btn btn-primary">Category</a>	
-                  <a href="#" class="btn btn-primary">Brand</a>	
-                  <a href="#" class="btn btn-danger">Reset</a>			
-             </div>
-      <div class="col-6 float-left">
-        <a href="">
-<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="black"/>
-<path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="black"/>
-<path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="black"/>
-<path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="black"/>
-</svg></span></a>
-<a href="#">
-  
-</a>
-<a href="">
-  <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr035.svg-->
-<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path opacity="0.3" d="M2 9.09998V3C2 2.4 2.4 2 3 2H9.10001L2 9.09998ZM22 9.09998V3C22 2.4 21.6 2 21 2H14.9L22 9.09998ZM2 14.9V21C2 21.6 2.4 22 3 22H9.10001L2 14.9ZM14.9 22H21C21.6 22 22 21.6 22 21V14.9L14.9 22Z" fill="black"/>
-<path d="M19.2 17.8L13.4 12L19.2 6.20001L17.8 4.79999L12 10.6L6.2 4.79999L4.8 6.20001L10.6 12L4.8 17.8L6.2 19.2L12 13.4L17.8 19.2L19.2 17.8Z" fill="black"/>
-</svg></span>
-<!--end::Svg Icon-->
-</a>
-
-
-
-
-
-
-             </div>
-             
+   
      
-
-
-
-
-     </div>
-            </div>
+           
          <!--begin::Page-->
          <div class="page d-flex flex-row flex-column-fluid">
             <!--begin::Aside-->
@@ -65,7 +25,7 @@
                   <!--begin::Container-->
                   <div class="row" style="margin-left: 0px;margin-right:0px;">
                      <!--begin::Col-->
-                     <div class="col-xl-6 col-md-6">
+                     <div class="col-xl-5 col-md-5">
                         <div class="d-flex align-items-center flex-stack"style="margin-bottom:20px;">
                            <!--begin::Select-->
                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option">
@@ -85,7 +45,7 @@
                               <!--end::Svg Icon-->
                            </a>
                         </div>
-                        <div class="border" id="kt_chat_messenger " style="border-radius:10px;" >
+                        <di v class="border" id="kt_chat_messenger " style="border-radius:10px;" >
                            <div class="" id="kt_chat_messenger_body h-200px" >
                               <div style="height:500px;" class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
                                  <!--begin::Card-->
@@ -227,31 +187,15 @@
                            </div>
                            <!--end::Card body-->
                            <!--begin::Card footer-->
-                           <div class="card-footer pt-4" id="kt_chat_messenger_footer" style="postion:bottom">
-                              <div class="d-flex flex-stack">
-                                 <!--begin::Actions-->
-                                 <div class="d-flex align-items-center me-2">
-                                 <button class="btn btn-danger" type="button" data-kt-element="send"  data-bs-toggle="tooltip" title="Cancel Order"> <i class="f fa-xmark"></i> Cancel</button>
-                                    <a class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                                    <i class="bi bi-paperclip fs-3"></i>
-</a>
-                                    <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                                    <i class="bi bi-upload fs-3"></i>
-                                    </button>
-                                 </div>
-                                 <!--end::Actions-->
-                                 <!--begin::Send-->
-                                
-                                 <button class="btn btn-primary" type="button" data-kt-element="send"> <i class="fa fa-receipt"></i> Bill Now</button>
-                                 <!--end::Send-->
-                              </div>
+                           <div class="card-footer pt-4" id="kt_chat_messenger_footer">
+                           
                               <!--end::Toolbar-->
                            </div>
                            <!--end::Card footer-->
-                        </div>
+                        </di>
                      </div>
                      <!--begin::Col-->
-                     <div class="col-xl-6 col-md-6 mb-3">
+                     <div class="col-xl-7 col-md-7 mb-3">
                        
                         <div class="header-search me-4 mb-3">
 										<!--begin::Menu- wrapper-->
