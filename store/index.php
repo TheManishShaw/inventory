@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-		<title>Dashboard – <?php echo $sys_title ?></title>
+		<title>Store – <?php echo $sys_title ?></title>
 		
         <?php include "../cores/inc/header_c.php" ?>
 	</head>
@@ -139,7 +139,7 @@
 												</div>
 												<!--end::Content-->
 											</div>										
-											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
+											<a  href="javascript:void(0);" onclick="modal_show()" data-href="modal/submit.php" data-name="Add Users" class="openPopup btn btn-primary" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Add User">Add Customer</a>
 											<!--end::Add customer-->
 										</div>
 										<!--end::Toolbar-->
@@ -167,10 +167,11 @@
 														<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
 													</div>
 												</th>
-												<th class="min-w-125px">Customer Name</th>
+												<th class="min-w-125px">Store Name</th>
 												<th class="min-w-125px">Email</th>
-												<th class="min-w-125px">Company</th>
-												<th class="min-w-125px">Payment Method</th>
+                                                <th class="min-w-125px">Phone</th>
+												<th class="min-w-125px">Addess</th>
+												<th class="min-w-125px">Pincode</th>
 												<th class="min-w-125px">Created Date</th>
 												<th class="text-end min-w-70px">Actions</th>
 											</tr>
@@ -189,20 +190,23 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="view.php" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
+													<a href="view.php" class="text-gray-800 text-hover-primary mb-1">demo store</a>
 												</td>
 												<!--end::Name=-->
 												<!--begin::Email=-->
 												<td>
-													<a href="#" class="text-gray-600 text-hover-primary mb-1">e.smith@kpmg.com.au</a>
+													<a href="#" class="text-gray-600 text-hover-primary mb-1">demo@example.com</a>
+												</td>
+                                                <td>
+													<a href="#" class="text-gray-600 text-hover-primary mb-1">+918678799799</a>
 												</td>
 												<!--end::Email=-->
 												<!--begin::Company=-->
-												<td>-</td>
+												<td>14/20 chowbaga road kolkata -70039</td>
 												<!--end::Company=-->
 												<!--begin::Payment method=-->
 												<td data-filter="mastercard">
-												<img src="../assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="" />**** 8735</td>
+												<img src="../assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="" />700039</td>
 												<!--end::Payment method=-->
 												<!--begin::Date=-->
 												<td>14 Dec 2020, 8:43 pm</td>

@@ -29,7 +29,7 @@
 					<!--end::Header-->
          <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 			<!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
+            <div id="kt_content_container" class="container-fluid">
 							<!--begin::Layout-->
 							<div class="d-flex flex-column flex-xl-row">							
 								<!--begin::Content-->
@@ -53,7 +53,7 @@
 										<!--begin:::Tab pane-->
 										<div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
 											<!--begin::Card-->
-											<div class="card pt-4 mb-6 mb-xl-9">
+											<div class="pt-4 mb-6 mb-xl-9">
 												<!--begin::Card header-->
 												<div class="card-header border-0">
 													<!--begin::Card title-->
@@ -173,7 +173,7 @@
 										<!--begin:::Tab pane-->
 										<div class="tab-pane fade" id="kt_customer_view_overview_events_and_logs_tab" role="tabpanel">
 											<!--begin::Card-->
-											<div class="card pt-4 mb-6 mb-xl-9">
+											<div class=" pt-4 mb-6 mb-xl-9">
 												<!--begin::Card header-->
 												<div class="card-header border-0">
 													<!--begin::Card title-->
