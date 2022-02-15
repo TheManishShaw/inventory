@@ -1,9 +1,9 @@
-<?php  include "../cores/inc/config_c.php" ?>
+<?php include '../cores/inc/config_c.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>POS – <?php echo $sys_title ?></title>
-      <?php include "../cores/inc/header_c.php" ?>
+      <title>POS – <?php echo $sys_title; ?></title>
+      <?php include '../cores/inc/header_c.php'; ?>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -11,48 +11,39 @@
       <!--begin::Main-->
       <!--begin::Root-->
       <div class="d-flex flex-column flex-root"  >
-      <div class="row">
+      <div class="row border ">
       <div class="col-lg-12 mt-2">
-      <div class="col-6 float-end">
-     <!--begin::Action wrapper-->
-     <a href="#" class="btn btn-primary">All </a>
+      <div class="col-5 float-end d-flex ">
+         <div class="d-flex flex-stackp-1">
+  <!--begin::Action wrapper-->
+  <a href="#" class="btn btn-primary">All </a>
                   <a href="#" class="btn btn-primary">Category</a>	
                   <a href="#" class="btn btn-primary">Brand</a>	
-                  <a href="#" class="btn btn-danger">Reset</a>			
+                  <a href="#" class="btn btn-danger">Reset</a>
+         </div>
+   			
              </div>
-      <div class="col-6 float-left">
+      <div class="col-7 float-start">
         <a href="">
-<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="black"/>
-<path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="black"/>
-<path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="black"/>
-<path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="black"/>
-</svg></span></a>
-<a href="#">
-  
-</a>
-<a href="">
-  <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr035.svg-->
-<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path opacity="0.3" d="M2 9.09998V3C2 2.4 2.4 2 3 2H9.10001L2 9.09998ZM22 9.09998V3C22 2.4 21.6 2 21 2H14.9L22 9.09998ZM2 14.9V21C2 21.6 2.4 22 3 22H9.10001L2 14.9ZM14.9 22H21C21.6 22 22 21.6 22 21V14.9L14.9 22Z" fill="black"/>
-<path d="M19.2 17.8L13.4 12L19.2 6.20001L17.8 4.79999L12 10.6L6.2 4.79999L4.8 6.20001L10.6 12L4.8 17.8L6.2 19.2L12 13.4L17.8 19.2L19.2 17.8Z" fill="black"/>
-</svg></span>
-<!--end::Svg Icon-->
-</a>
+            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="black"/>
+            <path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="black"/>
+            <path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="black"/>
+            <path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="black"/>
+            </svg></span>
+         </a>
 
-
-
-
-
-
-             </div>
-             
+      <a href="">
+         <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr035.svg-->
+         <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+         <path opacity="0.3" d="M2 9.09998V3C2 2.4 2.4 2 3 2H9.10001L2 9.09998ZM22 9.09998V3C22 2.4 21.6 2 21 2H14.9L22 9.09998ZM2 14.9V21C2 21.6 2.4 22 3 22H9.10001L2 14.9ZM14.9 22H21C21.6 22 22 21.6 22 21V14.9L14.9 22Z" fill="black"/>
+         <path d="M19.2 17.8L13.4 12L19.2 6.20001L17.8 4.79999L12 10.6L6.2 4.79999L4.8 6.20001L10.6 12L4.8 17.8L6.2 19.2L12 13.4L17.8 19.2L19.2 17.8Z" fill="black"/>
+         </svg></span>
+         <!--end::Svg Icon-->
+      </a>
+    </div>         
      
-
-
-
-
-     </div>
+</div>
             </div>
          <!--begin::Page-->
          <div class="page d-flex flex-row flex-column-fluid">
@@ -65,7 +56,7 @@
                   <!--begin::Container-->
                   <div class="row" style="margin-left: 0px;margin-right:0px;">
                      <!--begin::Col-->
-                     <div class="col-xl-6 col-md-6">
+                     <div class="col-xl-5 col-md-5">
                         <div class="d-flex align-items-center flex-stack"style="margin-bottom:20px;">
                            <!--begin::Select-->
                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option">
@@ -74,7 +65,7 @@
                               <option value="2">Option 2</option>
                           </select>
                            <!--end::Select-->
-                           <a href="#" class="btn btn-icon border-0 btn-custom flex-shrink-0" data-bs-target="#kt_modal_create_project" data-bs-toggle="tooltip" title="Add User">
+                           <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/submit.php" data-name="Add Users" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Add User">
                               <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                               <span class="svg-icon svg-icon-2hx">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -100,7 +91,9 @@
                                        </tr>
                                     </thead>
                                     <tbody>
+                                       
                                       <tr>
+
                                           <td>Tiger Nixon</td>
                                           <td>34343t</td>
                                           <td>
@@ -164,7 +157,7 @@
                                              <!--begin::Dialer-->
                                              <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                                                 <!--begin::Decrease control-->
-                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                                                <a type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                                    <span class="svg-icon svg-icon-1">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -173,7 +166,7 @@
                                                       </svg>
                                                    </span>
                                                    <!--end::Svg Icon-->
-                                                </button>
+                                                </a>
                                                 <!--end::Decrease control-->
                                                 <!--begin::Input control-->
                                                 <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="36" />
@@ -195,7 +188,7 @@
                                           </td>
                                           <td>$320,800</td>
                                           <td>
-                                             <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission" >
+                                             <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/submit.php" data-name="Add Users" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Add User">
                                                 <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
                                                 <span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
@@ -203,7 +196,7 @@
                                                 <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="black"/>
                                                 </svg></span>
                                                 <!--end::Svg Icon-->
-                                             </button>
+                                             </a>
                                              <button class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-permissions-table-filter="delete_row" data-bs-toggle="tooltip" title="Delete Item">
                                                 <span class="svg-icon svg-icon-3">
                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -227,7 +220,7 @@
                            </div>
                            <!--end::Card body-->
                            <!--begin::Card footer-->
-                           <div class="card-footer pt-4" id="kt_chat_messenger_footer" style="postion:bottom">
+                           <div class="card-footer pt-4" id="kt_chat_messenger_footer">
                               <div class="d-flex flex-stack">
                                  <!--begin::Actions-->
                                  <div class="d-flex align-items-center me-2">
@@ -251,7 +244,8 @@
                         </div>
                      </div>
                      <!--begin::Col-->
-                     <div class="col-xl-6 col-md-6 mb-3">
+                    
+                     <div class="col-xl-7 col-md-7">
                        
                         <div class="header-search me-4 mb-3">
 										<!--begin::Menu- wrapper-->
@@ -270,20 +264,106 @@
 											</form>											
 										</div>									
 									</div>
+                        <div class="page-title d-flex flex-column me-5 mb-2">								
+									<h1 class="d-flex flex-column text-dark fw-bold fs-5 mb-0">Category</h1>								
+								</div>
                         
+                        <ul class="nav nav-tabs nav-pills border-0 flex-row  me-5 mb-3 mb-md-0 fs-6">
+    <li class="nav-item w-md-150px me-0">
+        <a class="nav-link active" data-bs-toggle="tab" href="#kt_vtab_pane_1">Link 1</a>
+    </li>
+    <li class="nav-item w-md-150px me-0">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_vtab_pane_2">Link 2</a>
+    </li>
+    <li class="nav-item w-md-150px">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_vtab_pane_3">Link 3</a>
+    </li>
+</ul>
+                        <div class="row">
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-primary">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white">Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-warning">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white"> Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-success">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white">Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-primary">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white">Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-warning">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white">Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-2">
+                           <div class="card bg-success">                                                                        
+                              <div class="card-body  p-3 d-block">
+                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <h4 class="text-white">Testing <span class="badge badge-square badge-secondary">5</span> </h4>
+                                 <p class="text-white" >Cake</p>                                        
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+                       
+                        
+                        <div class="page-title d-flex flex-column me-5 mb-2">								
+									<h1 class="d-flex flex-column text-dark fw-bold fs-5 mb-0">All Products</h1>									
+									<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-4 pt-1">								
+										<li class="breadcrumb-item">
+                              <a href="#" class="badge badge-light">All <span class="badge badge-circle badge-secondary" style="padding:2px!important;">42</span></a>									
+										</li>
+										<li class="breadcrumb-item">
+                                 <a href="#" class="badge badge-light">Cake <span class="badge badge-circle badge-secondary" style="padding:2px!important;">5</span></a>                              
+										</li>								
+									</ul>									
+								</div>
                         <div class="">
                            <div class="scroll-y me-n5 pe-5 h-180px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="0px">
                               <div class="row">
+                               
                                  <div class="col-lg-4 mb-1">
-                                    <div class="card  ribbon ribbon-top ribbon-vertical">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
-                                          <h3>Testing</h3>
-                                          <p>Cake</p>
+                                      <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
                                        </div>
                                     </div>
                                  </div>
@@ -292,27 +372,31 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                       <div class="card-body ">
-                                          <h3>Testing</h3>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
                                           <p>Cake</p>
-                                          <h6 class="badge badge-primary">Price:900</h6>
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> 
                                  <div class="col-lg-4 mb-1">
                                     <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="150px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
-                                       <div class="card-body ">
-                                          <h3>Testing</h3>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end"> 
+                                           <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
                                           <p>Cake</p>
-                                          <h6 class="badge badge-primary">Price:900</h6>
                                        </div>
                                     </div>
-                                 </div>                               
+                                 </div>                                
                                  
                                 
                               </div>
@@ -328,8 +412,8 @@
          </div>
          <!--end::Page-->
       </div>
-      <!--end::Scrolltop-->		
+      <!--end::Scrolltop-->	  	
    </body>
-   <?php include "../cores/inc/footer_c.php" ?>
+   <?php include '../cores/inc/footer_c.php'; ?>
    <!--end::Body-->
 </html>

@@ -47102,15 +47102,15 @@ code:not([class*="language-"]) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 1.75rem;
-  min-width: 1.75rem;
+  height: 1.20rem;
+  min-width: 1.20rem;
   padding: 0 0.1rem;
 }
 .badge.badge-circle {
   border-radius: 50%;
   padding: 0;
   min-width: unset;
-  width: 1.75rem;
+  width: 1.20rem;
 }
 .badge.badge-sm {
   min-width: 1.5rem;
