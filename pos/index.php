@@ -76,7 +76,7 @@
                               <!--end::Svg Icon-->
                            </a>
                         </div>
-                        <div class="border" id="kt_chat_messenger " style="border-radius:10px;" >
+                        <di v class="border" id="kt_chat_messenger " style="border-radius:10px;" >
                            <div class="" id="kt_chat_messenger_body h-200px" >
                               <div style="height:500px;" class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
                                  <!--begin::Card-->
@@ -241,7 +241,7 @@
                               <!--end::Toolbar-->
                            </div>
                            <!--end::Card footer-->
-                        </div>
+                        </di>
                      </div>
                      <!--begin::Col-->
                     
