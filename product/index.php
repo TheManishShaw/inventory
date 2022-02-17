@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-		<title>Products – <?php echo $sys_title ?></title>
+		<title>Products - <?php echo $sys_title ?></title>
 		
         <?php include "../cores/inc/header_c.php" ?>
 	</head>
@@ -27,11 +27,11 @@
 					<!--begin::Header-->
 					<?php include "../cores/inc/top_c.php" ?>
 					<!--end::Header-->
-         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-			<!--begin::Container-->
-            <div id="kt_content_container" class="container-fluid">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Container-->
+						<div id="kt_content_container" class="">
 							<!--begin::Layout-->
-							<div class="d-flex flex-column flex-xl-row">							
+							<div class="">							
 								<!--begin::Content-->
 								<div class="flex-lg-row-fluid ms-lg-15">
 									<!--begin:::Tabs-->

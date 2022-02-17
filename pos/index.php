@@ -26,12 +26,8 @@
          <a href="#" class="btn btn-danger" style="margin-left:10px">Reset</a>   
          <a class="btn" onclick="fullscreen();">   <i class="fas fa-expand fs-2x"></i></a>
          <div class="d-lg-block d-none" style="margin-top:6px;margin-left:0px;margin-right:10px;font-size:20px;position: auto;font-weight:400px;" id="time">
-             <span id="hours">00</span>
-
-           
-           
-        
-      </div>
+             <span id="hours">00</span>        
+         </div>
    	</div>
       <div class="d-flex justify-content-center">
       
@@ -53,7 +49,7 @@
                   <!--begin::Container-->
                   <div class="row" style="margin-left: 0px;margin-right:0px;">
                      <!--begin::Col-->
-                     <div class="col-xl-5 col-md-5">
+                     <div class="col-xl-5 col-md-5" style="overflow:hidden">
                         <div class="d-flex align-items-center flex-stack"style="margin-bottom:20px;">
                            <!--begin::Select-->
                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option">
@@ -77,6 +73,7 @@
                            <div class="" id="kt_chat_messenger_body h-200px" >
                               <div style="height:500px;" class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
                                  <!--begin::Card-->
+                                 
                                  <table class="table table-row-bordered" >
                                     <thead class="" >
                                        <tr class="fw-bold fs-4 bg-secondary  text-white border-bottom border-gray-200 " >
@@ -88,7 +85,9 @@
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       
+                                       <tr>
+                                          
+                                       </tr>
                                       <tr>
 
                                           <td>Tiger Nixon</td>
@@ -109,7 +108,7 @@
                                                 </button>
                                                 <!--end::Decrease control-->
                                                 <!--begin::Input control-->
-                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="36" />
+                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" value="36" />
                                                 <!--end::Input control-->
                                                 <!--begin::Increase control-->
                                                 <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
@@ -128,8 +127,9 @@
                                           </td>
                                           <td>$320,800</td>
                                           <td>
-                                          <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/submit.php" data-name="Add Users" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Add User">
-                                                <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
+                                          <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/edit.php" data-name="Edit Product" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Edit Product">
+                                          <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
+                                          <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
                                                 <span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
                                                 <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="black"/>
@@ -167,7 +167,7 @@
                                                 </a>
                                                 <!--end::Decrease control-->
                                                 <!--begin::Input control-->
-                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="36" />
+                                                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget"  value="36" />
                                                 <!--end::Input control-->
                                                 <!--begin::Increase control-->
                                                 <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
@@ -186,7 +186,7 @@
                                           </td>
                                           <td>$320,800</td>
                                           <td>
-                                             <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/submit.php" data-name="Add Users" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Add User">
+                                             <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/edit.php" data-name="Edit Product" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Edit Product">
                                                 <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
                                                 <span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
@@ -223,12 +223,8 @@
                                  <!--begin::Actions-->
                                  <div class="d-flex align-items-center me-2">
                                  <button class="btn btn-danger" type="button" data-kt-element="send"  data-bs-toggle="tooltip" title="Cancel Order"> <i class="f fa-xmark"></i> Cancel</button>
-                                    <a class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                                    <i class="bi bi-paperclip fs-3"></i>
-</a>
-                                    <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                                    <i class="bi bi-upload fs-3"></i>
-                                    </button>
+                                  
+                                   
                                  </div>
                                  <!--end::Actions-->
                                  <!--begin::Send-->
@@ -267,7 +263,7 @@
 									<h1 class="d-flex flex-column text-dark fw-bold fs-5 mb-0">Category</h1>								
 								</div>
                        
-                        <div class="row">
+                        <div class="row d-flex flex-nowrap hover-scroll-x h-90px">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-primary">                                                                        
                               <div class="card-body  p-3 d-block">
@@ -341,8 +337,8 @@
 									</ul>									
 								</div>
                         <div class="">
-                           <div class="scroll-y me-n5 pe-5 h-180px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="0px">
-                              <div class="row">
+                           <div >
+                              <div class="row scroll-y h-500px">
                                
                                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
                                     <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
@@ -373,7 +369,247 @@
                                           <p>Cake</p>
                                        </div>
                                     </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
                                  </div> 
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">
+                                      <div class=" float-end">
+                                          <h6 class="badge badge-primary">Price:900</h6>
+                                       </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
+                                    <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
+                                       <div class="ribbon-label bg-danger">
+                                          60
+                                       </div>
+                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <div class="card-body p-2 ">                                      
+                                       <div class=" float-end">                                                                    
+                                         <h6 class="badge badge-primary">Price:900</h6>
+                                          </div>
+                                          <h6>Testing</h6>
+                                          <p>Cake</p>
+                                       </div>
+                                    </div>
+                                 </div>
                                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
                                     <div class="card card-bordered ribbon ribbon-top ribbon-vertical">
                                        <div class="ribbon-label bg-danger">
@@ -420,79 +656,7 @@
          <!--end::Page-->
       </div>
       <!--end::Scrolltop-->	
-      <script>
-         function fullscreen() {
-  var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
-    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-    (document.msFullscreenElement && document.msFullscreenElement !== null);
-  var docElm = document.documentElement;
-  if (!isInFullScreen) {
-    if (docElm.requestFullscreen) {
-      docElm.requestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-      docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-      docElm.webkitRequestFullScreen();
-    } else if (docElm.msRequestFullscreen) {
-      docElm.msRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-  }
-}
-         function clock() {
-    var hours = document.getElementById("hours");
-    var minutes = document.getElementById("minutes");
-    var seconds = document.getElementById("seconds");
-    var phase = document.getElementById("phase");
 
-    var h = new Date().getHours();
-    var m = new Date().getMinutes();
-    var s = new Date().getSeconds();
-    var am = "AM";
-
-    if (h > 12) {
-        h = h - 12;
-        var am = "PM";
-    }
-
-    h = h < 10 ? "0" + h : h;
-    m = m < 10 ? "0" + m : m;
-    s = s < 10 ? "0" + s : s;
-
-    hours.innerHTML = h + ":" + m + "&nbsp;" + am;
-debug: true
-}
-
-var interval = setInterval(clock, 100);
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-        h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i
-    }; // add zero in front of numbers < 10
-    return i;
-}
-</script>  	
    </body>
    <?php include '../cores/inc/footer_c.php'; ?>
    <!--end::Body-->

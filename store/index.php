@@ -246,6 +246,7 @@
 								</div>
 								<!--end::Card body-->
 							</div>
+							
 						</div>
 						<!--end::Container-->
 					</div>

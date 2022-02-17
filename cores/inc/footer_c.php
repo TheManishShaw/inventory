@@ -10,6 +10,7 @@
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="<?php echo $sys_link ?>/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="<?php echo $sys_link ?>/assets/js/custom/documentation/general/datatables/advanced.js"></script>
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="<?php echo $sys_link ?>/assets/js/custom/apps/customers/list/export.js"></script>
@@ -66,20 +67,79 @@ $(document).ready(function(){
     }); 
 });
 </script>
-<!-- Modal -->
-          <div class="modal fade" id=""  tabindex="-1"  >
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="" ></h5>
-                            <a class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-dismiss="modal" href="#"></a>
-                        </div>
-                        <div class="modal-body" >
-                            Loading...
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+<script>
+         function fullscreen() {
+  var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+    (document.msFullscreenElement && document.msFullscreenElement !== null);
+  var docElm = document.documentElement;
+  if (!isInFullScreen) {
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    } else if (docElm.msRequestFullscreen) {
+      docElm.msRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+}
+         function clock() {
+    var hours = document.getElementById("hours");
+    var minutes = document.getElementById("minutes");
+    var seconds = document.getElementById("seconds");
+    var phase = document.getElementById("phase");
+
+    var h = new Date().getHours();
+    var m = new Date().getMinutes();
+    var s = new Date().getSeconds();
+    var am = "AM";
+
+    if (h > 12) {
+        h = h - 12;
+        var am = "PM";
+    }
+
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+
+    hours.innerHTML = h + ":" + m + "&nbsp;" + am;
+debug: true
+}
+
+var interval = setInterval(clock, 100);
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =
+        h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i
+    }; // add zero in front of numbers < 10
+    return i;
+}
+</script>  	
 
 
 			<div class="modal fade" id="modal_show" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true">		

@@ -1,59 +1,73 @@
-                           
-                        <!--begin::Aside menu-->
-                        <div class="aside-menu flex-column-fluid">
+			 
+					 <!--begin::Aside menu-->
+                     <div class="aside-menu flex-column-fluid">
 						<!--begin::Aside Menu-->
 						<div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-offset="0">
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold" id="#kt_aside_menu" data-kt-menu="true">
-								<div class="menu-item">
-									<a class="menu-link" href="<?php echo $sys_link ?>/dash.php">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Dashboard</span>
-									</a>
-								</div>
-                                <div class="menu-item">
-									<a class="menu-link" href="<?php echo $sys_link ?>/product/index.php">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Products</span>
-									</a>
-								</div>
-                                <div class="menu-item">
-									<a class="menu-link" href="<?php echo $sys_link ?>/sales/index.php">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Sales</span>
-									</a>
-								</div>
 							
+							<?php 
+							
+								$db_handle = new DBController();
+								$sql_navc="SELECT `navc_id`, `navc_data`, `navc_name`, `navc_icon`, `navc_type` FROM `navc_tbl` WHERE `navc_tbl`.`navc_grp` LIKE '%$u_type%' AND `navc_tbl`.`navc_status` = 'active' ORDER BY `navc_tbl`.`navc_level` ASC";
+								$navc_array = $db_handle->runQuery($sql_navc);
+								if ((is_array($navc_array) || is_object($navc_array))){
+								foreach($navc_array as $k_navc=>$v_navc) {
+								$navc_type = $navc_array[$k_navc]["navc_type"];
+								$navc_id = $navc_array[$k_navc]["navc_id"];
+								?>
+								<div class="menu-item">
+								<?php if($navc_type == "no_sub"){?>
+								<a href="<?php echo $navc_array[$k_navc]["navc_data"]; ?>" class="menu-link">
+									<span class="menu-icon">											
+												<span class="svg-icon svg-icon-5">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+														<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+													</svg>
+												</span>												
+											</span>
+									<span class="menu-title"> <?php echo $navc_array[$k_navc]["navc_name"]; ?> </span>
+								</a>
+								</div>
+								<?php }elseif($navc_type == "sub"){?>
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<span class="menu-link">
+								<span class="menu-title" href="#<?php echo $navc_array[$k_navc]["navc_name"]; ?>"  aria-controls="<?php echo $navc_array[$k_navc]["navc_name"]; ?>" >
+									<span class="<?php echo $navc_array[$k_navc]["navc_icon"]; ?>"></span>
+									 <?php echo $navc_array[$k_navc]["navc_name"]; ?> </span>
+								</span>
+									</div>
+								<div >
+								<div class="menu-sub menu-sub-accordion menu-active-bg" id="<?php echo $navc_array[$k_navc]["navc_name"]; ?>">
 								
+								<span class="menu-link">								
+												
+										
 								
-								
+									<?php
+									$sql_navm = "SELECT `navm_data`, `navm_name` FROM `navm_tbl` WHERE `navc_id` = '$navc_id' AND `navm_status` = 'active' AND `navm_grp` LIKE '%$u_type%'";
+									$navm_array = $db_handle->runQuery($sql_navm);
+									if ((is_array($navm_array) || is_object($navm_array))){
+									foreach($navm_array as $k_navm=>$v_navm) {
+									?>
+										<span class="menu-item">
+											<a class="menu-link" href="<?php echo $navm_array[$k_navm]["navm_data"]; ?>"><?php echo $navm_array[$k_navm]["navm_name"]; ?></a>
+										</span>
+									<?php 
+									}
+									}
+									?>
+                  	</span>
+								</div>
+                </div>
+				
+			<?php 
+				}
+			}
+			}
+			?>
+									
 								
 								
 								
@@ -83,7 +97,7 @@
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="<?php echo $sys_link ?>/assets/media/avatars/150-26.jpg" />
+													<img alt="Logo" src="<?php echo $sys_link ?>assets/media/avatars/150-26.jpg" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
@@ -97,13 +111,13 @@
 										</div>
 										<div class="separator my-2"></div>										
 										<div class="menu-item px-5">
-											<a href="<?php echo $sys_link ?>/profile.php" class="menu-link px-5">My Profile</a>
+											<a href="<?php echo $sys_link ?>profile.php" class="menu-link px-5">My Profile</a>
 										</div>										
 										<div class="menu-item px-5 my-1">
-											<a href="<?php echo $sys_link?>/password_reset.php" class="menu-link px-5">Change Password</a>
+											<a href="account/settings.html" class="menu-link px-5">Account Settings</a>
 										</div>										
 										<div class="menu-item px-5">
-											<a href="<?php echo $sys_link?>/signout.php" class="menu-link px-5">Sign Out</a>
+											<a href="signout.php" class="menu-link px-5">Sign Out</a>
 										</div>										
 										<div class="separator my-2"></div>
 										<!--end::Menu separator-->
@@ -129,10 +143,10 @@
 										<!--begin::Info-->
 										<div class="me-2">
 											<!--begin::Username-->
-											<a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">Manish Shaw </a>
+											<a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">Paul Melone</a>
 											<!--end::Username-->
 											<!--begin::Description-->
-											<span class="text-gray-400 fw-bold d-block fs-8">Web dev</span>
+											<span class="text-gray-400 fw-bold d-block fs-8">Python Dev</span>
 											<!--end::Description-->
 										</div>
 										<!--end::Info-->

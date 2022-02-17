@@ -1,9 +1,14 @@
-<?php  include "cores/inc/config_c.php" ?>
+<?php
+include "cores/inc/config_c.php";
+include "cores/inc/functions_c.php";
+include "cores/inc/auth_c.php";
+include "cores/inc/var_c.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-		<title>Dashboard – <?php echo $sys_title ?></title>
+		<title>Profile - <?php echo $sys_title ?></title>
 		
         <?php include "cores/inc/header_c.php" ?>
 	</head>
@@ -31,7 +36,7 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Container-->
 						<div id="kt_content_container" class="container-xxl">
-							<div class="d-flex flex-column flex-lg-row">						
+							<div class="d-flex flex-column flex-lg-row">    						
 								
 								<!--begin::Layout-->
 								<div class="flex-md-row-fluid ms-lg-12">							

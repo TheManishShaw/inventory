@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<title>Reset Password – <?php echo $sys_title ?></title>
+		<title>Reset Password - <?php echo $sys_title ?></title>
         <?php include "cores/inc/header_c.php"  ?>
 	</head>
 	<body id="kt_body" class="auth-bg">
@@ -18,11 +18,11 @@
 						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
 							<!--begin::Logo-->
 							<a href="index.php" class="py-9 pt-lg-20">
-								<img alt="Logo" src="assets/media/logos/default.svg" class="h-40px" />
+								<img alt="Logo" src="<?php echo $sys_link ?>/assets/media/logos/default.svg" class="h-40px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
-							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to Good</h1>
+							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to <?php echo $sys_name ?></h1>
 							<!--end::Title-->
 							<!--begin::Description-->
 							<p class="fw-bold fs-2 text-white">Plan your blog post by choosing a topic creating 

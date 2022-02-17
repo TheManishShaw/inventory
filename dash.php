@@ -1,4 +1,10 @@
-<?php  include "cores/inc/config_c.php" ?>
+<?php
+include "cores/inc/config_c.php";
+include "cores/inc/functions_c.php";
+include "cores/inc/auth_c.php";
+include "cores/inc/var_c.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,13 +38,6 @@
 						<!--begin::Container-->
 						<div id="kt_content_container" class="container-fluid">
 							<!--begin::Row-->
-
-
-
-
-
-
-
 							<div class="row g-5 g-xl-8">							
 								<!--begin::Col-->
 								<div class="col-xl-12">
