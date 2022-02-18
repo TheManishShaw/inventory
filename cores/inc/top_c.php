@@ -2,8 +2,8 @@
 						<!--begin::Brand-->
 						<div class="header-brand">
 							<!--begin::Logo-->
-							<a href="<?php echo $sys_link ?>/index.php">
-								<img alt="Logo" src="<?php echo $sys_link ?>/assets/media/logos/default.svg" class="h-25px" />
+							<a href="<?php echo $sys_link ?>">
+								<img alt="Logo" src="<?php echo $sys_logo ?>" class="h-50px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Aside action-->

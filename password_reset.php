@@ -15,10 +15,10 @@
 					<!--begin::Wrapper-->
 					<div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
 						<!--begin::Header-->
-						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
+						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-10">
 							<!--begin::Logo-->
-							<a href="index.php" class="py-9 pt-lg-20">
-								<img alt="Logo" src="<?php echo $sys_link ?>/assets/media/logos/default.svg" class="h-40px" />
+							<a href="index.php" class="py-9 pt-lg-10">
+								<img alt="Logo" src="<?php echo $sys_logo ?>" class="h-50px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
@@ -31,7 +31,7 @@
 						</div>
 						<!--end::Header-->
 						<!--begin::Illustration-->
-						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url(../../assets/media/illustrations/sketchy-1/2.png)"></div>
+						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-200px min-h-lg-450px" style="background-image: url(assets/media/images/banner.svg)"></div>
 						<!--end::Illustration-->
 					</div>
 					<!--end::Wrapper-->

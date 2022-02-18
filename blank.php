@@ -1,4 +1,9 @@
-<?php  include "cores/inc/config_c.php" ?>
+<?php  
+include "cores/inc/config_c.php";
+include "cores/inc/functions_c.php";
+include "cores/inc/auth_c.php";
+include "cores/inc/var_c.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 

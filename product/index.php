@@ -185,7 +185,7 @@
 												<!--end::Card header-->
 												<!--begin::Card body-->
 												<div class="card-body py-0">
-												<table class="table align-middle table-row-dashed fs-6 gy-5" id="">
+												<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable_example_5">
 										<!--begin::Table head-->
 										<thead>
 											<!--begin::Table row-->
@@ -259,7 +259,7 @@
 														<div class="menu-item px-3">
 															<a href="#" class="menu-link px-3">View</a>
 														</div>
-														<!--end::Menu item-->
+											\			<!--end::Menu item-->
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
 															<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
