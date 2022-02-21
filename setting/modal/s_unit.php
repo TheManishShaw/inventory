@@ -1,3 +1,7 @@
+<?php 
+include "../../cores/inc/config_c.php";
+
+?>
 <script>
 $(document).ready(function(){
 	// File upload via Ajax
@@ -16,7 +20,7 @@ $(document).ready(function(){
 			   return xhr;
 			},
 			type: 'POST',
-			url: 'modal/insert_blog.php',
+			url: 'modal/i_unit.php',
 			data: new FormData(this),
 			contentType: false,
 			cache: false,
@@ -32,20 +36,39 @@ $(document).ready(function(){
 			},
 			success: function(response){
 				if(response == 'ok'){
-					$('#uploadForm')[0].reset();
-				    $("#submit").prop('disabled', true); // disable button
-					$('#uploadStatus').html('<center><img src="<?php echo $sys_link?>/assets/images/loding.gif"></br><span style="color:#28A74B;">Data Submitted Successfully <br/> <a href="#" onClick="window.location.reload();return false;">Close</a> </center> ');
-					$('#formbox').html('');
-					setTimeout(function(){
-                    $('#modal_show').modal('hide')
-                    }, 3000);
-					
-					window. close(); 
-				}else if(response !== 'ok'){
 					$('#uploadStatus').html('<p style="color:#EA4335;">Data Not Sent.</p>'+ response);
+				
+				}else if(response !== 'ok'){
+					abcd();
+					modal_hide(); 
+					$('#kt_datatable_example_5').DataTable().reload();
+					Swal.fire({
+					text: "Data Submission Successfully!",
+					icon: "success",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn btn-primary"
+					}
+				});
+					
 				}
 			}
 		});
 	});
 });
-</script>  
+</script>
+<div id="uploadStatus"></div>
+<div id="formbox">
+<form  id="uploadForm" enctype="multipart/form-data" >
+<div class="mb-10">
+    <label for="exampleFormControlInput1" class="required form-label">Name</label>
+    <input type="text" class="form-control form-control-solid" name="u_name" id="u_name" placeholder="Enter Unit Name"/>
+</div>
+<div class="mb-10">
+    <label for="exampleFormControlInput1" class="required form-label">Short Name</label>
+    <input type="text" class="form-control form-control-solid" name="u_shortname" id="u_shortname" placeholder="Enter Short Name"/>
+</div>
+<button class="btn btn-primary" type="submit">Submit</button>	 
+</form>
+</div>

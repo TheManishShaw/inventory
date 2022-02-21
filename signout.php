@@ -1,5 +1,5 @@
 <?php
-include "cores/inc/config_c.php"; 
+include "cores/inc/config.php"; 
 session_start();
 session_destroy();
 header("location: index.php");

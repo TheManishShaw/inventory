@@ -11,7 +11,7 @@
 <html lang="en">
 
 <head>
-		<title>Unit List – <?php echo $sys_title ?></title>
+		<title>Category List – <?php echo $sys_title ?></title>
 		
         <?php include "../cores/inc/header_c.php" ?>
 	</head>
@@ -25,11 +25,11 @@
 					<?php include "../cores/inc/top_c.php" ?>
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<div id="kt_content_container" class="container-fluid">
-						<div class="pt-10"><a href="javascript:void(0);" onclick="modal_show()" data-href="modal/s_unit.php" data-name="Add Unit" class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
+						<div class="pt-10"><a href="javascript:void(0);" onclick="modal_show()" data-href="modal/s_unit.php" data-name="Add Unit" class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Category</a>
 										<h1 class="anchor fw-bolder mb-5">Unit List</h1>
 										
-										<div class="my-5" id="reload">
-                              <table id="kt_datatable_example_5" class="table table-striped gy-5 gs-7 border rounded">
+										<div class="my-5">
+											<table id="kt_datatable_example_5" class="table table-striped gy-5 gs-7 border rounded">
 											<thead>
                                  <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">ID</th>
@@ -60,7 +60,7 @@
                                                 </svg></span>
                                              </a>
                                     
-                                       <a class="btn btn-icon btn-active-light-danger w-30px h-30px " type="button"   data-kt-docs-table-filter="delete_row" data-bs-toggle="tooltip" title="Delete Item">
+                                       <a class="btn btn-icon btn-active-light-danger w-30px h-30px openPopup" type="button" id="kt_docs_sweetalert_html" data-name="Delete" data-kt-permissions-table-filter="delete_row" data-bs-toggle="tooltip" title="Delete Item">
                                           <span class="svg-icon svg-icon-3">
                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
@@ -78,7 +78,6 @@
 
                               </tbody>
 											</table>
-
 										</div>
 										<!--end::Block-->			
 						</div>						
@@ -87,81 +86,7 @@
 					<?php include "../cores/inc/copy_c.php" ?>
 				</div>
 			</div>
-		</div>
-      <script>
-        
-         function abcd() {
-            $( "#reload" ).load( "re.php" );
-           
-
-         }
-          // Delete customer
-    var handleDeleteRows = () => {
-        // Select all delete buttons
-        const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
-
-        deleteButtons.forEach(d => {
-            // Delete button on click
-            d.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Select parent row
-                const parent = e.target.closest('tr');
-
-                // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
-
-                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                Swal.fire({
-                    text: "Are you sure you want to delete " + customerName + "?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    confirmButtonText: "Yes, delete!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary"
-                    }
-                }).then(function (result) {
-                    if (result.value) {
-                        // Simulate delete request -- for demo purpose only
-                        Swal.fire({
-                            text: "Deleting " + customerName,
-                            icon: "info",
-                            buttonsStyling: false,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(function () {
-                            Swal.fire({
-                                text: "You have deleted " + customerName + "!.",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                }
-                            }).then(function () {
-                                // delete row data from server and re-draw datatable
-                                dt.draw();
-                            });
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: customerName + " was not deleted.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
-                });
-            })
-        });
-    }
-      </script>		
+		</div>		
 	</body>
 	<?php include "../cores/inc/footer_c.php" ?>
  

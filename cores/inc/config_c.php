@@ -14,13 +14,13 @@ $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
 //System Variables
 $sys_link = "http://localhost/testing/inventory";
 $sys_name = "Inventory";
-$sys_title = "Inventory";
+$sys_title = "Trapo Inventory With POS";
 $sys_fav = "data/sys/logo_mins.png";
 $sys_session = "trapo_session";
 $sys_email = "no-reply@traderg.in";
 $sys_bccemail = "team@traderg.in";
-$sys_logo = "assets/media/logos/logo.png";
-$sys_light_logo = "https://manage.traderg.in/assets/images/logo-dark.png";
+$sys_logo = "assets/media/logos/light_logo.png";
+$sys_dark_logo = "assets/media/logos/dark_logo.png";
 $sys_bgimage = "data/sys/bg.jpg";
 $sys_defmsub = $sys_name;
 $sys_nameabbr = "ST.";

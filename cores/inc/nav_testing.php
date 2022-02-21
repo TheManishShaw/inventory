@@ -1,123 +1,78 @@
-			 
-                   
-				
-					<div class="aside-menu flex-column-fluid">
-						<div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-offset="0">
 						
-							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold" id="#kt_aside_menu" data-kt-menu="true">
+								
+								
+							
+					<div class="aside-menu flex-column-fluid">
+						<div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-offset="0">						
+							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold" id="#kt_aside_menu" data-kt-menu="true">							
+							<?php 							
+								$db_handle = new DBController();
+								$sql_navc="SELECT `navc_id`, `navc_data`, `navc_name`, `navc_icon`, `navc_type` FROM `navc_tbl` WHERE `navc_tbl`.`navc_grp` LIKE '%$u_type%' AND `navc_tbl`.`navc_status` = 'active' ORDER BY `navc_tbl`.`navc_level` ASC";
+								$navc_array = $db_handle->runQuery($sql_navc);
+								if ((is_array($navc_array) || is_object($navc_array))){
+								foreach($navc_array as $k_navc=>$v_navc) {
+								$navc_type = $navc_array[$k_navc]["navc_type"];
+								$navc_id = $navc_array[$k_navc]["navc_id"];
+								?>
 								<div class="menu-item">
-									<a class="menu-link" href="<?php echo $sys_link ?>/index.php">
-										<span class="menu-icon">
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
+								<?php if($navc_type == "no_sub"){?>
+								<a href="<?php echo $sys_link ?>/<?php echo $navc_array[$k_navc]["navc_data"]; ?>" class="menu-link">
+									<span class="menu-icon">											
+												<span class="svg-icon svg-icon-5">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+														<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+													</svg>
+												</span>												
 											</span>
-										</span>
-										<span class="menu-title">Dashboard</span>
-									</a>
+									<span class="menu-title"> <?php echo $navc_array[$k_navc]["navc_name"]; ?> </span>
+								</a>
 								</div>
+								<?php }elseif($navc_type == "sub"){?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
-										<span class="menu-icon">
+										<span class="menu-icon" >
 											<span class="svg-icon svg-icon-5">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
 													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
 												</svg>
 											</span>
-										</span>
-										<span class="menu-title">Products</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<div class="menu-sub menu-sub-accordion menu-active-bg">
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/sales/create.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
 											</span>
-											<span class="menu-title">Create Product</span>
-										</a>
+											<span class="menu-title">
+											<?php echo $navc_array[$k_navc]["navc_name"]; ?> 
+											</span>											
+											<span class="menu-arrow"></span>									
+									</span>				
+							
+									<div class="menu-sub menu-sub-accordion menu-active-bg" id="<?php echo $navc_array[$k_navc]["navc_name"]; ?>">																
+										<div class="menu-item">						
+											<?php
+											$sql_navm = "SELECT `navm_data`, `navm_name` FROM `navm_tbl` WHERE `navc_id` = '$navc_id' AND `navm_status` = 'active' AND `navm_grp` LIKE '%$u_type%'";
+											$navm_array = $db_handle->runQuery($sql_navm);
+											if ((is_array($navm_array) || is_object($navm_array))){
+											foreach($navm_array as $k_navm=>$v_navm) {
+											?>
+											<a class="menu-link" href="<?php echo $sys_link ?>/<?php echo $navm_array[$k_navm]["navm_data"]; ?>">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title"><?php echo $navm_array[$k_navm]["navm_name"]; ?></span>
+											</a>									
+											<?php 
+											}
+											}
+											?>
+						
+										</div>
 									</div>
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/product/index.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title"> Product List</span>
-										</a>
-									</div>									
-										
-									</div>
-								</div>
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<span class="menu-link">
-										<span class="menu-icon">
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-										</span>
-										<span class="menu-title">Sales</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<div class="menu-sub menu-sub-accordion menu-active-bg">
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/sales/create.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Create Sales</span>
-										</a>
-									</div>
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/sales/index.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title"> Sales List</span>
-										</a>
-									</div>									
-										
-									</div>
-								</div>
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<span class="menu-link">
-										<span class="menu-icon">
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-										</span>
-										<span class="menu-title">Setting</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<div class="menu-sub menu-sub-accordion menu-active-bg">
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/setting/unit.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Unit</span>
-										</a>
-									</div>
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/sales/index.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title"> Sales List</span>
-										</a>
-									</div>									
-										
-									</div>
-								</div>							
-							</div>
+								</div>				
+								<?php 
+								}
+							}
+							}
+							?>
+							</div>							
 						</div>
 					</div>
 					<div class="aside-footer flex-column-auto pb-5" id="kt_aside_footer">
@@ -198,6 +153,11 @@
 							</div>
 						</div>
 					</div>
+							
+							
+							
+								
+						
 
 
 				

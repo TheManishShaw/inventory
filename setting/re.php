@@ -7,29 +7,7 @@
    $query = "SELECT * FROM `_tblunits`";
    $faq = $db_handle->runQuery($query);
    ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-		<title>Unit List – <?php echo $sys_title ?></title>
-		
-        <?php include "../cores/inc/header_c.php" ?>
-	</head>
-	<body id="kt_body" class="aside-enabled">
-		<div class="d-flex flex-column flex-root">
-			<div class="page d-flex flex-row flex-column-fluid">
-				<div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">				
-					<?php include "../cores/inc/nav_c.php" ?>				
-				</div>
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<?php include "../cores/inc/top_c.php" ?>
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<div id="kt_content_container" class="container-fluid">
-						<div class="pt-10"><a href="javascript:void(0);" onclick="modal_show()" data-href="modal/s_unit.php" data-name="Add Unit" class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
-										<h1 class="anchor fw-bolder mb-5">Unit List</h1>
-										
-										<div class="my-5" id="reload">
-                              <table id="kt_datatable_example_5" class="table table-striped gy-5 gs-7 border rounded">
+<table id="kt_datatable_example_5" class="table table-striped gy-5 gs-7 border rounded">
 											<thead>
                                  <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">ID</th>
@@ -79,90 +57,9 @@
                               </tbody>
 											</table>
 
-										</div>
-										<!--end::Block-->			
-						</div>						
-					</div>
-					</div>
-					<?php include "../cores/inc/copy_c.php" ?>
-				</div>
-			</div>
-		</div>
-      <script>
-        
-         function abcd() {
-            $( "#reload" ).load( "re.php" );
-           
 
-         }
-          // Delete customer
-    var handleDeleteRows = () => {
-        // Select all delete buttons
-        const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
-
-        deleteButtons.forEach(d => {
-            // Delete button on click
-            d.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Select parent row
-                const parent = e.target.closest('tr');
-
-                // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
-
-                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                Swal.fire({
-                    text: "Are you sure you want to delete " + customerName + "?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    confirmButtonText: "Yes, delete!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary"
-                    }
-                }).then(function (result) {
-                    if (result.value) {
-                        // Simulate delete request -- for demo purpose only
-                        Swal.fire({
-                            text: "Deleting " + customerName,
-                            icon: "info",
-                            buttonsStyling: false,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(function () {
-                            Swal.fire({
-                                text: "You have deleted " + customerName + "!.",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                }
-                            }).then(function () {
-                                // delete row data from server and re-draw datatable
-                                dt.draw();
-                            });
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: customerName + " was not deleted.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
-                });
-            })
-        });
-    }
-      </script>		
-	</body>
-	<?php include "../cores/inc/footer_c.php" ?>
- 
-</html>
+                                            <script>
+                                                $(document).ready( function () {
+    $('#kt_datatable_example_5').DataTable();
+} );
+                                            </script>

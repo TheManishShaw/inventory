@@ -4,6 +4,11 @@ session_set_cookie_params(86400);
 ini_set('session.gc_probability', 0);
 ini_set('session.gc_divisor', 100);
 session_start();
+
+if(!isset($_SESSION["$sys_session"]) || $_SESSION["$sys_session"] !== true){
+    header("location: ".$sys_link."/index.php?url=".$ref_url."");
+    exit;
+}
 //Session Variables
 $u_id = $_SESSION["u_id"];
 $f_name = $_SESSION["f_name"];
@@ -18,10 +23,6 @@ $auth_token = $_SESSION["auth_token"];
 $u_mstats = $_SESSION["m_stats"];
 $u_estats = $_SESSION["e_stats"];
 $ref_url = $_SERVER['REQUEST_URI'];
-if(!isset($_SESSION["$sys_session"]) || $_SESSION["$sys_session"] !== true){
-    header("location: ".$sys_link."/index.php?url=".$ref_url."");
-    exit;
-}
 if($mob_check == "enabled"){
 if(!isset($_SESSION["$sys_session"]) || $_SESSION["m_stats"] !== "done"){
     header("location: ".$sys_link."/m_verify.php?url=".$ref_url."");
@@ -34,6 +35,18 @@ if(!isset($_SESSION["$sys_session"]) || $_SESSION["e_stats"] !== "done"){
     exit;
 }
 }
+// if($kyc_check == "enabled"){
+// if(!isset($_SESSION["$sys_session"]) || $_SESSION["kyc_stats"] !== "done"){
+//     header("location: ".$sys_link."/plugins/kyc/kyc_form.php");
+//     exit;
+// }
+// }
+// if($seed_payment == "enabled"){
+// if(!isset($_SESSION["$sys_session"]) || $_SESSION["seed_payment"] !== "done"){
+//     header("location: ".$sys_link."/seed_payment.php");
+//     exit;
+// }
+// }
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }

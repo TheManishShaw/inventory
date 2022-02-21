@@ -5,14 +5,12 @@ if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 session_start();
-$project_name = mysqli_real_escape_string($link, $_REQUEST['project_name']);
-$project_overview = mysqli_real_escape_string($link, $_REQUEST['project_overview']);
-$project_status = mysqli_real_escape_string($link, $_REQUEST['project_status']);
-
-$date = date("d/m/Y");
+$unit_name = mysqli_real_escape_string($link, $_REQUEST['u_name']);
+$unit_shortname = mysqli_real_escape_string($link, $_REQUEST['u_shortname']);
+$date = date("Y-m-d");
 $u_id = $_SESSION["u_id"];
-
-$query = "INSERT INTO `blog_tbl`(`blog_title`, `blog_data`, `blog_creator`, `blog_status`, `blog_timestamp`) VALUES ('$project_name','$project_overview','$u_id','$project_status','$date')";
+$status = "active";
+$query = "INSERT INTO `_tblunits`(`name`, `ShortName`, `u_set`, `created_at`, `status`) VALUES ('$unit_name','$unit_shortname','$u_id','$date','$status')";
 if(mysqli_query($link, $query)){
     /*$header = "From: no-reply@ivdata.in \r\n";
     $header .= "Reply-To: care@traderg.in \r\n";
@@ -26,8 +24,11 @@ if(mysqli_query($link, $query)){
     if($status == "approved"){
     mail($email_id,"Kyc Verified",$msg, $header);
     }*/
+   
     echo "ok";
 }else{
+   
     echo "err";
+    
 }
 ?>

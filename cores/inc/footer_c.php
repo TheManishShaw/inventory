@@ -27,6 +27,9 @@
 function modal_show() {
     $('#modal_show').modal('show')
 }
+function modal_hide() {
+    $('#modal_show').modal('hide')
+}
 $(document).ready(function(){
     $('.openPopup').on('click',function(){
         var dataURL = $(this).attr('data-href');
@@ -121,6 +124,24 @@ function checkTime(i) {
     }; // add zero in front of numbers < 10
     return i;
 }
+
+      const button = document.getElementById('kt_docs_sweetalert_html');
+
+button.addEventListener('click', e =>{
+    e.preventDefault();
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      });
+});
+ 
+   
 </script>  	
 
 
