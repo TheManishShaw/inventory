@@ -33,7 +33,7 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
 									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/sales/create.php">
+										<a class="menu-link" href="<?php echo $sys_link?>/product/create.php">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>

@@ -81,65 +81,69 @@ $(document).ready(function(){
     }
   }
 }
-         function clock() {
-    var hours = document.getElementById("hours");
-    var minutes = document.getElementById("minutes");
-    var seconds = document.getElementById("seconds");
-    var phase = document.getElementById("phase");
+//Uncomment later
+// function clock() {
+//     var hours = document.getElementById("hours");
+//     var minutes = document.getElementById("minutes");
+//     var seconds = document.getElementById("seconds");
+//     var phase = document.getElementById("phase");
 
-    var h = new Date().getHours();
-    var m = new Date().getMinutes();
-    var s = new Date().getSeconds();
-    var am = "AM";
+//     var h = new Date().getHours();
+//     var m = new Date().getMinutes();
+//     var s = new Date().getSeconds();
+//     var am = "AM";
 
-    if (h > 12) {
-        h = h - 12;
-        var am = "PM";
-    }
+//     if (h > 12) {
+//         h = h - 12;
+//         var am = "PM";
+//     }
 
-    h = h < 10 ? "0" + h : h;
-    m = m < 10 ? "0" + m : m;
-    s = s < 10 ? "0" + s : s;
+//     h = h < 10 ? "0" + h : h;
+//     m = m < 10 ? "0" + m : m;
+//     s = s < 10 ? "0" + s : s;
 
-    hours.innerHTML = h + ":" + m + "&nbsp;" + am;
-debug: true
-}
+//     hours.innerHTML = h + ":" + m + "&nbsp;" + am;
+// debug: true
+// }
 
-var interval = setInterval(clock, 100);
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-        h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
+// var interval = setInterval(clock, 100);
+// function startTime() {
+//     var today = new Date();
+//     var h = today.getHours();
+//     var m = today.getMinutes();
+//     var s = today.getSeconds();
+//     m = checkTime(m);
+//     s = checkTime(s);
+//     document.getElementById('clock').innerHTML =
+//         h + ":" + m + ":" + s;
+//     var t = setTimeout(startTime, 500);
+// }
 
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i
-    }; // add zero in front of numbers < 10
-    return i;
-}
+// function checkTime(i) {
+//     if (i < 10) {
+//         i = "0" + i
+//     }; // add zero in front of numbers < 10
+//     return i;
+// }
+//Uncomment later
 
-      const button = document.getElementById('kt_docs_sweetalert_html');
+//Probably not required
+//       const button = document.getElementById('kt_docs_sweetalert_html');
 
-button.addEventListener('click', e =>{
-    e.preventDefault();
+// button.addEventListener('click', e =>{
+//     e.preventDefault();
 
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      });
-});
+//     Swal.fire({
+//         title: 'Are you sure?',
+//         text: "You won't be able to revert this!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!'
+//       });
+// });
+// Probably not required
  
    
 </script>  	
