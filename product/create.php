@@ -27,9 +27,9 @@ include "../cores/inc/var_c.php";
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <!--begin::Product List-->
-                        <div class="card card-flush  flex-row-fluid p-6 ">
+                        <div class=" card-flush  flex-row-fluid p-6 ">
                             <!--begin::Card header-->
-                            <div class="card-header">
+                            <div class="card-header mb-2">
                                 <div class="card-title">
                                     <h2>Create Product</h2>
                                 </div>
@@ -41,7 +41,7 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Name *</label>
+                                            <label class="required form-label">Name </label>
                                             <input type="text" class="form-control" placeholder="Enter Name"
                                                 data-errors="Please Enter Name." name="name" id="name" required>
                                             <div class="help-block with-errors"></div>
@@ -49,7 +49,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>HSN Code *</label>
+                                            <label class="required form-label">HSN Code </label>
                                             <input type="text" class="form-control" placeholder="Enter HSN Code"
                                                 data-errors="Please Enter Code." name="code" id="code" required>
                                             <div class="help-block with-errors"></div>
@@ -59,7 +59,10 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Category *</label>
+                                            <label class=" form-label"> 
+                                            <span class="required">Category</span>
+														<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Select the product category and if you don't have then create a category first"></i>
+                                            </label>
                                             <select name="category" data-control="select2" id="category" data-placeholder="Choose a category"
                                                 class="form-control">
                                                 <option></option>
@@ -68,7 +71,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Brand *</label>
+                                            <label class="required form-label">Brand </label>
                                             <select name="brand" id="brand" data-control="select2" class="form-control"
                                                 data-style="py-0" data-placeholder="Please Select a Brand" required>
                                                 <option></option>
@@ -79,7 +82,7 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Barcode Symbology *</label>
+                                            <label class="required form-label">Barcode Symbology </label>
                                             <select name="bar" id="bar" class="form-control" data-control="select2"
                                                 data-style="py-0" data-errors="Please Select Barcode" required>
                                                 <option value="CREM01">CREM01</option>
@@ -95,7 +98,7 @@ include "../cores/inc/var_c.php";
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label> Product Cost *</label>
+                                            <label class="required form-label"> Product Cost </label>
                                             <input type="text" class="form-control" placeholder="Enter Cost"
                                                 data-errors="Please Enter Cost." name="cost" id="cost" onkeydown="return ( event.ctrlKey || event.altKey 
 																											|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
@@ -110,7 +113,7 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Sales Price *</label>
+                                            <label class="required form-label">Sales Price </label>
                                             <input type="text" class="form-control" placeholder="Enter Price"
                                                 data-errors="Please Enter Price." name="price" id="price" onkeydown="return ( event.ctrlKey || event.altKey 
 																											|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
@@ -123,7 +126,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Product Unit *</label>
+                                            <label class="required form-label">Product Unit </label>
                                             <select name="unit" id="unit" class="form-control"
                                                 data-style="py-0" data-control="select2">
                                                 <option selected disabled>Choose product Unit</option>
@@ -134,7 +137,7 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Sale Unit *</label>
+                                            <label class="required form-label">Sale Unit </label>
                                             <select name="sale" id="sale" class="form-control"
                                                 data-style="py-0" data-control="select2">
                                                 <option selected disabled>Choose Sale Unit</option>
@@ -143,7 +146,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Purchase Unit *</label>
+                                            <label>Purchase Unit </label>
                                             <select name="purchase" id="purchase" class="form-control"
                                                 data-style="py-0" data-control="select2">
                                                 <option selected disabled>Choose Purchase Unit</option>
@@ -154,7 +157,7 @@ include "../cores/inc/var_c.php";
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Tax Method *</label>
+                                            <label class="required form-label">Tax Method </label>
                                             <select name="tax" id="tax" class="form-control"
                                                 data-style="py-0" data-control="select2">
                                                 <option value="Exclusive">Exclusive</option>
@@ -164,7 +167,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>GST *</label>
+                                            <label class="required form-label">GST </label>
                                             <select name="sale_tax" id="sale_tax" class="form-control"
                                                 data-style="py-0" data-control="select2" data-placeholder="Choose GST">
                                             </select>
@@ -172,7 +175,7 @@ include "../cores/inc/var_c.php";
                                     </div>
                                     <div class="col-md-6 mt-4">
                                         <div class="form-group">
-                                            <label>Stock Alert *</label>
+                                            <label class="required form-label">Stock Alert </label>
                                             <input type="number" name="stock_alert" id="quantity" value="2"
                                                 class="form-control" onkeydown="return ( event.ctrlKey || event.altKey 
 																											|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
