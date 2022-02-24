@@ -1,8 +1,8 @@
 <?php
-include "../cores/inc/config_c.php";
-include "../cores/inc/functions_c.php";
-include "../cores/inc/auth_c.php";
-include "../cores/inc/var_c.php";
+include "../../cores/inc/config_c.php";
+include "../../cores/inc/functions_c.php";
+include "../../cores/inc/auth_c.php";
+include "../../cores/inc/var_c.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@ include "../cores/inc/var_c.php";
 <head>
     <title>Dashboard – <?php echo $sys_title ?></title>
 
-    <?php include "../cores/inc/header_c.php" ?>
+    <?php include "../../cores/inc/header_c.php" ?>
 </head>
 
 <body id="kt_body" class="aside-enabled">
@@ -20,10 +20,10 @@ include "../cores/inc/var_c.php";
                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-                <?php include "../cores/inc/nav_c.php" ?>
+                <?php include "../../cores/inc/nav_c.php" ?>
             </div>
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <?php include "../cores/inc/top_c.php" ?>
+                <?php include "../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <!--begin::Product List-->
@@ -36,7 +36,7 @@ include "../cores/inc/var_c.php";
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
-                            <form data-toggle="validator" action="../insert_product.php" method="POST" id="uploadForm"
+                            <form data-toggle="validator" action="gears/create_backend.php" method="POST" id="uploadForm"
                                 autocomplete="off" enctype="multipart/form-data">
                                 <div class="row mb-4">
                                     <div class="col-md-6">
@@ -73,8 +73,9 @@ include "../cores/inc/var_c.php";
                                         <div class="form-group">
                                             <label class="required form-label">Brand </label>
                                             <select name="brand" id="brand" data-control="select2" class="form-control"
-                                                data-style="py-0" data-placeholder="Please Select a Brand" required>
-                                                <option></option>
+											data-style="py-0" data-placeholder="Please Select a Brand" >
+											<!-- data-style="py-0" data-placeholder="Please Select a Brand" required> -->
+											<option></option>
                                             </select>
                                         </div>
                                     </div>
@@ -105,7 +106,8 @@ include "../cores/inc/var_c.php";
 																											|| (95<event.keyCode && event.keyCode<106)
 																											|| (event.keyCode==8) || (event.keyCode==9) 
 																											|| (event.keyCode>34 && event.keyCode<40) 
-																											|| (event.keyCode==46) || (event.keyCode == 190) )" required>
+																											|| (event.keyCode==46) || (event.keyCode == 190) )">
+																											<!-- || (event.keyCode==46) || (event.keyCode == 190) )" required> -->
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -120,7 +122,8 @@ include "../cores/inc/var_c.php";
 																											|| (95<event.keyCode && event.keyCode<106)
 																											|| (event.keyCode==8) || (event.keyCode==9) 
 																											|| (event.keyCode>34 && event.keyCode<40) 
-																											|| (event.keyCode==46)  || (event.keyCode==190))" required>
+																											|| (event.keyCode==46)  || (event.keyCode==190))">
+																											<!-- || (event.keyCode==46)  || (event.keyCode==190))" required> -->
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -182,7 +185,8 @@ include "../cores/inc/var_c.php";
 																											|| (95<event.keyCode && event.keyCode<106)
 																											|| (event.keyCode==8) || (event.keyCode==9) 
 																											|| (event.keyCode>34 && event.keyCode<40) 
-																											|| (event.keyCode==46) )" placeholder="Enter Quantity" required>
+																											|| (event.keyCode==46) )" placeholder="Enter Quantity">
+																											<!-- || (event.keyCode==46) )" placeholder="Enter Quantity" required> -->
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -216,11 +220,25 @@ include "../cores/inc/var_c.php";
 
                     </div>
                 </div>
-                <?php include "../cores/inc/copy_c.php" ?>
+                <?php include "../../cores/inc/copy_c.php" ?>
             </div>
         </div>
     </div>
+	<?php include "../../cores/inc/footer_c.php" ?>
+	<script>
+		document.querySelector('#submit').addEventListener('click',function(e){
+			e.preventDefault();
+			var url = $("form").attr("action");
+			var formData = {};
+			$("form").find("input[name]").each(function (index, node) {
+				formData[node.name] = node.value;
+			});
+			$.post(url,formData)
+			.done(function(data){
+				console.log(data);
+			});
+		});
+	</script>
 </body>
-<?php include "../cores/inc/footer_c.php" ?>
 
 </html>

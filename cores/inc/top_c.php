@@ -27,7 +27,7 @@
 									<div class="d-flex">
 									
 										<div class="d-flex align-items-center me-4">
-											<a href="<?php echo $sys_link ?>/pos/index.php" id="kt_drawer_chat_toggle" class="btn btn-primary btn-active-light" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+											<a href="<?php echo $sys_link ?>/inventory/pos/index.php" id="kt_drawer_chat_toggle" class="btn btn-primary btn-active-light" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 												
 											POS</a>
 										</div>										

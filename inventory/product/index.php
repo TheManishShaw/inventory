@@ -1,8 +1,8 @@
 <?php  
-	include "../cores/inc/config_c.php";
-	include "../cores/inc/var_c.php";
-	include "../cores/inc/functions_c.php";
-	include "../cores/inc/auth_c.php";
+	include "../../cores/inc/config_c.php";
+	include "../../cores/inc/var_c.php";
+	include "../../cores/inc/functions_c.php";
+	include "../../cores/inc/auth_c.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@
 <head>
 		<title>Products - <?php echo $sys_title ?></title>
 		
-        <?php include "../cores/inc/header_c.php" ?>
+        <?php include "../../cores/inc/header_c.php" ?>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -23,14 +23,14 @@
 				<!--begin::Aside-->
 				<div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
 					<!--end::Aside toolbar-->
-					<?php include "../cores/inc/nav_c.php" ?>
+					<?php include "../../cores/inc/nav_c.php" ?>
 					<!--end::Aside menu-->					
 				</div>
 				<!--end::Aside-->
 				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 					<!--begin::Header-->
-					<?php include "../cores/inc/top_c.php" ?>
+					<?php include "../../cores/inc/top_c.php" ?>
 					<!--end::Header-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Container-->
@@ -299,7 +299,7 @@
 						<!--end::Container-->
                     </div>
 					<!--begin::Footer-->
-					<?php include "../cores/inc/copy_c.php" ?>
+					<?php include "../../cores/inc/copy_c.php" ?>
 					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->
@@ -320,6 +320,6 @@
 		<!--end::Scrolltop-->		
 	</body>
     
-    <?php include "../cores/inc/footer_c.php" ?>
+    <?php include "../../cores/inc/footer_c.php" ?>
 	<!--end::Body-->
 </html>

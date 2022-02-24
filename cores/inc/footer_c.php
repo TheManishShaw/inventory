@@ -25,10 +25,10 @@
 
 		<script>
 function modal_show() {
-    $('#modal_show').modal('show')
+    $('#modal_show').modal('show');
 }
 function modal_hide() {
-    $('#modal_show').modal('hide')
+  $('#modal_show').modal('hide');
 }
 $(document).ready(function(){
     $('.openPopup').on('click',function(){
