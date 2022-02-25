@@ -1,5 +1,5 @@
 <?php 
-include "../../cores/inc/config_c.php";
+include "../../../cores/inc/config_c.php";
 
 ?>
 <script>
