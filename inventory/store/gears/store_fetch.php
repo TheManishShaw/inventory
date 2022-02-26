@@ -5,7 +5,7 @@
     include "../../../cores/inc/functions_c.php";
     include "../../../cores/inc/auth_c.php";
 
-    $query = "SELECT * FROM `uset_tbl` WHERE `uset_status`='active'";
+    $query = "SELECT * FROM `uset_tbl` WHERE `uset_status`='active' ORDER BY `uset_id` DESC";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

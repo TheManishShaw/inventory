@@ -10,7 +10,7 @@
 <head>
     <title>Store List – <?php echo $sys_title ?></title>
 
-    <?php include "../../cores/inc/header_c.php" ?>
+    <?php include "../../cores/inc/header_c.php"; ?>
 </head>
 
 <body id="kt_body" class="aside-enabled">
@@ -20,7 +20,7 @@
                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-                <?php include "../../cores/inc/nav_c.php" ?>
+                <?php include "../../cores/inc/nav_c.php";?>
             </div>
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                 <?php include "../../cores/inc/top_c.php" ?>
@@ -174,7 +174,7 @@
         $(function(){
         var table = $("#store-tbl").DataTable({
             "ajax": "gears/store_fetch.php",
-            "deferRender": false,
+            "deferRender": true,
             "columns": [
                 {"data": "uset_id",
                     "render": function(data,type,row) {
@@ -231,20 +231,31 @@
                         `;
                     }
                 }
-            ]
+            ],
+            "order": [[1,"desc"]]
         });
         setTimeout(function(){
             checkboxEvent();
+            handleSearchDatatable();
             KTMenu.createInstances();
             },1200);
     });
+
+    // Function for searching in datatable.
+    function handleSearchDatatable() {
+        const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
+        filterSearch.addEventListener('keyup', function (e) {
+            $('#store-tbl').DataTable().search(e.target.value).draw();
+        });
+    }
+
     function reloadDatatable() {
         $('#store-tbl').DataTable().ajax.reload();
         setTimeout(function(){
-            console.log('checkbox');
             checkboxEvent();
+            handleSearchDatatable();
             KTMenu.createInstances();
-            },2000);
+        },2000);
     }
 
     $('body').on('click','#delete-unit',function(e) {
