@@ -2,27 +2,22 @@
 <div id="formbox">
 <form  id="uploadForm" enctype="multipart/form-data" >
 <div class="mb-10">
-    <label for="u_name" class="required form-label">Name</label>
-    <input type="text" class="form-control form-control-solid" name="u_name" id="u_name" placeholder="Enter Unit Name"/>
+    <label for="name" class="required form-label">Tax Name</label>
+    <input type="text" class="form-control form-control-solid" name="name" id="name" placeholder="Enter Tax Name"/>
 </div>
 <div class="mb-10">
-    <label for="u_shortname" class="required form-label">Short Name</label>
-    <input type="text" class="form-control form-control-solid" name="u_shortname" id="u_shortname" placeholder="Enter Short Name"/>
+    <label for="percent" class="required form-label">Tax Percentage</label>
+    <input type="text" class="form-control form-control-solid" name="percent" id="percent" placeholder="Enter Tax Percentage"/>
 </div>
 <div class="mb-10">
-    <label for="operator" class="required form-label">Operator</label>
-    <select class="form-control" data-control="select2" name="operator" id="operator"
-    required data-placeholder="Choose Operator">
-        <option hidden>Choose an operator..</option>
-        <option value="+">Addition(+)</option>
-        <option value="-">Subtraction(-)</option>
-        <option value="*">Multiply(*)</option>
-        <option value="/">Divide(/)</option>
+    <label for="default" class="required form-label">Default</label>
+    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Choose yes to make this your default tax option.
+    Your default option is used as your preference while adding products."></i>
+    <select class="form-control" data-control="select2" name="default" id="default"
+    required data-placeholder="Is this your default tax?">
+        <option value="yes">YES</option>
+        <option value="no">NO</option>
     </select>
-</div>
-<div class="mb-10">
-    <label for="operator_value" class="required form-label">Operator Value</label>
-    <input type="text" class="form-control form-control-solid" name="operator_value" id="operator_value" placeholder="Enter Operator Value"/>
 </div>
 <button class="btn btn-primary" id="submit" type="submit">Submit</button>	 
 </form>
@@ -31,7 +26,7 @@
     function submitForm(formData){                
         $.ajax({
             type:'POST',
-            url: "gears/create_unit.php",
+            url: "gears/create_tax.php",
             data: formData,
             enctype: 'multipart/form-data',
             processData: false,
@@ -39,7 +34,7 @@
         }).done(function (data) {
             Swal.fire(
                 'Success',
-                'Unit created successfully!',
+                'Tax created successfully!',
                 'success'
             );
             parent.reloadDatatable();

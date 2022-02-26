@@ -3,10 +3,7 @@
    include "../../../cores/inc/functions_c.php";
    include "../../../cores/inc/auth_c.php";
    include "../../../cores/inc/var_c.php";
-   $db_handle = new DBController();
-   $query = "SELECT * FROM `_tblunits`";
-   $faq = $db_handle->runQuery($query);
-   ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,9 +62,8 @@
                                                 </div>
                                             </th>
                                             <th class="min-w-125px">ID</th>
-                                            <th class="min-w-125px">Name</th>
-                                            <th class="min-w-125px">Short Name</th>
-                                            <th class="min-w-125px">Created Date</th>
+                                            <th class="min-w-125px">Tax Name</th>
+                                            <th class="min-w-125px">Tax Percentage</th>
                                             <th class="text-end min-w-100px">Actions</th>
                                         </tr>
                                     </thead>
@@ -123,8 +119,8 @@
                     document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Tax -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
                                         data-href="modal/create_tax.php" data-name="Add Tax"
-                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
-                                    <!-- end:: Add Unit -->`;
+                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Tax</a>
+                                    <!-- end:: Add Tax -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -137,16 +133,16 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#unit-tbl').on( 'draw.dt',   function () { 
+            $('#tax-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Unit -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Tax -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_unit.php" data-name="Add Unit"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
-                                    <!-- end:: Add Unit -->`;
+                                    data-href="modal/create_tax.php" data-name="Add Tax"
+                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Tax</a>
+                                    <!-- end:: Add Tax -->`;
                 }
             }).dataTable();
 
@@ -159,24 +155,23 @@
         }
 
         $(function(){
-            var table = $("#unit-tbl").DataTable({
-                "ajax": "gears/unit_fetch.php",
+            var table = $("#tax-tbl").DataTable({
+                "ajax": "gears/tax_fetch.php",
                 "deferRender": true,
                 "columns": [
-                    {"data": "id",
+                    {"data": "tax_id",
                         "render": function(data,type,row) {
                             return `<div
                                         class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" id="checkbox`+row.id+`" />
+                                            value="1" id="checkbox`+row.tax_id+`" />
                                     </div>`;
                         }
                     },
-                    {"data":"id"},
-                    {"data": "name"},
-                    {"data": "ShortName"},
-                    {"data": "created_at"},
+                    {"data":"tax_id"},
+                    {"data": "tax_name"},
+                    {"data": "tax_percent"},
                     {"data": null}
                 ],
                 "columnDefs": [
@@ -201,13 +196,19 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
                                         <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_unit.php?id=`+row.id+`" data-name="Update Store">Edit</a>
+                                        data-href="modal/update_tax.php?id=`+row.tax_id+`" data-name="Update Store">Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.id+`" 
+                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.tax_id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="javascript:void(0);" class="menu-link px-3 default-action" default-id="`+row.tax_id+`" 
+                                        data-kt-customer-table-filter="default">Set Default</a>
                                     </div>
                                     <!--end::Menu item-->
                                 </div>
@@ -229,12 +230,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#unit-tbl').DataTable().search(e.target.value).draw();
+                $('#tax-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#unit-tbl').DataTable().ajax.reload();
+            $('#tax-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();
@@ -296,6 +297,40 @@
                         Swal.fire(
                             'Deleted!',
                             'Item has been deleted.',
+                            'success'
+                        );
+                        reloadDatatable();
+                    }).fail(function() {
+                        Swal.fire(
+                            'Error',
+                            "An error occured, please try again!",
+                            'error'
+                        );
+                    });
+                }
+            });
+        });
+
+        $('body').on('click','.default-action',function(e){
+            e.preventDefault();
+            let id = $(this).attr('default-id');
+            Swal.fire({
+                html: `Are you sure you want to set this as your default tax?`,
+                icon: 'question',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                customClass: {
+                    confirmButton: "btn btn-info",
+                    cancelButton: "btn btn-secondary"
+                }
+            }).then((result)=> {
+                if(result.isConfirmed) {
+                    $.post("gears/default.php",{"id":id})
+                    .done(function(data) {
+                        Swal.fire(
+                            'Updated!',
+                            'Your default tax has been updated!',
                             'success'
                         );
                         reloadDatatable();

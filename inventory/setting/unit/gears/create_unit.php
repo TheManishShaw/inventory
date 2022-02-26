@@ -14,7 +14,10 @@
 
     $unit_name = mysqli_real_escape_string($link, $unit_name);
     $unit_shortname = mysqli_real_escape_string($link, $unit_shortname);
-    $date = date("Y-m-d");
+    $operator = mysqli_real_escape_string($link,$operator);
+    $operator_value = mysqli_real_escape_string($link,$operator_value);
+    
+    $date = date("Y-m-d H:i:s");
     $u_id = $_SESSION["u_id"];
     $status = "active";
     $query = "INSERT INTO `_tblunits`(`name`, `ShortName`, `u_set`, `operator`, `operator_value`, `created_at`, `status`) 

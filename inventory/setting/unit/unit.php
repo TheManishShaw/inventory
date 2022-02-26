@@ -3,10 +3,7 @@
    include "../../../cores/inc/functions_c.php";
    include "../../../cores/inc/auth_c.php";
    include "../../../cores/inc/var_c.php";
-   $db_handle = new DBController();
-   $query = "SELECT * FROM `_tblunits`";
-   $faq = $db_handle->runQuery($query);
-   ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 

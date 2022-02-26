@@ -41,16 +41,16 @@ $(document).ready(function(){
     }); 
 });
 
-$(document).ready(function(){
-    $('.').on('click',function(){
-        var dataURL = $(this).attr('data-href');
-        var dataNAME = $(this).attr('data-name');
-        document.getElementById("Tickets").innerHTML = dataNAME;
-        $('.modal-body').load(dataURL,function(){
-            $('#modal_show').modal({show:true});
-        });
-    }); 
-});
+// $(document).ready(function(){
+//     $('.').on('click',function(){
+//         var dataURL = $(this).attr('data-href');
+//         var dataNAME = $(this).attr('data-name');
+//         document.getElementById("Tickets").innerHTML = dataNAME;
+//         $('.modal-body').load(dataURL,function(){
+//             $('#modal_show').modal({show:true});
+//         });
+//     }); 
+// });
 </script>
 <script>
          function fullscreen() {

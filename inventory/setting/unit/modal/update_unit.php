@@ -58,7 +58,7 @@
             console.log(data)
             Swal.fire(
                 'Success',
-                'Store updated successfully!',
+                'Unit updated successfully!',
                 'success'
             );
             parent.reloadDatatable();
