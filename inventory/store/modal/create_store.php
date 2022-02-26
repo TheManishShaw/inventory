@@ -41,9 +41,19 @@
             processData: false,
             contentType: false
         }).done(function (data) {
-            document.querySelector('#data_response').innerHTML = `<p class="text-success">Store created successfully.</p>`;
-            setTimeout(modal_hide,3000);
+            Swal.fire(
+                'Success',
+                'Store created successfully!',
+                'success'
+            );
+            parent.reloadDatatable();
+            modal_hide();
         }).fail(function(e){
+            Swal.fire(
+                'Error',
+                'An error occured. Please try again.',
+                'error'
+            );
             console.log(e.responseText);
         });
     }
@@ -52,7 +62,6 @@
             e.preventDefault();
             let formData = new FormData($('form')[0]);
             submitForm(formData);
-            parent.reloadDatatable();
         });
     });
 </script>

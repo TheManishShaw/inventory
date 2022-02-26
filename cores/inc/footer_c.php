@@ -31,7 +31,7 @@ function modal_hide() {
   $('#modal_show').modal('hide');
 }
 $(document).ready(function(){
-    $('.openPopup').on('click',function(){
+    $('body').on('click','.openPopup',function(){
         var dataURL = $(this).attr('data-href');
         var dataNAME = $(this).attr('data-name');
         document.getElementById("modal_title").innerHTML = dataNAME;

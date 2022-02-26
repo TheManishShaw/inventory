@@ -117,7 +117,9 @@
                 checkboxes.forEach(function(item){
                 if(item.checked == true){
                     let id = item.getAttribute("id");
-                    id = id.replace("checkbox","");
+                    if (id != null){
+                        id = id.replace("checkbox","");
+                    }
                     if(id != "" && id != 0){
                         selectedCheckboxes[idCounter] = id;
                         idCounter++;
@@ -214,13 +216,14 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="modal/update_store.php?id=`+row.uset_id+`" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
+                                    <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
                                      data-href="modal/update_store.php?id=`+row.uset_id+`" data-name="Update Store">Edit</a>
                                 </div>
                     			<!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.uset_id+`" data-kt-customer-table-filter="delete_row">Delete</a>
+                                    <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.uset_id+`" 
+                                    data-kt-customer-table-filter="delete_row">Delete</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
@@ -238,9 +241,10 @@
     function reloadDatatable() {
         $('#store-tbl').DataTable().ajax.reload();
         setTimeout(function(){
+            console.log('checkbox');
             checkboxEvent();
             KTMenu.createInstances();
-            },1200);
+            },2000);
     }
 
     $('body').on('click','#delete-unit',function(e) {

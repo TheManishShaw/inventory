@@ -47,7 +47,10 @@
          placeholder="Enter Store GST Number" required>
     </div>
         <div class="form-group my-4">
-        <input type="file" id="image" name="image" required />
+        <input type="file" id="image" accept=".jpg, .jpeg, .png" name="image"/>
+        <input type="text" name="old_image" value="<?php echo $row['uset_image'];?>" hidden>
+        <img src="../../data/store_img/<?php echo $row['uset_image'];?>" width="150px"
+        height="150px" alt="Store logo."/>
         <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Please provide a logo image of the store."></i>
     </div>
     
@@ -58,15 +61,25 @@
     function submitForm(formData){                
         $.ajax({
             type:'POST',
-            url: "gears/create_store.php",
+            url: "gears/update_store.php",
             data: formData,
             enctype: 'multipart/form-data',
             processData: false,
             contentType: false
         }).done(function (data) {
-            document.querySelector('#data_response').innerHTML = `<p class="text-success">Store created successfully.</p>`;
-            setTimeout(modal_hide,3000);
+            Swal.fire(
+                'Success',
+                'Store updated succesfully!',
+                'success'
+            );
+            parent.reloadDatatable();
+            modal_hide();
         }).fail(function(e){
+            Swal.fire(
+                'Error',
+                'An error occured. Please try again.',
+                'error'
+            );
             console.log(e.responseText);
         });
     }
@@ -75,7 +88,6 @@
             e.preventDefault();
             let formData = new FormData($('form')[0]);
             submitForm(formData);
-            parent.reloadDatatable();
         });
     });
 </script>
