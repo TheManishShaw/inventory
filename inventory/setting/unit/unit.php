@@ -1,16 +1,19 @@
 <?php
-   include "../../cores/inc/config_c.php";
-   include "../../cores/inc/functions_c.php";
-   include "../../cores/inc/auth_c.php";
-   include "../../cores/inc/var_c.php";
-?>
+   include "../../../cores/inc/config_c.php";
+   include "../../../cores/inc/functions_c.php";
+   include "../../../cores/inc/auth_c.php";
+   include "../../../cores/inc/var_c.php";
+   $db_handle = new DBController();
+   $query = "SELECT * FROM `_tblunits`";
+   $faq = $db_handle->runQuery($query);
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Store List – <?php echo $sys_title ?></title>
+    <title>Unit List – <?php echo $sys_title ?></title>
 
-    <?php include "../../cores/inc/header_c.php"; ?>
+    <?php include "../../../cores/inc/header_c.php" ?>
 </head>
 
 <body id="kt_body" class="aside-enabled">
@@ -20,14 +23,14 @@
                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-                <?php include "../../cores/inc/nav_c.php";?>
+                <?php include "../../../cores/inc/nav_c.php" ?>
             </div>
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <?php include "../../cores/inc/top_c.php" ?>
+                <?php include "../../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="pt-10">
-                            <h1 class="anchor fw-bolder mb-5">Store List</h1>
+                            <h1 class="anchor fw-bolder mb-5">Unit List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
@@ -40,50 +43,47 @@
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add Store -->
+                                    <!-- begin:: Add Unit -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->
+                                        data-href="modal/create_unit.php" data-name="Add Unit"
+                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
+                                    <!-- end:: Add Unit -->
                                 </div>
                                 <!--end::Toolbar-->
 
                             </div>
-                            <!--end::Wrapper-->
 
-                            <!--begin::Datatable-->
-                            <table id="store-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
-                                <thead>
-                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="w-10px pe-2">
-                                            <div
-                                                class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                <input class="form-check-input" type="checkbox"
-                                                 id="checkbox0" />
-                                            </div>
-                                        </th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>GST No.</th>
-                                        <th class="text-end min-w-100px">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 fw-bold">
-                                </tbody>
-                            </table>
-                            <!--end::Datatable-->
+                            <div class="my-5">
+                                <table id="unit-tbl" class="table table-striped gy-5 gs-7 border rounded">
+                                    <thead>
+                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th class="w-10px pe-2">
+                                                <div
+                                                    class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                    <input class="form-check-input" type="checkbox"
+                                                    id="checkbox0" />
+                                                </div>
+                                            </th>
+                                            <th class="min-w-125px">ID</th>
+                                            <th class="min-w-125px">Name</th>
+                                            <th class="min-w-125px">Short Name</th>
+                                            <th class="min-w-125px">Created Date</th>
+                                            <th class="text-end min-w-100px">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--end::Block-->
                         </div>
                     </div>
                 </div>
-                <?php include "../../cores/inc/copy_c.php" ?>
+                <?php include "../../../cores/inc/copy_c.php" ?>
             </div>
         </div>
     </div>
-    <?php include "../../cores/inc/footer_c.php" ?>
+    <?php include "../../../cores/inc/footer_c.php" ?>
     <script>
         //   function for adding event to checkboxes and selecting them
         function checkboxEvent(){
@@ -120,11 +120,11 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Unit -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                                        data-href="modal/create_store.php" data-name="Add Unit"
+                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
+                                    <!-- end:: Add Unit -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -137,16 +137,16 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#store-tbl').on( 'draw.dt',   function () { 
+            $('#unit-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Unit -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                                    data-href="modal/create_unit.php" data-name="Add Unit"
+                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
+                                    <!-- end:: Add Unit -->`;
                 }
             }).dataTable();
 
@@ -159,27 +159,24 @@
         }
 
         $(function(){
-            var table = $("#store-tbl").DataTable({
-                "ajax": "gears/store_fetch.php",
+            var table = $("#unit-tbl").DataTable({
+                "ajax": "gears/unit_fetch.php",
                 "deferRender": true,
                 "columns": [
-                    {"data": "uset_id",
+                    {"data": "id",
                         "render": function(data,type,row) {
                             return `<div
                                         class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" id="checkbox`+row.uset_id+`" />
+                                            value="1" id="checkbox`+row.id+`" />
                                     </div>`;
                         }
                     },
-                    {"data":"uset_id"},
-                    {"data": "uset_name"},
-                    {"data": "uset_email"},
-                    {"data": "uset_phone"},
-                    {"data": "uset_address"},
-                    {"data": "uset_pincode"},
-                    {"data": "uset_gst_no"},
+                    {"data":"id"},
+                    {"data": "name"},
+                    {"data": "ShortName"},
+                    {"data": "created_at"},
                     {"data": null}
                 ],
                 "columnDefs": [
@@ -204,12 +201,12 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
                                         <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_store.php?id=`+row.uset_id+`" data-name="Update Store">Edit</a>
+                                        data-href="modal/update_unit.php?id=`+row.id+`" data-name="Update Store">Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.uset_id+`" 
+                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -232,12 +229,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#store-tbl').DataTable().search(e.target.value).draw();
+                $('#unit-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#store-tbl').DataTable().ajax.reload();
+            $('#unit-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();
@@ -260,7 +257,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":ids})
+                    $.post("gears/delete.php",{"id_list":ids})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
@@ -294,7 +291,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":id})
+                    $.post("gears/delete.php",{"id_list":id})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
@@ -314,5 +311,4 @@
         });
     </script>
 </body>
-
 </html>

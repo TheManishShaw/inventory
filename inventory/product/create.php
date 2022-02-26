@@ -10,7 +10,7 @@ include "../../cores/inc/var_c.php";
 <head>
     <title>Dashboard – <?php echo $sys_title ?></title>
 
-    <?php include "../../cores/inc/header_c.php" ?>
+    <?php include "../../cores/inc/header_c.php";?>
 </head>
 
 <body id="kt_body" class="aside-enabled">

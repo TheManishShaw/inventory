@@ -99,7 +99,7 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
 									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/unit.php">
+										<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/unit/unit.php">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
