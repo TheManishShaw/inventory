@@ -5,6 +5,8 @@
     include "../../../../cores/inc/functions_c.php";
     include "../../../../cores/inc/auth_c.php";
 
+    $id = $_POST['id'];
+
     $u_set = $_SESSION['u_set'];
 
     $unit_name = htmlspecialchars($_POST['u_name']);
@@ -15,10 +17,9 @@
     $unit_name = mysqli_real_escape_string($link, $unit_name);
     $unit_shortname = mysqli_real_escape_string($link, $unit_shortname);
     $date = date("Y-m-d");
-    $u_id = $_SESSION["u_id"];
 
     $query = "UPDATE `_tblunits` SET `name`='$unit_name', `ShortName`='$unit_shortname', `u_set`='$u_set', `operator`='$operator',
-     `operator_value`='$operator_value', `updated_at`='$date'";
+     `operator_value`='$operator_value', `updated_at`='$date' WHERE `id`='$id'";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

@@ -41,6 +41,7 @@
     <input type="text" class="form-control form-control-solid" name="operator_value" value="<?php echo $row['operator_value']; ?>"
      id="operator_value" placeholder="Enter Operator Value"/>
 </div>
+<input type="text" name="id" value="<?php echo $id;?>" hidden/>
 <button class="btn btn-primary" id="submit" type="submit">Submit</button>	 
 </form>
 </div>
@@ -54,6 +55,7 @@
             processData: false,
             contentType: false
         }).done(function (data) {
+            console.log(data)
             Swal.fire(
                 'Success',
                 'Store updated successfully!',

@@ -107,6 +107,14 @@
 										</a>
 									</div>
 									<div class="menu-item">
+										<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/tax/tax.php">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">Tax</span>
+										</a>
+									</div>
+									<div class="menu-item">
 										<a class="menu-link" href="<?php echo $sys_link?>/inventory/sales/index.php">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>

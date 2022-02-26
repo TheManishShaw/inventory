@@ -11,7 +11,7 @@
 <html lang="en">
 
 <head>
-    <title>Unit List – <?php echo $sys_title ?></title>
+    <title>Tax List – <?php echo $sys_title ?></title>
 
     <?php include "../../../cores/inc/header_c.php" ?>
 </head>
@@ -30,7 +30,7 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="pt-10">
-                            <h1 class="anchor fw-bolder mb-5">Unit List</h1>
+                            <h1 class="anchor fw-bolder mb-5">Tax List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
@@ -43,18 +43,18 @@
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add Unit -->
+                                    <!-- begin:: Add Tax -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                        data-href="modal/create_unit.php" data-name="Add Unit"
-                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
-                                    <!-- end:: Add Unit -->
+                                        data-href="modal/create_tax.php" data-name="Add Tax"
+                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Tax</a>
+                                    <!-- end:: Add Tax -->
                                 </div>
                                 <!--end::Toolbar-->
 
                             </div>
 
                             <div class="my-5">
-                                <table id="unit-tbl" class="table table-striped gy-5 gs-7 border rounded">
+                                <table id="tax-tbl" class="table table-striped gy-5 gs-7 border rounded">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="w-10px pe-2">
@@ -120,9 +120,9 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Unit -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Tax -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                        data-href="modal/create_unit.php" data-name="Add Unit"
+                                        data-href="modal/create_tax.php" data-name="Add Tax"
                                         class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Unit</a>
                                     <!-- end:: Add Unit -->`;
                 }
