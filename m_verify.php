@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 $phone = $_SESSION["tel_no"];
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2?authorization=BEWToPFXi3kewLfgMnDCmSbcJx59j4Oda1sQ7uRVN0lYGrZ6vtmdLUIDuvcYoe53iXkpSrPHfatJjWCA&variables_values=$otp&route=otp&numbers=".urlencode($phone),
+  CURLOPT_URL => "dev/bulkV2?authorization=BEWToPFXi3kewLfgMnDCmSbcJx59j4Oda1sQ7uRVN0lYGrZ6vtmdLUIDuvcYoe53iXkpSrPHfatJjWCA&variables_values=$otp&route=otp&numbers=".urlencode($phone),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,

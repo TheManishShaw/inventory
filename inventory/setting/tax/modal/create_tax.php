@@ -10,9 +10,12 @@
     <input type="text" class="form-control form-control-solid" name="percent" id="percent" placeholder="Enter Tax Percentage"/>
 </div>
 <div class="mb-10">
-    <label for="default" class="required form-label">Default</label>
-    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Choose yes to make this your default tax option.
+     <label class=" form-label"> 
+            <span class="required">Default</span>
+				<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Choose yes to make this your default tax option.
     Your default option is used as your preference while adding products."></i>
+    </label>
+
     <select class="form-control" data-control="select2" name="default" id="default"
     required data-placeholder="Is this your default tax?">
         <option value="yes">YES</option>
