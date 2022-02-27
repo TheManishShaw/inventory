@@ -19,7 +19,7 @@
     $gst = mysqli_real_escape_string($link,$gst);
 
     $tmp_name = $_FILES['image']['tmp_name'];
-    $extn = explode('.',$_FILES['image']['name']); // extension of image
+    $extn = explode('.',$_FILES['image']['name']); // returns an array with extension at 1st position
     $imageName = time() . "." . $extn[1];
     $folder = "../../../data/store_img/".$imageName;
     

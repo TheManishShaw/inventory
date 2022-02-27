@@ -98,31 +98,38 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/unit/unit.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Unit</span>
-										</a>
-									</div>
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/tax/tax.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Tax</span>
-										</a>
-									</div>
-									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/inventory/sales/index.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title"> Sales List</span>
-										</a>
-									</div>									
-										
+										<div class="menu-item">
+											<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/brand/brand.php">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Brand</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/category/category.php">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Category</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/unit/unit.php">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Unit</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/tax/tax.php">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Tax</span>
+											</a>
+										</div>
 									</div>
 								</div>							
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">

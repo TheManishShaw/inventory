@@ -34,7 +34,7 @@
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Customers" />
+                                        placeholder="Search Unit" />
                                 </div>
                                 <!--end::Search-->
 
@@ -198,7 +198,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
                                         <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_unit.php?id=`+row.id+`" data-name="Update Store">Edit</a>
+                                        data-href="modal/update_unit.php?id=`+row.id+`" data-name="Update Unit">Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
