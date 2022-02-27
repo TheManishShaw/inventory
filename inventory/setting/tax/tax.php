@@ -34,7 +34,7 @@
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Customers" />
+                                        placeholder="Search Tax" />
                                 </div>
                                 <!--end::Search-->
 
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="my-5">
-                                <table id="tax-tbl" class="table table-striped gy-5 gs-7 border rounded">
+                                <table id="tax-tbl1" class="table table-striped gy-5 gs-7 border rounded">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th class="w-10px pe-2">
@@ -155,7 +155,7 @@
         }
 
         $(function(){
-            var table = $("#tax-tbl").DataTable({
+            var table = $("#tax-tbl1").DataTable({
                 "ajax": "gears/tax_fetch.php",
                 "deferRender": true,
                 "columns": [

@@ -1,9 +1,9 @@
-<?php include '../cores/inc/config_c.php'; ?>
+<?php include '../../cores/inc/config_c.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
       <title>POS – <?php echo $sys_title; ?></title>
-      <?php include '../cores/inc/header_c.php'; ?>
+      <?php include '../../cores/inc/header_c.php'; ?>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -267,7 +267,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-primary">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white">Cake</p>                                        
                               </div>
@@ -276,7 +276,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-warning">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white"> Cake</p>                                        
                               </div>
@@ -285,7 +285,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-success">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white">Cake</p>                                        
                               </div>
@@ -294,7 +294,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-primary">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white">Cake</p>                                        
                               </div>
@@ -303,7 +303,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-warning">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white">Cake</p>                                        
                               </div>
@@ -312,7 +312,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
                            <div class="card bg-success">                                                                        
                               <div class="card-body  p-3 d-block">
-                                 <img class="float-end" src="../assets/media/avatars/150-6.jpg" width="30px" alt="">
+                                 <img class="float-end" src="../../assets/media/avatars/150-6.jpg" width="30px" alt="">
                                  <h4 class="text-white">Testing <span class="badge badge-square badge-white">5</span> </h4>
                                  <p class="text-white" >Cake</p>                                        
                               </div>
@@ -345,7 +345,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -360,7 +360,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -375,7 +375,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -390,7 +390,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -405,7 +405,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -420,7 +420,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -435,7 +435,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -450,7 +450,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -465,7 +465,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -480,7 +480,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -495,7 +495,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -510,7 +510,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -525,7 +525,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -540,7 +540,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -555,7 +555,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -570,7 +570,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -585,7 +585,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">
                                       <div class=" float-end">
                                           <h6 class="badge badge-primary">Price:900</h6>
@@ -600,7 +600,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end">                                                                    
                                          <h6 class="badge badge-primary">Price:900</h6>
@@ -615,7 +615,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end"> 
                                            <h6 class="badge badge-primary">Price:900</h6>
@@ -630,7 +630,7 @@
                                        <div class="ribbon-label bg-danger">
                                           60
                                        </div>
-                                       <img class="card-img-top" width="100px" height="120px" src="../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
+                                       <img class="card-img-top" width="100px" height="120px" src="../../assets/media/avatars/150-6.jpg" alt="Card image cap">                                              
                                        <div class="card-body p-2 ">                                      
                                        <div class=" float-end"> 
                                            <h6 class="badge badge-primary">Price:900</h6>
@@ -658,6 +658,6 @@
       <!--end::Scrolltop-->	
 
    </body>
-   <?php include '../cores/inc/footer_c.php'; ?>
+   <?php include '../../cores/inc/footer_c.php'; ?>
    <!--end::Body-->
 </html>

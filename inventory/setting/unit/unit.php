@@ -34,7 +34,7 @@
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Customers" />
+                                        placeholder="Search Unit" />
                                 </div>
                                 <!--end::Search-->
 
