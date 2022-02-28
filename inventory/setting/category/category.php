@@ -170,7 +170,7 @@
                         }
                     },
                     {"data":"cat_id"},
-                    {"data": "cat_brand"},
+                    {"data": "brand"},
                     {"data": "cat_name"},
                     {"data": null}
                 ],

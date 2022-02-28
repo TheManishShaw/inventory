@@ -7,7 +7,8 @@
 
     $u_set = $_SESSION['u_set'];
 
-    $query = "SELECT * FROM `category_tbl` WHERE `cat_uset`='$u_set' AND `status`='active'";
+    $query = "SELECT `cat_id`,`_brands`.`name` AS `brand`,`cat_name` FROM `category_tbl` INNER JOIN `_brands` 
+    ON `category_tbl`.`cat_brand`=`_brands`.`id` WHERE `cat_uset`='$u_set' AND `category_tbl`.`status`='active'";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die("Could not fetch taxes. ".mysqli_error($link));

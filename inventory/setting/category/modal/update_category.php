@@ -19,7 +19,7 @@
 <div id="uploadStatus"></div>
 <div id="formbox">
     <form id="uploadForm" method="POST" enctype="multipart/form-data" >
-        <div class="mb-10">
+        <div class="fv-row mb-10">
             <label for="brand" class="required form-label">Brand Name</label>
             <select class="form-control" data-control="select2"
             name="brand" id="brand" required>
@@ -34,7 +34,7 @@
             ?>
             </select>
         </div>
-        <div class="mb-10">
+        <div class="fv-row mb-10">
             <label for="cat_name" class="required form-label">Category Name</label>
             <input type="text" class="form-control form-control-solid" name="cat_name"
              id="cat_name" value="<?php echo $category['cat_name'];?>" placeholder="Enter Category Name"/>
@@ -53,7 +53,6 @@
             processData: false,
             contentType: false
         }).done(function (data) {
-            console.log(data)
             Swal.fire(
                 'Success',
                 'Category updated successfully!',
@@ -74,7 +73,44 @@
         document.querySelector("#submit").addEventListener("click",function(e){
             e.preventDefault();
             let formData = new FormData($('form')[0]);
-            submitForm(formData);
+            if (validator) {
+                validator.validate().then(function(status) {
+                    if (status == "Valid") {
+                        submitForm(formData);
+                    }
+                });
+            }
         });
     });
+
+    var form = document.querySelector("form");
+
+    var validator = FormValidation.formValidation(
+        form,
+        {
+            fields: {
+                brand: {
+                    validators: {
+                        notEmpty: {
+                            message: "Please select an option."
+                        }
+                    }
+                },
+                cat_name: {
+                    validators: {
+                        notEmpty: {
+                            message: "Text input is requred."
+                        }
+                    }
+                }
+            },
+            plugins: {
+                submitButton: new FormValidation.plugins.SubmitButton(),
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: ".fv-row"
+                })
+            }
+        }
+    );
 </script>
