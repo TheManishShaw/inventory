@@ -43,7 +43,8 @@ include "../../cores/inc/var_c.php";
                                         <div class="form-group">
                                             <label class="required form-label">Name </label>
                                             <input type="text" class="form-control" placeholder="Enter Name"
-                                                data-errors="Please Enter Name." name="name" id="name" required>
+                                                data-errors="Please Enter Name." name="name" id="name" onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" pattern="[a-zA-Z]+"  required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>

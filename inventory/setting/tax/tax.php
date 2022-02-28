@@ -116,11 +116,9 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Tax -->
-                                    <a href="javascript:void(0);" onclick="modal_show()"
+                    document.querySelector("#btn-div").innerHTML = `<a href="javascript:void(0);" onclick="modal_show()"
                                         data-href="modal/create_tax.php" data-name="Add Tax"
-                                        class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Tax</a>
-                                    <!-- end:: Add Tax -->`;
+                                        class="openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Tax</a>`;
                 }
             } 
             checkboxDeleteButton();

@@ -3,7 +3,8 @@
 <form  id="uploadForm" enctype="multipart/form-data" >
 <div class="mb-10">
     <label for="name" class="required form-label">Tax Name</label>
-    <input type="text" class="form-control form-control-solid" name="name" id="name" placeholder="Enter Tax Name"/>
+    <input type="text" class="form-control form-control-solid" name="name" id="name" onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" pattern="[a-zA-Z]+"  placeholder="Enter Tax Name"/>
 </div>
 <div class="mb-10">
     <label for="percent" class="required form-label">Tax Percentage</label>
