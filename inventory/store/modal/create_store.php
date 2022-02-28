@@ -1,11 +1,17 @@
 <form id="uploadForm" method="POST" action="../gears/create_store.php" enctype="multipart/form-data">
     <div class="fv-row form-group mb-4">
         <label class="form-label required" for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="uset_name" placeholder="Enter Store Name" required>
+        <input type="text" class="form-control" id="name" name="uset_name" placeholder="Enter Store Name"onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" pattern="[a-zA-Z]+"  required>
     </div>
     <div class="fv-row form-group my-4">
         <label class="form-label required" for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone"  placeholder="Enter Store Phone" required>
+        <input type="text" class="form-control" id="phone" name="phone"  placeholder="Enter Store Phone" onkeydown="return ( event.ctrlKey || event.altKey 
+																											|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+																											|| (95<event.keyCode && event.keyCode<106)
+																											|| (event.keyCode==8) || (event.keyCode==9) 
+																											|| (event.keyCode>34 && event.keyCode<40) 
+																											|| (event.keyCode==46)  || (event.keyCode==190))" required>
     </div>
     <div class="fv-row form-group my-4">
         <label class="form-label required" for="address">Address</label>
@@ -17,7 +23,12 @@
     </div>
     <div class="fv-row form-group my-4">
         <label class="form-label required" for="pincode">Pin Code</label>
-        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter Store Pin Code" required>
+        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter Store Pin Code" onkeydown="return ( event.ctrlKey || event.altKey 
+																											|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+																											|| (95<event.keyCode && event.keyCode<106)
+																											|| (event.keyCode==8) || (event.keyCode==9) 
+																											|| (event.keyCode>34 && event.keyCode<40) 
+																											|| (event.keyCode==46)  || (event.keyCode==190))" required>
     </div>
     <div class="fv-row form-group my-4">
         <label class="form-label required" for="gstno">GST Number</label>

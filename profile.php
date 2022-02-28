@@ -144,12 +144,7 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 								</div>
 							</div>				
 						</div>
-					</div>
-
-
-
-
-                    
+					</div>                   
 					<!--begin::Footer-->
 					<?php include "cores/inc/copy_c.php" ?>
 					<!--end::Footer-->

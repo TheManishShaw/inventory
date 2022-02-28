@@ -28,9 +28,9 @@
 						<div id="kt_content_container" class="container-fluid">
 						<div class="pt-10">
 							<!-- <a href="#" class="btn btn-primary float-end">Add Users</a> -->
-										<h1 class="anchor fw-bolder mb-5">Users List</h1>
+							<h1 class="anchor fw-bolder mb-5">Users List</h1>
 										
-										<div class="my-5">
+						<div class="my-5">
 							<table id="kt_datatable_example_5" class="table table-striped gy-5 gs-7 border rounded">
 								<thead>
 									<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
