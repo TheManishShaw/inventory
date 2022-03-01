@@ -194,7 +194,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
                                         <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_tax.php?id=`+row.tax_id+`" data-name="Update Store">Edit</a>
+                                        data-href="modal/update_tax.php?id=`+row.tax_id+`" data-name="Update Tax">Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
