@@ -20,6 +20,7 @@
     $tax = htmlspecialchars($_POST['sale_tax']);
     $stock_alert = htmlspecialchars($_POST['stock_alert']);
     $description = htmlspecialchars($_POST['descp']);
+    $oldImage = htmlspecialchars($_POST['old_images']);
 
     $id = mysqli_real_escape_string($link,$id);
     $name = mysqli_real_escape_string($link,$name);
@@ -34,6 +35,7 @@
     $tax = mysqli_real_escape_string($link,$tax);
     $stock_alert = mysqli_real_escape_string($link,$stock_alert);
     $description = mysqli_real_escape_string($link,$description);
+    $oldImage = mysqli_real_escape_string($link,$oldImage);
 
     $image = [];
     if(isset($_FILES['files']) && !empty($_FILES['files']['name'][0])) {
@@ -44,9 +46,11 @@
             $folder = "../../../data/product_img/".$image[$i];
             move_uploaded_file($tmp_name,$folder);
         }
+        $image = implode(",",$image);
+    } else {
+        $image = $oldImage;
     }
 
-    $image = implode(",",$image);
     $date = date("Y-m-d H:i:s");
 
     $query = "UPDATE `_tblproducts` SET `u_set`='$u_set',`code`='$code',`type_barcode`='$bar',`name`='$name',

@@ -237,7 +237,7 @@ $product = mysqli_fetch_assoc($product_result);
     </div>
     <input type="text" name="id" value="<?php echo $id;?>" hidden/>
 
-    <button type="submit" name="submit" id="submit" class="btn btn-primary mr-2">Add
+    <button type="submit" name="submit" id="submit" class="btn btn-primary mr-2">Update
         Product</button>
     <button type="reset" class="btn btn-danger">Reset</button>
     
