@@ -205,6 +205,32 @@ $product = mysqli_fetch_assoc($product_result);
                 <div class="field" align="left">
                     <h3>Upload your images</h3>
                     <input type="file" id="files" name="files[]" multiple />
+                    <input type="text" name="old_images" value="<?php echo $product['image'];?>" hidden/>
+                </div>
+                <div>
+                    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php
+                            $images = explode(",",$product['image']);
+                            for($i=0; $i < count($images); $i++ ){
+                                ?>
+                                <div class="carousel-item <?php if($i==0){echo 'active';}?>">
+                                <img src="../../data/product_img/<?php echo $images[$i];?>" class="d-block w-100" 
+                                height="150px" width="150px" alt="Image of product">
+                                </div>
+                                <?php
+                            }
+                        ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    </div>
                 </div>
             </div>
         </div>

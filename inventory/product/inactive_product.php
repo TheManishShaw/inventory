@@ -27,7 +27,7 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="pt-10">
-                            <h1 class="anchor fw-bolder mb-5">Active Product List</h1>
+                            <h1 class="anchor fw-bolder mb-5">In-Active Product List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
@@ -51,7 +51,7 @@
                             <!--end::Wrapper-->
 
                             <!--begin::Datatable-->
-                            <table id="active-product-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <table id="inactive-product-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -119,10 +119,10 @@
 						document.querySelector("#btn-div").innerHTML = `<div class="fw-bolder d-flex align-items-center me-5">
 							<span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
 						<button selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger mx-2' id="delete-unit">Delete</button>
-						<button selected-checkboxes="`+ selectedCheckboxes +`" class="btn btn-info mx-2" id='toggle-product'>Mark In-active</button>`;
+						<button selected-checkboxes="`+ selectedCheckboxes +`" class="btn btn-info mx-2" id='toggle-product'>Mark Active</button>`;
 					} else if (checking == false && document.querySelector("#delete-unit")) {
 						document.querySelector("#btn-div").innerHTML = `<a href="create.php" 
-						class="btn btn-primary float-end"><i class="fa fa-plus"></i> Add Product</a>`;
+						class=" btn btn-primary float-end"><i class="fa fa-plus"></i> Add Product</a>`;
 					}
 				} 
 				checkboxDeleteButton();
@@ -135,14 +135,15 @@
 				}
 						
 				//code for attaching event listeners to all checkboxes is datatable redrawn
-				$('#active-product-tbl').on( 'draw.dt',   function () { 
+				$('#inactive-product-tbl').on( 'draw.dt',   function () { 
 					checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
 					checkboxes.forEach(function(item){eventListenerAdder(item)});
 					document.querySelector("#checkbox0").checked = false;
 					if(document.querySelector("#delete-unit")){
 						document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Product -->
-										<a href="modal/create_product.php" class="btn btn-primary float-end">
-										<i class="fa fa-plus"></i> Add Product</a>`;
+										<a href="create.php" class="btn btn-primary float-end">
+                                        <i class="fa fa-plus"></i> Add Product</a>
+										<!-- end:: Add Product -->`;
 					}
 				}).dataTable();
 	
@@ -155,8 +156,8 @@
 			}
 	
 			$(function(){
-				$("#active-product-tbl").DataTable({
-					"ajax": "gears/product_fetch.php",
+				$("#inactive-product-tbl").DataTable({
+					"ajax": "gears/inactive_fetch.php",
 					"deferRender": true,
 					"columns": [
 						{"data": "id",
@@ -221,7 +222,7 @@
 										<div class="menu-item px-3">
 											<a href="javascript:void(0);" class="menu-link px-3 text-center text-nowrap toggle-status"
 											 product-id="`+row.id+`" 
-											>Mark In-active</a>
+											>Mark Active</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
@@ -249,12 +250,12 @@
 			function handleSearchDatatable() {
 				const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
 				filterSearch.addEventListener('keyup', function (e) {
-					$('#active-product-tbl').DataTable().search(e.target.value).draw();
+					$('#inactive-product-tbl').DataTable().search(e.target.value).draw();
 				});
 			}
 	
 			function reloadDatatable() {
-				$('#active-product-tbl').DataTable().ajax.reload();
+				$('#inactive-product-tbl').DataTable().ajax.reload();
 				setTimeout(function(){
 					checkboxEvent();
 					handleSearchDatatable();
@@ -311,7 +312,7 @@
 					}
 				}).then((result)=> {
 					if(result.isConfirmed) {
-						$.post("gears/toggleStatus.php",{"id_list":ids,"current":'active'})
+						$.post("gears/toggleStatus.php",{"id_list":ids,'current':'inactive'})
 						.done(function(data) {
 							Swal.fire(
 								'Stauts changed!',
@@ -379,7 +380,7 @@
 					}
 				}).then((result)=> {
 					if(result.isConfirmed) {
-						$.post("gears/toggleStatus.php",{"id_list":id,"current":'active'})
+						$.post("gears/toggleStatus.php",{"id_list":id,"current":'inactive'})
 						.done(function(data) {
 							Swal.fire(
 								'Status changed!',

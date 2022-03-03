@@ -45,7 +45,15 @@
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
-											<span class="menu-title"> Product List</span>
+											<span class="menu-title">Active Products</span>
+										</a>
+									</div>									
+									<div class="menu-item">
+										<a class="menu-link" href="<?php echo $sys_link?>/inventory/product/inactive_product.php">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">In-Active Products</span>
 										</a>
 									</div>									
 										

@@ -35,24 +35,24 @@
     $stock_alert = mysqli_real_escape_string($link,$stock_alert);
     $description = mysqli_real_escape_string($link,$description);
 
-    // $image = [];
-    // if(isset($_FILES['files']) && !empty($_FILES['files']['name'])) {
-    //     for($i = 0; $i < count($_FILES['files']['name']); $i++) {
-    //         $tmp_name = $_FILES['files']['tmp_name'][$i];
-    //         $extn = explode('.',$_FILES['files']['name'][$i]);   // returns an array with extension at 1st position.
-    //         $image[] = 'product'.time()."$i.".$extn[1];
-    //         $folder = "../../../data/product_img/".$image[$i];
-    //         move_uploaded_file($tmp_name,$folder);
-    //     }
-    // }
+    $image = [];
+    if(isset($_FILES['files']) && !empty($_FILES['files']['name'][0])) {
+        for($i = 0; $i < count($_FILES['files']['name']); $i++) {
+            $tmp_name = $_FILES['files']['tmp_name'][$i];
+            $extn = explode('.',$_FILES['files']['name'][$i]);   // returns an array with extension at 1st position.
+            $image[] = 'product'.time()."$i.".$extn[1];
+            $folder = "../../../data/product_img/".$image[$i];
+            move_uploaded_file($tmp_name,$folder);
+        }
+    }
 
-    // $image = implode(",",$image);
+    $image = implode(",",$image);
     $date = date("Y-m-d H:i:s");
 
     $query = "UPDATE `_tblproducts` SET `u_set`='$u_set',`code`='$code',`type_barcode`='$bar',`name`='$name',
     `cost`='$cost',`price`='$price',`category_id`='$category',`brand_id`='$brand',`unit_id`='$unit',
-    `sale_unit_id`='$unit',`purchase_unit_id`='$unit',`stock_alert`='$stock_alert',`tax`='$tax',
-    `tax_method`='$taxmethod',`note`='$description',`updated_at`='$date' WHERE `id`=''";
+    `sale_unit_id`='$unit',`purchase_unit_id`='$unit',`stock_alert`='$stock_alert',`tax`='$tax',`image`='$image',
+    `tax_method`='$taxmethod',`note`='$description',`updated_at`='$date' WHERE `id`='$id'";
     $result = mysqli_query($link,$query);
     
     if (!$result) {
