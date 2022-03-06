@@ -58,7 +58,7 @@ $tax_result = mysqli_query($link,$query);
                                         <div class="form-group fv-row">
                                             <label class="required form-label">Name </label>
                                             <input type="text" class="form-control" placeholder="Enter Name" data-errors="Please Enter Name."
-                                                name="name" id="name" oninput="inputLimiter(this)" data-regex="[^a-zA-Z ]" required>
+                                                name="name" id="name" oninput="inputLimiter(this)" data-regex="[^a-zA-Z0-9 ]" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>

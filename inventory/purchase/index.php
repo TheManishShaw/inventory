@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <title>Sales List – <?php echo $sys_title ?></title>
+    <title>Purchase List – <?php echo $sys_title;?></title>
 
     <?php include "../../cores/inc/header_c.php"; ?>
 </head>
@@ -27,24 +27,23 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="pt-10">
-                            <h1 class="anchor fw-bolder mb-5">Store List</h1>
+                            <h1 class="anchor fw-bolder mb-5">Purchase List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Store" />
+                                        placeholder="Search purchase" />
                                 </div>
                                 <!--end::Search-->
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add Store -->
-                                    <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->
+                                    <!-- begin:: Add Purchase -->
+                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
+                                        <i class="fa fa-plus"></i> Add Purchase</a>
+                                    <!-- end:: Add Purchase -->
                                 </div>
                                 <!--end::Toolbar-->
 
@@ -52,7 +51,7 @@
                             <!--end::Wrapper-->
 
                             <!--begin::Datatable-->
-                            <table id="store-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <table id="purchase-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -62,9 +61,9 @@
                                                  id="checkbox0" />
                                             </div>
                                         </th>
-                                        <th>Sale ID</th>
+                                        <th>Purchase ID</th>
                                         <th>Date</th>
-                                        <th>Customer</th>
+                                        <th>Supplier</th>
                                         <th>Grand Total</th>
                                         <th>Quantity</th>
                                         <th>Paid</th>
@@ -122,11 +121,10 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
-                                    <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase -->
+                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add Purchase</a>
+                                    <!-- end:: Add Purchase -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -139,16 +137,15 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#store-tbl').on( 'draw.dt',   function () { 
+            $('#purchase-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
-                                    <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase -->
+                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add Purchase</a>
+                                    <!-- end:: Add Purchase -->`;
                 }
             }).dataTable();
 
@@ -161,8 +158,8 @@
         }
 
         $(function(){
-            var table = $("#store-tbl").DataTable({
-                "ajax": "gears/sales_fetch.php",
+            var table = $("#purchase-tbl").DataTable({
+                "ajax": "gears/purchase_fetch.php",
                 "deferRender": true,
                 "columns": [
                     {"data": "id",
@@ -175,9 +172,9 @@
                                     </div>`;
                         }
                     },
-                    {"data":"sale_id"},
+                    {"data":"purchase_id"},
                     {"data": "date"},
-                    {"data": "client_id"},
+                    {"data": "supplier_id"},
                     {"data": "total_amount"},
                     {"data": "quantity"},
                     {"data": "paid_amount",
@@ -215,13 +212,13 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_store.php?id=`+row.uset_id+`" data-name="Update Store">Edit</a>
+                                        <a class="table-modal menu-link px-3" href="modal/update_purchase.php?id=`+row.purchase_id+`"
+                                        >Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.uset_id+`" 
+                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.purchase_id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -244,12 +241,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#store-tbl').DataTable().search(e.target.value).draw();
+                $('#purchase-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#store-tbl').DataTable().ajax.reload();
+            $('#purchase-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();
@@ -272,7 +269,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":ids})
+                    $.post("gears/delete.php",{"id_list":ids})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
@@ -306,7 +303,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":id})
+                    $.post("gears/delete.php",{"id_list":id})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
