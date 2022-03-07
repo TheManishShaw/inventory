@@ -18,12 +18,22 @@
         die('Could not fetch purchase. '.mysqli_error($link));
     }
     $purchaseRow = mysqli_fetch_assoc($purchaseResult);
+
+    $query = "SELECT `_tblpurchase_details`.`quantity`,`_tblpurchase_details`.`product_id`,`net_tax`,
+    `total_amount`,`_tblproducts`.`code`,`_tblproducts`.`name`,`_tblproducts`.`price`,
+    `_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_details` INNER JOIN `_tblproducts` ON 
+    `_tblpurchase_details`.`product_id`=`_tblproducts`.`id` WHERE `purchase_id`='$purchase_id'
+    AND `_tblpurchase_details`.`status`='active'";
+    $productsResult = mysqli_query($link,$query);
+    if (!$productsResult){
+        die('Could not fetch Purchase Details. '.mysqli_error($link));
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Create Purchase – <?php echo $sys_title ?></title>
+    <title>Update Purchase – <?php echo $sys_title ?></title>
 
     <?php include "../../../cores/inc/header_c.php";?>
 </head>
@@ -46,15 +56,16 @@
                             <!--begin::Card header-->
                             <div class="card-header mb-2">
                                 <div class="card-title">
-                                    <h2>Create Purchase</h2>
+                                    <h2>Update Purchase</h2>
                                 </div>
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
-                            <form data-toggle="validator" action="../gears/create_purchase.php" method="POST" id="uploadForm"
+                            <form data-toggle="validator" action="../gears/update_purchase.php" method="POST" id="uploadForm"
                                 autocomplete="off" enctype="multipart/form-data">
                                 <div class="row my-4">
                                     <div class="col-6">   
+                                        <input type="text" name="purchase_id" value="<?php echo $purchase_id;?>" hidden/>
                                         <label class="fw-bolder" for="date">Date</label>
                                         <input type="text" id="date" placeholder="Enter Date" class="form-control"
                                         value="<?php echo date('d-m-Y H:i:s',strtotime($purchaseRow['date']));?>" name="date">
@@ -105,6 +116,73 @@
                                         </tr>
                                     </thead>
                                     <tbody style="max-height:250px;overflow:auto;">
+                                    <?php
+                                        while($productsRow = mysqli_fetch_assoc($productsResult)){
+                                            ?>
+                                            <tr class="text-center product-row" id="product<?php echo $productsRow['product_id'];?>">
+                                                <td class="px-3"><p><?php echo $productsRow['name'];?></p><span class="badge badge-success"><?php echo $productsRow['code'];?></span>
+                                                <input name="product_id[]" value="<?php echo $productsRow['product_id'];?>" hidden/>
+                                                <input name="product_code[]" value="<?php echo $productsRow['code'];?>" hidden/>
+                                                <input name="product_name[]" value="<?php echo $productsRow['name'];?>" hidden/>
+                                                </td>
+                                                <td class="product-price"><?php echo $productsRow['price'];?></td>
+                                                <td class="product-stock"><?php echo $productsRow['stock'];?></td>
+                                                <td>
+                                                    <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                                                    <!--begin::Decrease control-->
+                                                    <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0">
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                        <span class="svg-icon svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    </button>
+                                                    <!--end::Decrease control-->
+                                                    <!--begin::Input control-->
+                                                    <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" 
+                                                    name="quantity[]" value="<?php echo $productsRow['quantity'];?>" />
+                                                    <!--end::Input control-->
+                                                    <!--begin::Increase control-->
+                                                    <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                        <span class="svg-icon svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    </button>
+                                                    <!--end::Increase control-->
+                                                    </div>
+                                                </td>
+                                                <td><span class="product-tax"><?php echo $productsRow['net_tax'];?></span>
+                                                    <input class="product-tax-input" name="tax[]" 
+                                                    value="<?php echo $productsRow['net_tax'];?>" hidden/>
+                                                    <input class="product-tax-single" 
+                                                    value="<?php echo $productsRow['net_tax']/$productsRow['quantity'];?>" hidden/>
+                                                </td>
+                                                <td><span class="product-subtotal">
+                                                    <?php
+                                                        echo $productsRow['total_amount'];
+                                                    ?>
+                                                    </span>
+                                                    <input class="product-subtotal-input" name="subtotal[]" value="<?php
+                                                    echo $productsRow['total_amount'];?>" hidden/>
+                                                    <input class="product-subtotal-single" 
+                                                    value="<?php echo $productsRow['total_amount']/$productsRow['quantity'];?>" hidden/>
+                                                </td>
+                                                <td>
+                                                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    ?>
                                     </tbody>
                                     </table>
                                 </div>
@@ -145,8 +223,8 @@
                                                         Total :</b></label>
                                                 <input class="text-end" style="width: 150px; background-color: #f5f5f5; border: none"
                                                 readonly id="grandtotal_disp" value="<?php echo $purchaseRow['total_amount']?>"/>
-                                                <input type="number" name="grand_total" id="grand_total" value="0.00"
-                                                     readonly hidden/>
+                                                <input type="number" name="grand_total" id="grand_total" 
+                                                value="<?php echo $purchaseRow['total_amount'];?>" readonly hidden/>
                                                 <i class="fas fa-rupee-sign mt-2"></i>
                                             </div>
 
@@ -170,7 +248,7 @@
                                 <label>Discount Amount</label>
                                 <div role="group" class="input-group">
                                     <input type="text" class="form-control" id="discount" name="discount" 
-                                    value="<?php echo $purchaseRow[''];?>" required>
+                                    value="<?php echo $purchaseRow['discount'];?>" required>
                                     <a class="btn bg-primary"><i class="fas text-white fa-rupee-sign"></i></a>
                                 </div>
                                 </div>
@@ -179,9 +257,11 @@
 
                                 <select class="form-control mb-3" name="payment_status">
 
-                                <option value="paid" selected>Paid</option>
+                                <option value="paid" 
+                                <?php if($purchaseRow['payment_status']=='paid') echo 'selected';?>>Paid</option>
                                 <!--<option value="2">Partial</option>-->
-                                <option value="pending">Pending</option>
+                                <option value="pending"
+                                <?php if($purchaseRow['payment_status']=='pending') echo 'selected';?>>Pending</option>
                                 </select>
                             </div>
 
@@ -192,36 +272,130 @@
                                 <label for="validationCustom02">Amount</label>
                                 <div role="group" class="input-group">
                                 <input type="text" class="form-control" data-regex="[^0-9.]"
-                                 name="amount" id='amount-input'>
+                                 name="amount" id='amount-input' value="<?php echo $purchaseRow['paid_amount'];?>">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label>Payment Choice</label>
                                 <div class="form-group" id="payment-choice">
                                     <div class="ml-2 btn-group" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
-                                        <label class="btn btn-outline-success active" data-kt-button="true">
-                                            <input class="btn-check" type="radio" name="payment_method" id="cash" value="cash" autocomplete="off" checked="checked"> Cash
+                                        <?php
+                                            $active = '';
+                                            $checked = '';
+                                            if ($purchaseRow['payment_method']=='cash') {
+                                                $active = 'active';
+                                                $checked = 'checked';
+                                            }
+                                        ?>
+                                        <label class="btn btn-outline-success <?php echo $active?>" data-kt-button="true">
+                                            <input class="btn-check" type="radio" name="payment_method" id="cash" value="cash"
+                                             autocomplete="off" checked="<?php echo $checked;?>"> Cash
                                         </label>
-                                        <label class="btn btn-outline-primary" data-kt-button="true">
-                                            <input class="btn-check" type="radio" name="payment_method" id="card" value="card" autocomplete="off"> Card
+                                        <?php
+                                            $active = '';
+                                            $checked = '';
+                                            if ($purchaseRow['payment_method']=='card') {
+                                                $active = 'active';
+                                                $checked = 'checked';
+                                            }
+                                        ?>
+                                        <label class="btn btn-outline-primary <?php echo $active;?>" data-kt-button="true">
+                                            <input class="btn-check" type="radio" name="payment_method" id="card" value="card"
+                                            <?php echo $checked;?> autocomplete="off"> Card
                                         </label>
-                                        <label class="btn btn-outline-info" data-kt-button="true">
-                                            <input class="btn-check" type="radio" name="payment_method" id="upi" value="upi" autocomplete="off"> UPI
+                                        <?php
+                                            $active = '';
+                                            $checked = '';
+                                            if ($purchaseRow['payment_method']=='upi') {
+                                                $active = 'active';
+                                                $checked = 'checked';
+                                            }
+                                        ?>
+                                        <label class="btn btn-outline-info <?php echo $active;?>" data-kt-button="true">
+                                            <input class="btn-check" type="radio" name="payment_method" id="upi" value="upi" 
+                                            <?php echo $selected;?> autocomplete="off"> UPI
                                         </label>
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="col-md-1 d-flex align-items-end">
+                                <?php if ($purchaseRow['split_payment_method']==''){?>
                                 <button type="button" id="split" class="btn btn-primary mb-3">Split</button>
+                                <?php } else {?>
+                                    <button type="button" id="split-remove" class="btn btn-danger mb-3">
+                                        <i class="fas fa-times fs-2 ms-1"></i>
+                                    </button>
+                                <?php
+                                    }?>
                             </div>
                                 </div>
-                                <div id="split-amount-div" class="row"></div>
+                                <div id="split-amount-div" class="row">
+                                    <?php
+                                        if ($purchaseRow['split_payment_method']!=''){
+                                            ?>
+                                                <div class="col-md-4 mb-2">
+                                                    <label for="validationCustom02">Amount</label>
+                                                    <div role="group">
+                                                    <input type="text" class="form-control"
+                                                    value="<?php echo $purchaseRow['split_amount'];?>" disabled id="split-input">
+                                                    <input type="text" value="<?php echo $purchaseRow['split_amount'];?>"
+                                                     class="form-control" name="split_amount" hidden id="split-input-hidden">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Payment Choice</label>
+                                                    <div class="form-group">
+                                                        <div class="ml-2 btn-group" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
+                                                            <?php
+                                                                $active = '';
+                                                                $checked = '';
+                                                                if ($purchaseRow['split_payment_method']=='cash') {
+                                                                    $active = 'active';
+                                                                    $checked = 'checked';
+                                                                }
+                                                            ?>
+                                                            <label class="btn btn-outline-success <?php echo $active;?>" data-kt-button="true">
+                                                                <input class="btn-check" type="radio" name="split_payment_method" value="cash"
+                                                                <?php echo $checked;?> autocomplete="off"> Cash
+                                                            </label>
+                                                            <?php
+                                                                $active = '';
+                                                                $checked = '';
+                                                                if ($purchaseRow['split_payment_method']=='card') {
+                                                                    $active = 'active';
+                                                                    $checked = 'checked';
+                                                                }
+                                                            ?>
+                                                            <label class="btn btn-outline-primary <?php echo $active;?>" data-kt-button="true">
+                                                                <input class="btn-check" type="radio" name="split_payment_method" value="card" 
+                                                                <?php echo $selected;?> autocomplete="off"> Card
+                                                            </label>
+                                                            <?php
+                                                                $active = '';
+                                                                $checked = '';
+                                                                if ($purchaseRow['split_payment_method']=='upi') {
+                                                                    $active = 'active';
+                                                                    $checked = 'checked';
+                                                                }
+                                                            ?>
+                                                            <label class="btn btn-outline-info <?php echo $active;?>" data-kt-button="true">
+                                                                <input class="btn-check" type="radio" name="split_payment_method" value="upi" 
+                                                                <?php echo $selected;?> autocomplete="off" checked> UPI
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                        }
+                                    ?>
+                                </div>
                                 <div class="row">
                                     
                                     <div class="col-12">
                                         <label for="email">Notes</label>
-                                        <textarea type="textarea" class="form-control" rows="5" id="notes" name="notes"></textarea>
+                                        <textarea type="textarea" class="form-control" 
+                                        rows="5" id="notes" name="notes"><?php echo $purchaseRow['notes'];?></textarea>
                                     </div>
                                 </div>
                                 <button type="submit" name="pursubmit" class="btn btn-success mt-3">Submit</button>
@@ -241,6 +415,15 @@
             enableTime: true,
             dateFormat: 'd-m-Y H:i:s',
             minDate: "today"
+        });
+
+        var productsAdded = [];
+        $(function(){
+            // array of products fetched from database.
+            const previousProducts = Array.from(document.querySelectorAll('[name="product_id[]"]'));
+            previousProducts.forEach(function(item){
+               productsAdded.push(item.value); 
+            });
         });
 
         function search(){
@@ -273,7 +456,6 @@
         });
 
         function addProduct(item){
-            console.log(item)
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
@@ -283,63 +465,72 @@
                 tax = (item.price * item.tax / 100).toFixed(2);
                 subtotal = (Number(item.price) + Number(tax)).toFixed(2);
             }
-            $('tbody').append(`
-            <tr class="text-center product-row" id="product`+item.id+`">
-                <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
-                <input name="product_id[]" value="`+item.id+`" hidden/>
-                <input name="product_code[]" value="`+item.code+`" hidden/>
-                <input name="product_name[]" value="`+item.name+`" hidden/>
-                </td>
-                <td class="product-price">`+item.price+`</td>
-                <td class="product-stock">`+item.quantity+`</td>
-                <td>
-                    <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
-                    <!--begin::Decrease control-->
-                    <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Decrease control-->
-                    <!--begin::Input control-->
-                    <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
-                    <!--end::Input control-->
-                    <!--begin::Increase control-->
-                    <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Increase control-->
-                    </div>
-                </td>
-                <td><span class="product-tax">`+tax+`</span>
-                    <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
-                    <input class="product-tax-single" value="`+tax+`" hidden/>
-                </td>
-                <td><span class="product-subtotal">`+
-                    subtotal+`</span>
-                    <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
-                    <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
-                </td>
-                <td>
-                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
-                </td>
-            </tr>
-            `);
+            if (productsAdded.indexOf(item.id)==-1){
+                productsAdded.push(item.id);
+                $('tbody').append(`
+                <tr class="text-center product-row" id="product`+item.id+`">
+                    <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
+                    <input name="product_id[]" value="`+item.id+`" hidden/>
+                    <input name="product_code[]" value="`+item.code+`" hidden/>
+                    <input name="product_name[]" value="`+item.name+`" hidden/>
+                    </td>
+                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-stock">`+item.quantity+`</td>
+                    <td>
+                        <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                        <!--begin::Decrease control-->
+                        <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Decrease control-->
+                        <!--begin::Input control-->
+                        <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
+                        <!--end::Input control-->
+                        <!--begin::Increase control-->
+                        <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Increase control-->
+                        </div>
+                    </td>
+                    <td><span class="product-tax">`+tax+`</span>
+                        <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
+                        <input class="product-tax-single" value="`+tax+`" hidden/>
+                    </td>
+                    <td><span class="product-subtotal">`+
+                        subtotal+`</span>
+                        <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
+                        <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
+                    </td>
+                    <td>
+                        <a title="Delete" data-id='`+item.id+`' class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                    </td>
+                </tr>
+                `);
 
-            cartTotal();
+                cartTotal();
+            } else {
+                Swal.fire(
+                    'Item Already added!',
+                    'You can increase the quantity of the product.',
+                    'warning'
+                );
+            }
             document.querySelector('#search-products').value = '';
             document.querySelector('#search-results').classList.add('d-none');
         }
@@ -431,6 +622,8 @@
         $('table').on('click','.item-remove',function(){
             $(this).closest('tr').remove();
             cartTotal();
+            let id = this.getAttribute('data-id');
+            productsAdded.splice(productsAdded.indexOf(id),1);
         });
 
 

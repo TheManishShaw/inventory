@@ -247,8 +247,8 @@
             console.log(e.responseText);
         });
 
+        var productsAdded = [];
         function addProduct(item){
-            console.log(item)
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
@@ -258,63 +258,72 @@
                 tax = (item.price * item.tax / 100).toFixed(2);
                 subtotal = (Number(item.price) + Number(tax)).toFixed(2);
             }
-            $('tbody').append(`
-            <tr class="text-center product-row" id="product`+item.id+`">
-                <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
-                <input name="product_id[]" value="`+item.id+`" hidden/>
-                <input name="product_code[]" value="`+item.code+`" hidden/>
-                <input name="product_name[]" value="`+item.name+`" hidden/>
-                </td>
-                <td class="product-price">`+item.price+`</td>
-                <td class="product-stock">`+item.quantity+`</td>
-                <td>
-                    <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
-                    <!--begin::Decrease control-->
-                    <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Decrease control-->
-                    <!--begin::Input control-->
-                    <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
-                    <!--end::Input control-->
-                    <!--begin::Increase control-->
-                    <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Increase control-->
-                    </div>
-                </td>
-                <td><span class="product-tax">`+tax+`</span>
-                    <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
-                    <input class="product-tax-single" value="`+tax+`" hidden/>
-                </td>
-                <td><span class="product-subtotal">`+
-                    subtotal+`</span>
-                    <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
-                    <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
-                </td>
-                <td>
-                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
-                </td>
-            </tr>
-            `);
+            if (productsAdded.indexOf(item.id)==-1){
+                productsAdded.push(item.id);
+                $('tbody').append(`
+                <tr class="text-center product-row" id="product`+item.id+`">
+                    <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
+                    <input name="product_id[]" value="`+item.id+`" hidden/>
+                    <input name="product_code[]" value="`+item.code+`" hidden/>
+                    <input name="product_name[]" value="`+item.name+`" hidden/>
+                    </td>
+                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-stock">`+item.quantity+`</td>
+                    <td>
+                        <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                        <!--begin::Decrease control-->
+                        <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Decrease control-->
+                        <!--begin::Input control-->
+                        <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
+                        <!--end::Input control-->
+                        <!--begin::Increase control-->
+                        <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Increase control-->
+                        </div>
+                    </td>
+                    <td><span class="product-tax">`+tax+`</span>
+                        <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
+                        <input class="product-tax-single" value="`+tax+`" hidden/>
+                    </td>
+                    <td><span class="product-subtotal">`+
+                        subtotal+`</span>
+                        <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
+                        <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
+                    </td>
+                    <td>
+                        <a title="Delete" data-id='`+item.id+`' class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                    </td>
+                </tr>
+                `);
 
-            cartTotal();
+                cartTotal();
+            } else {
+                Swal.fire(
+                    'Item Already added!',
+                    'You can increase the quantity of the product.',
+                    'warning'
+                );
+            }
             document.querySelector('#search-products').value = '';
             document.querySelector('#search-results').classList.add('d-none');
         }
@@ -406,6 +415,8 @@
         $('table').on('click','.item-remove',function(){
             $(this).closest('tr').remove();
             cartTotal();
+            let id = this.getAttribute('data-id');
+            productsAdded.splice(productsAdded.indexOf(id),1);
         });
 
 

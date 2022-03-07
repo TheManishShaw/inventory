@@ -168,13 +168,13 @@
                                         class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" id="checkbox`+row.uset_id+`" />
+                                            value="1" id="checkbox`+row.id+`" />
                                     </div>`;
                         }
                     },
                     {"data":"purchase_id"},
                     {"data": "date"},
-                    {"data": "supplier_id"},
+                    {"data": "supplier_name"},
                     {"data": "total_amount"},
                     {"data": "quantity"},
                     {"data": "paid_amount",
@@ -184,7 +184,7 @@
 					},
                     {"data": "amountPaid",
 						"render": function (data,type,row) {
-							return (Number(row.total_amount) - Number(row.paid_amount) + Number(row.split_amount)).toFixed(2);
+							return (Number(row.total_amount) - (Number(row.paid_amount) + Number(row.split_amount))).toFixed(2);
 						}
 					},
                     {"data": "net_tax"},
@@ -228,7 +228,6 @@
                         }
                     }
                 ],
-                "order": [[1,"desc"]]
             });
             setTimeout(function(){
                 checkboxEvent();

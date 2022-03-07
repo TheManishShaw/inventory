@@ -6,8 +6,8 @@
     include "../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
-    $purchase_id = 'PR_'.rand(101287,999012);
-
+    
+    $purchase_id = htmlspecialchars($_POST['purchase_id']);
     $purchaseDate = htmlspecialchars($_POST['date']);
     $supplier = htmlspecialchars($_POST['supplier']);
     $total_tax = htmlspecialchars($_POST['total_tax']);
@@ -28,6 +28,7 @@
         $split_payment_method = htmlspecialchars($_POST['split_payment_method']);
     }
 
+    $purchase_id = mysqli_real_escape_string($link,$purchase_id);
     $purchaseDate = mysqli_real_escape_string($link,$purchaseDate);
     $supplier = mysqli_real_escape_string($link,$supplier);
     $total_tax = mysqli_real_escape_string($link,$total_tax);
@@ -42,6 +43,9 @@
     $split_amount = mysqli_real_escape_string($link,$split_amount);
     $split_payment_method = mysqli_real_escape_string($link,$split_payment_method);
 
+    if ($split_amount == '') {
+        $split_amount = 0;
+    }
     $amountPaid=$amount + $split_amount;
 
     $product_quantity = $_POST['quantity'];
@@ -52,28 +56,27 @@
     $product_name = $_POST['product_name'];
 
     $purchaseDate = date('Y-m-d H:i:s',strtotime($purchaseDate));
-    // $productData = array("productIds"=>$productIds,"productCode"=>$productCode,"productName"=>$product_name,
-    //                     "productQuantity"=>$product_quantity,"productTax"=>$product_tax,
-    //                     "productSubtotal"=>$product_subtotal
-    //                 );
-    // $invoiceData = array("sale_id"=>$sale_id,"providerName"=>$u_set,"supplier"=>$supplier,"tax"=>$total_tax,
-    //                         "amountPaid"=>$amountPaid,"paymentMethod"=>array("main_payment"=>$payment_method,
-    //                         "split_payment"=>$split_payment_method),
-    //                         "payment"=>array("main_payment"=>$amount,"split_payment"=>$split_amount),
-    //                         "discount"=>$total_discount,"grandtotal"=>$grandTotal,"products"=>$productData
-    //                     );
 
     $date = date('Y-m-d H:i:s');
 
-    $query = "INSERT INTO `_tblpurchase` (`user_id`,`date`,`purchase_id`,`supplier_id`,`uset`,`net_tax`,
-    `discount`,`discount_method`,`total_amount`,`paid_amount`,`payment_method`,`payment_status`,`split_amount`,
-    `split_payment_method`,`notes`,`created_at`,`status`) VALUES ('$u_id','$purchaseDate','$purchase_id',
-    '$supplier','$u_set','$total_tax','$discount','$discount_type','$grandTotal','$amount','$payment_method',
-    '$payment_status','$split_amount','$split_payment_method','$notes','$date','active');";
+    $query = "UPDATE `_tblpurchase` SET `user_id`='$u_id',`date`='$purchaseDate',`supplier_id`='$supplier',
+    `uset`='$u_set',`net_tax`='$total_tax',`discount`='$discount',`discount_method`='$discount_type',
+    `total_amount`='$grandTotal',`paid_amount`='$amount',`payment_method`='$payment_method',
+    `payment_status`='$payment_status',`split_amount`='$split_amount',
+    `split_payment_method`='$split_payment_method',`notes`='$notes',`updated_at`='$date' 
+    WHERE `purchase_id`='$purchase_id'";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die('Could not make sale. '.mysqli_error($link));
     }
+
+    $query = "UPDATE `_tblpurchase_details` SET `status`='updated',`updated_at`='$date' WHERE 
+    `purchase_id`='$purchase_id'";
+    $result = mysqli_query($link,$query);
+    if (!$result) {
+        die("Could not update purchase details. ".mysqli_error($link));
+    }
+
     for($i = 0; $i < count($productIds); $i++) {
         $query  = "INSERT INTO `_tblpurchase_details` (`purchase_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
         `u_set`,`status`,`created_at`) VALUES ('$purchase_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]',
