@@ -1,0 +1,137 @@
+<form method="POST" id="customer-form" action="gears/add_customers.php">
+    <div class="form-row row">
+        <div class="col-md-6 mb-3 fv-row">
+            <label class="required form-label">First Name</label>
+            <input type="text" class="form-control form-control-solid" name="firstname" placeholder="Enter First Name" required>
+        </div>
+        <div class="col-md-6 mb-3 fv-row">
+            <label class="required form-label">Last Name</label>
+            <input type="text" class="form-control form-control-solid" name="lastname" placeholder="Enter Last Name" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control form-control-solid" name="email" placeholder="Enter your Email address">
+        </div>
+        <div class="col-md-6 mb-3 fv-row">
+            <label class="required form-label">Phone</label>
+            <input type="text" class="form-control form-control-solid" name="phone" placeholder="Enter your Phone number" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Business Name</label>
+            <input type="text" class="form-control form-control-solid" name="business_name" placeholder="Enter Business Name">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">GST Number</label>
+            <input type="text" class="form-control form-control-solid" name="gst_number" placeholder="Enter GST number">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control form-control-solid" name="address" placeholder="Enter your Address">
+        </div>
+    </div>
+    <input name="store" value="<?php echo $_GET['store'];?>" hidden />
+    <div class="form-group">
+        <button class="btn btn-primary" id="submit" name="submit" value="submit" type="submit">Submit</button>
+    </div>
+</form>
+<script>
+    function submitForm(formData){                
+        $.ajax({
+            type:'POST',
+            url: "gears/add_customer.php",
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            if (data == 'number' || data == 'email') {
+                Swal.fire(
+                    'Duplicate Value',
+                    'This '+data+' is already in use. Try a different '+data+'.',
+                    'warning'
+                );
+                return;
+            } else {
+                customerFetch(<?php echo $_GET['store'];?>);
+                Swal.fire(
+                    'Success',
+                    'Customer created successfully!',
+                    'success'
+                );
+                modal_hide();
+                setTimeout(function(){customerSelect(data)},2000);
+            }
+        }).fail(function(e){
+            Swal.fire(
+                'Error',
+                'An error occured. Please try again.',
+                'error'
+            );
+            console.log(e.responseText);
+        });
+    }
+    $(function(){
+        document.querySelector("#submit").addEventListener("click",function(e){
+            e.preventDefault();
+            let formData = new FormData($('#customer-form')[0]);
+            if (validator) {
+                validator.validate().then(function(status) {
+                    if (status == "Valid") {
+                        submitForm(formData);
+                    }
+                });
+            }
+        });
+    });
+
+    var form = document.querySelector("#customer-form");
+
+    var validator = FormValidation.formValidation(
+        form,
+        {
+            fields: {
+                firstname: {
+                    validators: {
+                        notEmpty: {
+                            message: "Text input required."
+                        }
+                    }
+                },
+                lastname: {
+                    validators: {
+                        notEmpty: {
+                            message: "Text input is required."
+                        }
+                    }
+                },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: "Text input is required."
+                        },
+                        phone:{
+                            country: 'IN',
+                            message: 'Enter a valid mobile number.'
+                        },
+                        stringLength:{
+                            min:10,
+                            max: 10,
+                            message: "Enter a valid 10 digit mobile number. Don't enter country code."
+                        }
+                    }
+                }
+            },
+            plugins: {
+                submitButton: new FormValidation.plugins.SubmitButton(),
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: ".fv-row"
+                })
+            }
+        }
+    );
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
