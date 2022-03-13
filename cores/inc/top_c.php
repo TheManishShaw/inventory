@@ -2,9 +2,15 @@
 							<!--begin::Header-->
 							<div id="kt_header"  class="header align-items-stretch">
 						<div class="header-brand">
-							<a href="<?php echo $sys_link ?>">
+							<a class="w-100 text-center" href="<?php echo $sys_link ?>">
+								<?php if($uset_pic != ''){
+								?>
+									<img alt="Logo" src="<?php echo $sys_link?>/data/store_img/<?php echo $uset_pic ?>" class="h-80px" />
+								<?php
+								} else {?>
 								<img alt="Logo" src="<?php echo $sys_link?>/<?php echo $sys_dark_logo ?>" class="h-35px" />
-							</a>							
+								<?php } ?>
+							</a>
 							<div class="d-flex align-items-center d-lg-none ms-n3 me-1" title="Show aside menu">
 								<div class="btn btn-icon btn-active-color-primary w-30px h-30px" id="kt_aside_mobile_toggle">
 									<span class="svg-icon svg-icon-1">

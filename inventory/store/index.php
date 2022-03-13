@@ -67,8 +67,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>GST No.</th>
+                                        <th>Date of Joining</th>
                                         <th class="text-end min-w-100px">Actions</th>
                                     </tr>
                                 </thead>
@@ -178,8 +177,17 @@
                     {"data": "uset_email"},
                     {"data": "uset_phone"},
                     {"data": "uset_address"},
-                    {"data": "uset_pincode"},
-                    {"data": "uset_gst_no"},
+                    {"data": "uset_created_at",
+                        "render": function(data,type,row) {
+                            let date = new Date(data);
+                            date = date.toLocaleString('en-IN',{
+                                day: 'numeric',
+                                year: 'numeric',
+                                month: 'numeric',
+                            });
+                            return date;
+                        }
+                    },
                     {"data": null}
                 ],
                 "columnDefs": [

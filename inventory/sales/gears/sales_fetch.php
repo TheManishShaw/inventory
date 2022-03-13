@@ -9,7 +9,7 @@
 
     $query = "SELECT *,(SELECT SUM(`quantity`) FROM `_tblsales_details` WHERE 
     `_tblsales_details`.`sale_id`=`_tblsales`.`sale_id`) AS `quantity` FROM `_tblsales` WHERE `uset`='$u_set' 
-    AND `status`='active'";
+    AND `status`='active'  ORDER BY `_tblsales`.`id` DESC";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die('Could not fetch sales. '.mysqli_error($link));

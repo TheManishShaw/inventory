@@ -173,7 +173,17 @@
                     {"data":"id"},
                     {"data": "name"},
                     {"data": "ShortName"},
-                    {"data": "created_at"},
+                    {"data": "created_at",
+                        "render": function(data,type,row){
+                            let date = new Date(data);
+                            date = date.toLocaleString('en-IN',{
+                                day: 'numeric',
+                                year: 'numeric',
+                                month: 'numeric',
+                            });
+                            return date;
+                        }
+                    },
                     {"data": null}
                 ],
                 "columnDefs": [

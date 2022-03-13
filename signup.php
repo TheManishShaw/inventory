@@ -15,6 +15,7 @@ $pass_id="";
 $u_type = "";
 $u_stats = "";
 $error ="";
+$u_set = 0;
 $data_stamp = date("d/m/Y h:m:s");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["email_id"]))){
@@ -38,7 +39,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $tel_no = trim($_POST["tel_no"]);
                     $u_type = trim($_POST["u_type"]);
                     $u_stats = trim($_POST["u_stats"]);
-                    
                 }
             } else{
                 //echo "Oops! Something went wrong. Please try again later. ERR#0002";
@@ -96,7 +96,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     if(empty($email_id_err) && empty($pass_id_err) && empty($confirm_pass_id_err) ){
-        $sql = "INSERT INTO `users_tbl`(`f_name`, `l_name`, `email_id`, `tel_no`, `pass_id`, `u_type`, `u_stats`, `u_timestamp`)  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		$sql = "SELECT `uset_id` FROM `uset_tbl` ORDER BY `uset_id` DESC LIMIT 1";
+		if ($result = mysqli_query($link,$sql)){
+			$row = mysqli_fetch_assoc($result);
+			$u_set = $row['uset_id']+1;
+			if ($u_set == null) {
+				$u_set = 1;
+			}
+		} else {
+			$confirm_pass_id_err = "Could not fetch Store id.";
+			$error = $error." ".$confirm_pass_id_err;
+		}
+        $sql = "INSERT INTO `users_tbl`(`f_name`, `l_name`, `email_id`, `tel_no`, `pass_id`, `u_type`, `u_stats`, `u_set`, `u_timestamp`)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         if($stmt = mysqli_prepare($link, $sql)){
             $f_name = trim($_POST["f_name"]);
             $l_name = trim($_POST["l_name"]);
@@ -104,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $tel_no = trim($_POST["tel_no"]);
             $u_type = trim($_POST["u_type"]);
             $u_stats = trim($_POST["u_stats"]);
-            mysqli_stmt_bind_param($stmt, "ssssssss", $param_f_name, $param_l_name, $param_email_id, $param_tel_no, $param_pass_id, $param_u_type, $param_u_stats, $param_data_stamp);
+            mysqli_stmt_bind_param($stmt, "sssssssss", $param_f_name, $param_l_name, $param_email_id, $param_tel_no, $param_pass_id, $param_u_type, $param_u_stats, $u_set, $param_data_stamp);
             $param_f_name = $f_name;
             $param_l_name = $l_name;
             $param_email_id = $email_id;
@@ -114,7 +125,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_u_stats = $u_stats;
             $param_data_stamp = $data_stamp;
             if(mysqli_stmt_execute($stmt)){
-                header("location: index.php?ref_stats=reg_success");
+				mysqli_stmt_close($stmt);
+				$sql = "INSERT INTO `uset_tbl` (`uset_id`,`uset_name`,`uset_email`,`uset_phone`,`uset_created_at`) VALUES (?,?,?,?,?)";
+				if($stmt = mysqli_prepare($link, $sql)){
+					mysqli_stmt_bind_param($stmt, "sssss",$u_set, $param_store_name,$email_id,$tel_no,$data_stamp);
+					$param_store_name = $f_name.' '.$l_name;
+					mysqli_stmt_execute($stmt);
+					header("location: index.php?ref_stats=reg_success");
+				} else {
+					$error = $error." Could not create store.";
+				}
             }
             else{
                 //echo "Something went wrong. Please try again later. ERR#0005";

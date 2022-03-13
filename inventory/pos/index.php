@@ -1,18 +1,13 @@
 <?php
+    include '../../cores/inc/config_c.php';
+    include '../../cores/inc/var_c.php';
+    include '../../cores/inc/functions_c.php';
+    include '../../cores/inc/auth_c.php';
 
-include '../../cores/inc/config_c.php';
-include '../../cores/inc/var_c.php';
-include '../../cores/inc/functions_c.php';
-include '../../cores/inc/auth_c.php';
-
-// remove both lines later.
-$u_set = $_SESSION['u_set'];
-$u_type = 'GRP02'
-
+    $u_set = $_SESSION['u_set'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>POS – <?php echo $sys_title; ?></title>
     <?php include '../../cores/inc/header_c.php'; ?>
@@ -27,10 +22,18 @@ $u_type = 'GRP02'
         <div class="row border ">
             <div class=" mt-2">
                 <div class=" float-start d-flex justify-content-start">
-
+                    <a class="w-100 text-center" href="<?php echo $sys_link ?>">
+                        <?php if($uset_pic != ''){
+                        ?>
+                            <img alt="Logo" src="<?php echo $sys_link?>/data/store_img/<?php echo $uset_pic ?>" class="h-50px ms-3" />
+                        <?php
+                        } else {?>
+                        <img alt="Logo" src="<?php echo $sys_link?>/<?php echo $sys_dark_logo ?>" class="h-35px" />
+                        <?php } ?>
+                    </a>
                 </div>
                 <div class=" float-end d-flex justify-content-end">
-                    <a href="#" class="btn btn-primary" style="margin-left:10px">All </a>
+                    <a href="#" onclick="productFetch($('#store-select').val())" class="btn btn-primary" style="margin-left:10px">All </a>
                     <div>
                         <a href="#" class="btn btn-primary" data-kt-menu-trigger="click"
                         data-kt-menu-placement="bottom-start"
@@ -72,11 +75,10 @@ $u_type = 'GRP02'
                     <!--begin::Container-->
                     <div class="row" style="margin-left: 0px;margin-right:0px;">
                         <!--begin::Col-->
-                        <div class="col-xl-5 col-md-5"  style="height: 90vh;overflow:auto;">
+                        <div class="col-xl-5 col-md-5">
                             <?php if ($u_type == 'GRP00') { ?>
                                 <select class="form-select form-select-solid mb-3" data-control="select2" data-placeholder="Select a store" id="store-select">
                                     <option></option>
-                                </select>
                                 </select>
                             <?php } else { ?>
                                 <input id="store-select" value="<?php echo $u_set ?>" hidden />
@@ -100,7 +102,7 @@ $u_type = 'GRP02'
                             </div>
                             <div class="border" id="kt_chat_messenger " style="border-radius:10px;">
                                 <div class="" id="kt_chat_messenger_body h-200px">
-                                    <div style="height:500px;" class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
+                                    <div  class="scroll-y " data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="-2px">
                                         <!--begin::Card-->
 
                                         <table class="table table-row-bordered">
@@ -113,7 +115,7 @@ $u_type = 'GRP02'
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="pos-table">
+                                            <tbody id="pos-table" class="h-300px">
                                             </tbody>
                                         </table>
                                     </div>
@@ -171,8 +173,6 @@ $u_type = 'GRP02'
 
                             <div id="brand-slider" class="row d-flex flex-nowrap hover-scroll-x h-90px">
                             </div>
-
-
                             <div class="page-title d-flex flex-column me-5 mb-2">
                                 <h1 class="d-flex flex-column text-dark fw-bold fs-5 mb-0">All Products</h1>
                                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-4 pt-1" id="category-slider">
@@ -180,7 +180,7 @@ $u_type = 'GRP02'
                             </div>
                             <div class="">
                                 <div>
-                                    <div id="products-div" class="row scroll-y h-500px">
+                                    <div id="products-div" class="row">
                                     </div>
                                 </div>
                                 <!--end::List-->
@@ -351,14 +351,16 @@ $u_type = 'GRP02'
                 if (cat.length > 0) {
                     $("#category-slider").html("");
                     cat.forEach(item => {
+                    if (item.quantity > 0) {
                         $("#category-slider").append(`
-                        <li class="breadcrumb-item">
-                           <a href="#" class="badge badge-light filter-cat mb-1"
-                           data-cat-id="`+item.cat_id+`">` + item.cat_name + ` 
-                           <span class="badge badge-circle badge-secondary" style="padding:2px!important;">
-                           ` + item.quantity + `</span></a>									
-                        </li>
-                     `);
+                            <li class="breadcrumb-item">
+                            <a href="#" class="badge badge-light filter-cat mb-1"
+                            data-cat-id="`+item.cat_id+`">` + item.cat_name + `
+                            <span class="badge badge-circle badge-secondary" style="padding:2px!important;">
+                            ` + item.quantity + `</span></a>									
+                            </li>
+                        `);
+                    }
                     $("#filters-cat").append(`<div class="col-sm-5 m-3">
                             <input class="filter-cat form-check-input" type="radio" value="`+ item.cat_id +`"
                             data-cat-id="`+item.cat_id+`" name="filter" id="cat-`+ item.cat_id +`"/>
@@ -373,18 +375,19 @@ $u_type = 'GRP02'
                 if (brand.length > 0) {
                     $("#brand-slider").html("");
                     brand.forEach(item => {
-                        $("#brand-slider").append(`
-                           <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
-                              <div class="card filter-brand bg-primary" data-brand-id="`+item.id+`">                                                                        
-                                 <div class="card-body p-3 d-block">
-                                    <img class="float-end" src="../../data/brand_img/` + item.image + `" 
-                                    width="30px" alt="">
-                                    <h4 class="text-white">` + item.name + `<span class="badge badge-square badge-white">`+item.quantity+`</span> </h4>
-                                    <p class="text-white">Cake</p>                                        
+                        if (item.quantity > 0){
+                            $("#brand-slider").append(`
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
+                                <div class="card filter-brand bg-primary" data-brand-id="`+item.id+`">                                                                        
+                                    <div class="card-body p-3 d-flex">
+                                        <img class="float-start" style="height:55px; width:55px; border-radius:50%;" src="../../data/brand_img/` + item.image + `" 
+                                        width="30px" alt="">
+                                        <h5 class="ms-4 text-white">` + item.name + `<span class="ms-3 badge badge-square badge-white">`+item.quantity+`</span> </h5>
+                                    </div>
                                  </div>
-                              </div>
-                           </div>
-                        `);
+                            </div>
+                            `);
+                        }
                         $("#filters-brand").append(`<div class="col-sm-5 m-3">
                             <input class="filter-brand form-check-input" type="radio" value="`+ item.id +`" 
                             data-brand-id="`+item.id+`" name="filter" id="brand-`+ item.id +`"/>
@@ -412,7 +415,7 @@ $u_type = 'GRP02'
                     subtotal = Number(element.price) + tax;
                 }
                 $('#pos-table').prepend(`
-                <tr class="products">
+                <tr class="products" style="height:80px !important;min-height:80px;">
                     <td><span class="product-name">` + element.name + `</span>
                         <span class="product-id" hidden>`+element.id+`</span>
                         <span class="product-stock" hidden>`+element.quantity+`</span>
@@ -689,7 +692,6 @@ $u_type = 'GRP02'
                 productsAdded.splice(productsAdded.indexOf(id), 1);
                 cartTotal();
             });
-
             $("body").on('click',".filter-cat",function(){
                 var storeId = $("#store-select").val();
                 filteredProducts(storeId,"",this.getAttribute("data-cat-id"));

@@ -91,7 +91,7 @@
                                     <div class="col-12">
                                         <label class="fw-bolder" for="search">Product</label>
                                         <div class="input-group">
-                                            <i class="fas fa-search fs-2 p-3"
+                                            <i class="fas fa-search fs-4 p-3"
                                                 style="border: 1px solid #d2d2d2; border-radius: 10px 0 0 10px"></i>
                                             <input type="text" class="form-control" id="search-products" placeholder="Choose products by code or name">
                                         </div>
@@ -324,7 +324,7 @@
                                 <button type="button" id="split" class="btn btn-primary mb-3">Split</button>
                                 <?php } else {?>
                                     <button type="button" id="split-remove" class="btn btn-danger mb-3">
-                                        <i class="fas fa-times fs-2 ms-1"></i>
+                                        <i class="fas fa-trash fs-2 ms-1"></i>
                                     </button>
                                 <?php
                                     }?>
@@ -653,7 +653,7 @@
                                     </div>
                                 </div>`);
                                 
-            $("#split").closest('.col-md-1').append(`<button type="button" class="btn btn-danger mb-3" id="split-remove"><i class="fas fa-times fs-2 ms-1"></i></button>`);
+            $("#split").closest('.col-md-1').append(`<button type="button" class="btn btn-danger mb-3" id="split-remove"><i class="fas fa-trash fs-2 ms-1"></i></button>`);
             $("#split").remove();
         });
 

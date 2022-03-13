@@ -33,14 +33,6 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
 									<div class="menu-item">
-										<a class="menu-link" href="<?php echo $sys_link?>/inventory/product/create.php">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">Create Product</span>
-										</a>
-									</div>
-									<div class="menu-item">
 										<a class="menu-link" href="<?php echo $sys_link?>/inventory/product/index.php">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
@@ -173,6 +165,7 @@
 										</div>
 									</div>
 								</div>							
+								<?php if($_SESSION['u_type']=='GRP00'){?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -196,7 +189,8 @@
 											</a>
 										</div>	
 									</div>
-								</div>							
+								</div>
+								<?php }?>							
 							</div>
 						</div>
 					</div>
@@ -206,31 +200,29 @@
 								<div class="me-5">								
 									<div class="symbol symbol-40px cursor-pointer" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-overflow="true">
 									<?php 
-										if($u_pic != "avatar-1.png"){
+										if($u_pic != ""){
 											?>
-												<img src="<?php echo $sys_link?>/assets/media/avatars/<?php echo $u_pic?>" alt="user-image">
+												<img src="<?php echo $sys_link?>/data/user_img/<?php echo $u_pic?>" alt="user-image">
 											<?php
 										}else{
 											?>
-												<img src="<?php echo $sys_link ?>/assets/media/avatars/<?php echo $u_pic ?>" alt="user-image" >
+												<img src="<?php echo $sys_link ?>/data/favicon.ico" alt="user-image" >
 											<?php 
 											}
 											?>								
-									
-									
 									</div>
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
 										<div class="menu-item px-3">
 											<div class="menu-content d-flex align-items-center px-3">
 												<div class="symbol symbol-50px me-5">
 												<?php 
-													if($u_pic != "avatar-1.png"){
+													if($u_pic != ""){
 													?>
-													<img src="<?php echo $sys_link?>/assets/media/avatars/<?php echo $u_pic?>" alt="user-image">
+													<img src="<?php echo $sys_link?>/data/user_img/<?php echo $u_pic?>" alt="user-image">
 													<?php
 													}else{
 													?>
-													<img src="<?php echo $sys_link ?>/assets/media/avatars/<?php echo $u_pic ?>" alt="user-image" >
+													<img src="<?php echo $sys_link ?>/data/favicon.ico" alt="user-image" >
 													<?php 
 													}
 													?>

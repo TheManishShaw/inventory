@@ -34,7 +34,7 @@
     $description = mysqli_real_escape_string($link,$description);
 
     $image = [];
-    if(isset($_FILES['files']) && !empty($_FILES['files']['name'])) {
+    if(isset($_FILES['files']) && $_FILES['files']['size'][0]!=0) {
         for($i = 0; $i < count($_FILES['files']['name']); $i++) {
             $tmp_name = $_FILES['files']['tmp_name'][$i];
             $extn = explode('.',$_FILES['files']['name'][$i]);   // returns an array with extension at 1st position.

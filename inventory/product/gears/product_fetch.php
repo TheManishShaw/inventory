@@ -11,7 +11,7 @@
     `_brands`.`name` AS `brand_name`,`quantity`,`_tblproducts`.`image`,`_tblproducts`.`status` FROM 
     `_tblproducts` INNER JOIN `category_tbl` ON `category_tbl`.`cat_id`=`_tblproducts`.`category_id` 
     INNER JOIN `_brands` ON `_brands`.`id` = `_tblproducts`.`brand_id` WHERE `_tblproducts`.`u_set`='$u_set' 
-    AND `_tblproducts`.`status`='active'";
+    AND `_tblproducts`.`status`='active' ORDER BY `_tblproducts`.`id` DESC";
     $result = mysqli_query($link,$query);
     
     if (!$result) {

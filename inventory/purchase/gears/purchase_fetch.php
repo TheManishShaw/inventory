@@ -14,7 +14,7 @@
     `_tblpurchase`.`paid_amount`,`_tblpurchase`.`split_amount`,`_tblpurchase`.`net_tax`,
     `_tblpurchase`.`payment_status` FROM `_tblpurchase` INNER JOIN `users_tbl` ON 
     `users_tbl`.`u_id`=`_tblpurchase`.`supplier_id` WHERE `uset`='$u_set' AND 
-    `_tblpurchase`.`status` = 'active' ORDER BY `id` DESC";
+    `_tblpurchase`.`status` = 'active' ORDER BY `_tblpurchase`.`id` DESC";
     $result = mysqli_query($link,$query);
     
     if (!$result) {

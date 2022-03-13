@@ -41,8 +41,8 @@
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
                                     <!-- begin:: Add Product -->
-                                    <a href="create.php" class=" btn btn-primary float-end">
-										<i class="fa fa-plus"></i> Add Product</a>
+                                    <a href="javascript:void(0);" data-href="modal/create.php" class="openPopup btn btn-primary float-end"
+									 onclick="modal_show()" data-name="Create product"><i class="fa fa-plus"></i> Add Product</a>
                                     <!-- end:: Add Product -->
                                 </div>
                                 <!--end::Toolbar-->
@@ -121,8 +121,8 @@
 						<button selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger mx-2' id="delete-unit">Delete</button>
 						<button selected-checkboxes="`+ selectedCheckboxes +`" class="btn btn-info mx-2" id='toggle-product'>Mark In-active</button>`;
 					} else if (checking == false && document.querySelector("#delete-unit")) {
-						document.querySelector("#btn-div").innerHTML = `<a href="create.php" 
-						class="btn btn-primary float-end"><i class="fa fa-plus"></i> Add Product</a>`;
+						document.querySelector("#btn-div").innerHTML = `<a data-href="modal/create.php" onclick="modal_show()" class="openPopup btn btn-primary float-end"
+									data-name="Add Product" href="javascript:void(0);"><i class="fa fa-plus"></i> Add Product</a>`;
 					}
 				} 
 				checkboxDeleteButton();
@@ -141,8 +141,8 @@
 					document.querySelector("#checkbox0").checked = false;
 					if(document.querySelector("#delete-unit")){
 						document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Product -->
-										<a href="modal/create_product.php" class="btn btn-primary float-end">
-										<i class="fa fa-plus"></i> Add Product</a>`;
+						<a data-href="modal/create.php" onclick="modal_show()" class="openPopup btn btn-primary float-end"
+									data-name="Add Product" href="javascript:void(0);"><i class="fa fa-plus"></i> Add Product</a>`;
 					}
 				}).dataTable();
 	
@@ -397,7 +397,7 @@
 					}
 				});
 			});
+			
 	</script>
 </body>
-
 </html>

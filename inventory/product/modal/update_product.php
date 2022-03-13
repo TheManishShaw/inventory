@@ -93,23 +93,6 @@ $product = mysqli_fetch_assoc($product_result);
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="form-group fv-row">
-                <label class="required form-label">Barcode Symbology </label>
-                <select name="bar" id="bar" class="form-control" data-control="select2"
-                    data-style="py-0" data-errors="Please Select Barcode" required>
-                    <option value="">Choose a barcode symbology...</option>
-                    <option value="CREM01" <?php if ($product['type_barcode'] == 'CREM01') echo 'selected';?>>CREM01</option>
-                    <option value="UM01" <?php if ($product['type_barcode'] == 'UM01') echo 'selected';?>>UM01</option>
-                    <option value="SEM01" <?php if ($product['type_barcode'] == 'SEM01') echo 'selected';?>>SEM01</option>
-                    <option value="COF01" <?php if ($product['type_barcode'] == 'COF01') echo 'selected';?>>COF01</option>
-                    <option value="FUN01" <?php if ($product['type_barcode'] == 'FUN01') echo 'selected';?>>FUN01</option>
-                    <option value="DIS01" <?php if ($product['type_barcode'] == 'DIS01') echo 'selected';?>>DIS01</option>
-                    <option value="NIS01" <?php if ($product['type_barcode'] == 'NIS01') echo 'selected';?>>NIS01</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="form-group fv-row">
                 <label class="required form-label"> Product Cost </label>
                 <input type="text" class="form-control" placeholder="Enter Cost"
                     data-errors="Please Enter Cost." name="cost" id="cost" value="<?php echo $product['cost'];?>"
@@ -117,8 +100,6 @@ $product = mysqli_fetch_assoc($product_result);
                 <div class="help-block with-errors"></div>
             </div>
         </div>
-    </div>
-    <div class="row mb-4">
         <div class="col-md-6">
             <div class="form-group fv-row">
                 <label class="required form-label">Sales Price </label>
@@ -128,6 +109,8 @@ $product = mysqli_fetch_assoc($product_result);
                 <div class="help-block with-errors"></div>
             </div>
         </div>
+    </div>
+    <div class="row mb-4">
         <div class="col-md-6">
             <div class="form-group fv-row">
                 <label class="required form-label">Product Unit </label>
@@ -144,8 +127,6 @@ $product = mysqli_fetch_assoc($product_result);
                 </select>
             </div>
         </div>
-    </div>
-    <div class="row mb-4">
         <div class="col-md-6">
             <div class="form-group fv-row">
                 <label class="required form-label">Tax Method </label>
@@ -156,6 +137,8 @@ $product = mysqli_fetch_assoc($product_result);
                 </select>
             </div>
         </div>
+    </div>
+    <div class="row mb-4">
         <div class="col-md-6">
             <div class="form-group fv-row">
                 <label class="required form-label">GST </label>
@@ -174,7 +157,7 @@ $product = mysqli_fetch_assoc($product_result);
                 </select>
             </div>
         </div>
-        <div class="col-md-6 mt-4">
+        <div class="col-md-6 mb-4">
             <div class="form-group fv-row">
                 <label class="form-label">
                     <span class="required">Stock Alert</span>
@@ -239,7 +222,6 @@ $product = mysqli_fetch_assoc($product_result);
 
     <button type="submit" name="submit" id="submit" class="btn btn-primary mr-2">Update
         Product</button>
-    <button type="reset" class="btn btn-danger">Reset</button>
     
 </form>
 <script>
@@ -379,4 +361,13 @@ $product = mysqli_fetch_assoc($product_result);
         let regex = new RegExp(element.getAttribute('data-regex'));
         element.value = element.value.replace(regex,'');
     }
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+    $('[data-control="select2"]').select2({
+        dropdownParent: $('#modal_show')
+    });
 </script>

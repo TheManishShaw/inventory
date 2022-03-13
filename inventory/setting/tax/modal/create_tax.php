@@ -17,7 +17,7 @@
     Your default option is used as your preference while adding products."></i>
     </label>
 
-    <select class="form-control" data-control="select2" name="default" id="default"
+    <select class="form-select" data-control="select2" name="default" id="default"
     required data-placeholder="Is this your default tax?">
         <option value="" hidden>Choose your default tax...</option>
         <option value="yes">YES</option>
@@ -107,5 +107,10 @@
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+    $('[data-control="select2"]').select2({
+        dropdownParent: $('#modal_show'),
+        minimumResultsForSearch: Infinity
     });
 </script>

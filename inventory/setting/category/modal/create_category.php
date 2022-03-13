@@ -103,4 +103,8 @@
             }
         }
     );
+    
+    $('[data-control="select2"]').select2({
+        dropdownParent: $('#modal_show')
+    });
 </script>

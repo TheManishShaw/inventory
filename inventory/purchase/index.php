@@ -173,7 +173,19 @@
                         }
                     },
                     {"data":"purchase_id"},
-                    {"data": "date"},
+                    {"data": "date",
+                        "render": function(data,type,row) {
+                            let date = new Date(data);
+                            date = date.toLocaleString('en-IN',{
+                                day: 'numeric',
+                                year: 'numeric',
+                                month: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric'
+                            });
+                            return date;
+                        }
+                    },
                     {"data": "supplier_name"},
                     {"data": "total_amount"},
                     {"data": "quantity"},

@@ -34,6 +34,6 @@ $sys_smssender = urlencode('GARIND');
 $sys_smsverifyorg = "TraderG";
 date_default_timezone_set("Asia/Kolkata");
 $date = date("d/m/Y");
-$def_utype = "GRP00";
+$def_utype = "GRP04";
 $def_ustats = "active";
 ?>
