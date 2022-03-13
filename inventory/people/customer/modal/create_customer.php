@@ -29,7 +29,6 @@
             <input type="text" class="form-control form-control-solid" name="address" placeholder="Enter your Address">
         </div>
     </div>
-    <input name="store" value="<?php echo $_GET['store'];?>" hidden />
     <div class="form-group">
         <button class="btn btn-primary" id="submit" name="submit" value="submit" type="submit">Submit</button>
     </div>
@@ -38,7 +37,7 @@
     function submitForm(formData){                
         $.ajax({
             type:'POST',
-            url: "gears/add_customer.php",
+            url: "gears/create_customer.php",
             data: formData,
             enctype: 'multipart/form-data',
             processData: false,
@@ -52,14 +51,13 @@
                 );
                 return;
             } else {
-                customerFetch(<?php echo $_GET['store'];?>);
                 Swal.fire(
                     'Success',
                     'Customer created successfully!',
                     'success'
                 );
                 modal_hide();
-                setTimeout(function(){customerSelect(data)},2000);
+                reloadDatatable();
             }
         }).fail(function(e){
             Swal.fire(

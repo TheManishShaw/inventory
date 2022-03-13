@@ -1,4 +1,4 @@
-<form method="POST" id="customer-form" action="gears/add_customers.php">
+<form method="POST" id="supplier-form" action="gears/add_suppliers.php">
     <div class="form-row row">
         <div class="col-md-6 mb-3 fv-row">
             <label class="required form-label">First Name</label>
@@ -29,7 +29,6 @@
             <input type="text" class="form-control form-control-solid" name="address" placeholder="Enter your Address">
         </div>
     </div>
-    <input name="store" value="<?php echo $_GET['store'];?>" hidden />
     <div class="form-group">
         <button class="btn btn-primary" id="submit" name="submit" value="submit" type="submit">Submit</button>
     </div>
@@ -38,7 +37,7 @@
     function submitForm(formData){                
         $.ajax({
             type:'POST',
-            url: "gears/add_customer.php",
+            url: "gears/create_supplier.php",
             data: formData,
             enctype: 'multipart/form-data',
             processData: false,
@@ -52,14 +51,13 @@
                 );
                 return;
             } else {
-                customerFetch(<?php echo $_GET['store'];?>);
                 Swal.fire(
                     'Success',
-                    'Customer created successfully!',
+                    'Supplier created successfully!',
                     'success'
                 );
                 modal_hide();
-                setTimeout(function(){customerSelect(data)},2000);
+                reloadDatatable();
             }
         }).fail(function(e){
             Swal.fire(
@@ -73,7 +71,7 @@
     $(function(){
         document.querySelector("#submit").addEventListener("click",function(e){
             e.preventDefault();
-            let formData = new FormData($('#customer-form')[0]);
+            let formData = new FormData($('#supplier-form')[0]);
             if (validator) {
                 validator.validate().then(function(status) {
                     if (status == "Valid") {
@@ -84,7 +82,7 @@
         });
     });
 
-    var form = document.querySelector("#customer-form");
+    var form = document.querySelector("#supplier-form");
 
     var validator = FormValidation.formValidation(
         form,

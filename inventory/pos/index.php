@@ -703,6 +703,11 @@
             $('#customer-select').on('change',function(){
                 paymentData();
             });
+
+            if ($('#store-select').val()!=''){
+                $("#add-customer-btn").attr("data-href", "modal/add_customer.php?store=" + $('#store-select').val());
+                $("#add-customer-btn").attr("onclick", "modal_show()");
+            }
         });
     </script>
 </body>

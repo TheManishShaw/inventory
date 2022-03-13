@@ -1,44 +1,65 @@
-<form method="POST" id="customer-form" action="gears/add_customers.php">
+<?php
+
+    include "../../../../cores/inc/config_c.php";
+
+    $id = $_GET['id'];
+
+    $query = "SELECT * FROM `users_tbl` WHERE `u_id`='$id'";
+    $result = mysqli_query($link,$query);
+    if (!$result){
+        die("Could not fetch supplier. ".mysqli_error($link));
+    }
+    $row = mysqli_fetch_assoc($result);
+
+?>
+<form method="POST" id="supplier-form" action="gears/add_suppliers.php">
     <div class="form-row row">
         <div class="col-md-6 mb-3 fv-row">
             <label class="required form-label">First Name</label>
-            <input type="text" class="form-control form-control-solid" name="firstname" placeholder="Enter First Name" required>
+            <input type="text" class="form-control form-control-solid" name="firstname"
+            value="<?php echo $row['f_name']; ?>" placeholder="Enter First Name" required>
         </div>
         <div class="col-md-6 mb-3 fv-row">
             <label class="required form-label">Last Name</label>
-            <input type="text" class="form-control form-control-solid" name="lastname" placeholder="Enter Last Name" required>
+            <input type="text" class="form-control form-control-solid" name="lastname"
+            value="<?php echo $row['l_name']; ?>" placeholder="Enter Last Name" required>
         </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">Email</label>
-            <input type="text" class="form-control form-control-solid" name="email" placeholder="Enter your Email address">
+            <input type="text" class="form-control form-control-solid" name="email"
+            value="<?php echo $row['email_id'];?>" placeholder="Enter your Email address">
         </div>
         <div class="col-md-6 mb-3 fv-row">
             <label class="required form-label">Phone</label>
-            <input type="text" class="form-control form-control-solid" name="phone" placeholder="Enter your Phone number" required>
+            <input type="text" class="form-control form-control-solid" name="phone"
+            value="<?php echo $row['tel_no'];?>" placeholder="Enter your Phone number" required>
         </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">Business Name</label>
-            <input type="text" class="form-control form-control-solid" name="business_name" placeholder="Enter Business Name">
+            <input type="text" class="form-control form-control-solid" name="business_name"
+            value="<?php echo $row['business_name'];?>" placeholder="Enter Business Name">
         </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">GST Number</label>
-            <input type="text" class="form-control form-control-solid" name="gst_number" placeholder="Enter GST number">
+            <input type="text" class="form-control form-control-solid" name="gst_number"
+            value="<?php echo $row['gst_num'];?>" placeholder="Enter GST number">
         </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">Address</label>
-            <input type="text" class="form-control form-control-solid" name="address" placeholder="Enter your Address">
+            <input type="text" class="form-control form-control-solid" name="address"
+            value="<?php echo $row['address'];?>" placeholder="Enter your Address">
         </div>
     </div>
-    <input name="store" value="<?php echo $_GET['store'];?>" hidden />
     <div class="form-group">
         <button class="btn btn-primary" id="submit" name="submit" value="submit" type="submit">Submit</button>
+        <input type="text" name="id" value="<?php echo $id;?>" hidden/>
     </div>
 </form>
 <script>
     function submitForm(formData){                
         $.ajax({
             type:'POST',
-            url: "gears/add_customer.php",
+            url: "gears/update_supplier.php",
             data: formData,
             enctype: 'multipart/form-data',
             processData: false,
@@ -52,14 +73,13 @@
                 );
                 return;
             } else {
-                customerFetch(<?php echo $_GET['store'];?>);
                 Swal.fire(
                     'Success',
-                    'Customer created successfully!',
+                    'Supplier updated successfully!',
                     'success'
                 );
                 modal_hide();
-                setTimeout(function(){customerSelect(data)},2000);
+                reloadDatatable();
             }
         }).fail(function(e){
             Swal.fire(
@@ -73,7 +93,7 @@
     $(function(){
         document.querySelector("#submit").addEventListener("click",function(e){
             e.preventDefault();
-            let formData = new FormData($('#customer-form')[0]);
+            let formData = new FormData($('#supplier-form')[0]);
             if (validator) {
                 validator.validate().then(function(status) {
                     if (status == "Valid") {
@@ -84,7 +104,7 @@
         });
     });
 
-    var form = document.querySelector("#customer-form");
+    var form = document.querySelector("#supplier-form");
 
     var validator = FormValidation.formValidation(
         form,
