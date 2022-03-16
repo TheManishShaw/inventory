@@ -26,7 +26,7 @@
                 <?php include "../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
-                        <div class="pt-10">
+                        <div class="">
                             <h1 class="anchor fw-bolder mb-5">Sales List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
@@ -43,7 +43,7 @@
                                     <!-- begin:: Add Store -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
                                     data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
+                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Sales</a>
                                     <!-- end:: Add Store -->
                                 </div>
                                 <!--end::Toolbar-->

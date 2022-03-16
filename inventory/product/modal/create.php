@@ -22,17 +22,9 @@ $tax_result = mysqli_query($link,$query);
     <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <div id="kt_content_container" class="container-fluid">
+                    <div id="kt_content_container" >
                         <!--begin::Product List-->
-                        <div class=" card-flush  flex-row-fluid p-6 ">
-                            <!--begin::Card header-->
-                            <div class="card-header mb-2">
-                                <div class="card-title">
-                                    <h2>Create Product</h2>
-                                </div>
-                            </div>
-                            <!--end::Card header-->
-                            <!--begin::Card body-->
+                        <div class=" card-flush ">
                             <form data-toggle="validator" action="gears/create_backend.php" method="POST" id="uploadForm"
                                 autocomplete="off" enctype="multipart/form-data">
                                 <div class="row mb-4">

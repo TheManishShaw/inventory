@@ -35,9 +35,9 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <!--begin::Create Purchase-->
-                        <div class=" card-flush  flex-row-fluid p-6 ">
+                        <div class=" card-flush  flex-row-fluid ">
                             <!--begin::Card header-->
-                            <div class="card-header mb-2">
+                            <div class="">
                                 <div class="card-title">
                                     <h2>Create Purchase</h2>
                                 </div>

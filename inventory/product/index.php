@@ -26,7 +26,7 @@
                 <?php include "../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
-                        <div class="pt-10">
+                        <div class="">
                             <h1 class="anchor fw-bolder mb-5">Active Product List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
