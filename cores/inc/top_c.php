@@ -5,7 +5,7 @@
 							<a class="w-100 text-center" href="<?php echo $sys_link ?>">
 								<?php if($uset_pic != ''){
 								?>
-									<img alt="Logo" src="<?php echo $sys_link?>/data/store_img/<?php echo $uset_pic ?>" class="h-80px" />
+									<img alt="Logo" src="<?php echo $sys_link?>/data/store_img/<?php echo $uset_pic ?>" class="h-40px" />
 								<?php
 								} else {?>
 								<img alt="Logo" src="<?php echo $sys_link?>/<?php echo $sys_dark_logo ?>" class="h-35px" />

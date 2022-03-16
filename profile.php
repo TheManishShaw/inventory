@@ -28,39 +28,27 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 		$store_site = $fetch_profile[$k]["uset_site"];
 	}
 }
-?>>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-		<title>Profile - <?php echo $sys_title ?></title>
+		<title>Dashboard – <?php echo $sys_title ?></title>
 		
         <?php include "cores/inc/header_c.php" ?>
 	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
 	<body id="kt_body" class="aside-enabled">
-		<!--begin::Main-->
-		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
-				<!--begin::Aside-->
-				<div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-					<!--end::Aside toolbar-->
-					<?php include "cores/inc/nav_c.php" ?>
-					<!--end::Aside menu-->					
+				<div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">				
+					<?php include "cores/inc/nav_c.php" ?>				
 				</div>
-				<!--end::Aside-->
-				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<!--begin::Header-->
 					<?php include "cores/inc/top_c.php" ?>
-					<!--end::Header-->
-				<!--begin::Content-->
-                	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<div id="kt_content_container" class="container-fluid">
-							<div class="d-flex flex-column flex-lg-row">
+					<!--begin::Product List-->
+					<div class="d-flex flex-column flex-lg-row">
 								<div class="flex-md-row-fluid ms-lg-12">
 								<form id="kt_account_basic_info_form" class="form">
 									<div class=" mb-5 mb-xl-10" id="kt_account_settings_info" data-kt-scroll-offset="{default: 100, md: 125}">
@@ -72,7 +60,7 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 											</div>
 										</div>
 										<div id="kt_account_basic_info" class="collapse show">
-												<div class="card-body border-top p-9">
+												<div class="card-body border-top">
 													<div class="row mb-6">
 														<label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
 														<div class="col-lg-8">
@@ -227,17 +215,17 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 										</div>								
 									</form>
 								</div>
-							</div>				
-						</div>
-					</div>                   
-					<!--begin::Footer-->
+							</div>
+																	
+					</div>
+					</div>
 					<?php include "cores/inc/copy_c.php" ?>
-					<!--end::Footer-->
 				</div>
 			</div>
 		</div>		
-		<?php include "cores/inc/footer_c.php" ?>
-		<script>
+	</body>
+	<?php include "cores/inc/footer_c.php" ?>
+	<script>
 			function submitForm(formData){                
 				$.ajax({
 					type:'POST',
@@ -351,5 +339,5 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 				this.value = this.value.replace(/[^0-9]/,'');
 			});
 		</script>
-	</body>
 </html>
+
