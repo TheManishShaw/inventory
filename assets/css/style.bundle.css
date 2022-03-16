@@ -48383,7 +48383,7 @@ body {
   .header {
     display: flex;
     align-items: center;
-    height: 60px;
+    height: 80px;
     transition: left 0.3s ease;
     background-color: #fff;
   }
