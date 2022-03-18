@@ -162,7 +162,7 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 																<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
 																	<i class="bi bi-x fs-2"></i>
 																</span>
-																<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+																<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove store">
 																	<i class="bi bi-x fs-2"></i>
 																</span>
 															</div>
@@ -337,6 +337,13 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 
 			$('[name="phone"],[name="store_phone"]').on("input",function(){
 				this.value = this.value.replace(/[^0-9]/,'');
+			});
+
+			$('body').on('click','[data-bs-original-title="Remove store"]',function(){
+				$('[name="old_store_image"]').val('');
+			});
+			$('body').on('click','[data-bs-original-title="Remove avatar"]',function(){
+				$('[name="old_profile_image"]').val('');
 			});
 		</script>
 </html>

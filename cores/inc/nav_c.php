@@ -322,7 +322,7 @@
 											<a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0"><?php echo $f_name?> <?php echo $l_name?></a>
 											<span class="text-gray-400 fw-bold d-block fs-8"><?php echo $u_type?></span>
 										</div>
-										<a href="signout.php" class="btn btn-icon btn-active-color-primary me-n4" data-bs-toggle="tooltip" title="End session and singout">
+										<a href="<?php echo $sys_link ?>/signout.php" class="btn btn-icon btn-active-color-primary me-n4" data-bs-toggle="tooltip" title="End session and singout">
 											<span class="svg-icon svg-icon-2 svg-icon-gray-400">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<rect opacity="0.3" width="12" height="2" rx="1" transform="matrix(-1 0 0 1 15.5 11)" fill="black" />
