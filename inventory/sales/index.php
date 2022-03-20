@@ -34,17 +34,16 @@
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search Store" />
+                                        placeholder="Search Sales" />
                                 </div>
                                 <!--end::Search-->
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add Store -->
-                                    <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Sales</a>
-                                    <!-- end:: Add Store -->
+                                    <!-- begin:: Add Sales -->
+                                    <a href="modal/create_sales.php" class="btn btn-primary float-end">
+                                        <i class="fa fa-plus"></i> Add Sales</a>
+                                    <!-- end:: Add Sales -->
                                 </div>
                                 <!--end::Toolbar-->
 
@@ -52,7 +51,7 @@
                             <!--end::Wrapper-->
 
                             <!--begin::Datatable-->
-                            <table id="store-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <table id="sales-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -122,11 +121,11 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Sales -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                                    data-href="modal/create_sales.php" data-name="Add Sales"
+                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Sales</a>
+                                    <!-- end:: Add Sales -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -139,16 +138,16 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#store-tbl').on( 'draw.dt',   function () { 
+            $('#sales-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Store -->
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Sales -->
                                     <a href="javascript:void(0);" onclick="modal_show()"
-                                    data-href="modal/create_store.php" data-name="Add Store"
-                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
-                                    <!-- end:: Add Store -->`;
+                                    data-href="modal/create_sales.php" data-name="Add Sales"
+                                    class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Sales</a>
+                                    <!-- end:: Add Sales -->`;
                 }
             }).dataTable();
 
@@ -161,7 +160,7 @@
         }
 
         $(function(){
-            var table = $("#store-tbl").DataTable({
+            var table = $("#sales-tbl").DataTable({
                 "ajax": "gears/sales_fetch.php",
                 "deferRender": true,
                 "columns": [
@@ -171,7 +170,7 @@
                                         class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" id="checkbox`+row.uset_id+`" />
+                                            value="1" id="checkbox`+row.sale_id+`" />
                                     </div>`;
                         }
                     },
@@ -199,7 +198,7 @@
 					},
                     {"data": "amountPaid",
 						"render": function (data,type,row) {
-							return (Number(row.total_amount) - Number(row.paid_amount) + Number(row.split_amount)).toFixed(2);
+							return (Number(row.total_amount) - (Number(row.paid_amount) + Number(row.split_amount))).toFixed(2);
 						}
 					},
                     {"data": "net_tax"},
@@ -227,13 +226,12 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_store.php?id=`+row.uset_id+`" data-name="Update Store">Edit</a>
+                                        <a class="table-modal menu-link px-3" href="modal/update_sales.php?id=`+row.sale_id+`" data-name="Update Sales">Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.uset_id+`" 
+                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.sale_id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -255,12 +253,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#store-tbl').DataTable().search(e.target.value).draw();
+                $('#sales-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#store-tbl').DataTable().ajax.reload();
+            $('#sales-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();

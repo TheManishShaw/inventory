@@ -47,12 +47,12 @@
                 <?php include "../../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
-                        <!--begin::Create Adjustment-->
+                        <!--begin::Update Adjustment-->
                         <div class=" card-flush  flex-row-fluid p-6 ">
                             <!--begin::Card header-->
                             <div class="card-header mb-2">
                                 <div class="card-title">
-                                    <h2>Create Adjustment</h2>
+                                    <h2>Update Adjustment</h2>
                                 </div>
                             </div>
                             <!--end::Card header-->

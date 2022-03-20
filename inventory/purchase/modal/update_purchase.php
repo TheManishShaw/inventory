@@ -10,7 +10,7 @@
     $query = "SELECT * FROM `users_tbl` WHERE `u_type`='GRP02' AND `u_set`='$u_set' AND `u_stats`='active'";
     $result = mysqli_query($link,$query);
     if (!$result){
-        die('Could not fetch customers. '.mysqli_error($link));
+        die('Could not fetch suppliers. '.mysqli_error($link));
     }
     $query = "SELECT * FROM `_tblpurchase` WHERE `purchase_id`='$purchase_id'";
     $purchaseResult = mysqli_query($link,$query);

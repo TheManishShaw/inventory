@@ -10,6 +10,9 @@
 
     $saleDate = htmlspecialchars($_POST['date']);
     $customer = htmlspecialchars($_POST['customer']);
+    if ($customer == 'walk-in') {
+        $customer = 1;
+    }
     $total_tax = htmlspecialchars($_POST['total_tax']);
     $total_discount = htmlspecialchars($_POST['total_discount']);
     $grandTotal = htmlspecialchars($_POST['grand_total']);
