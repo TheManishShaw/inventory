@@ -99,9 +99,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$sql = "SELECT `uset_id` FROM `uset_tbl` ORDER BY `uset_id` DESC LIMIT 1";
 		if ($result = mysqli_query($link,$sql)){
 			$row = mysqli_fetch_assoc($result);
-			$u_set = $row['uset_id']+1;
 			if ($u_set == null) {
 				$u_set = 1;
+			} else {
+				$u_set = $row['uset_id']+1;
 			}
 		} else {
 			$confirm_pass_id_err = "Could not fetch Store id.";
