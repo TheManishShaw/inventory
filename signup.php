@@ -16,7 +16,7 @@ $u_type = "";
 $u_stats = "";
 $error ="";
 $u_set = 0;
-$data_stamp = date("d/m/Y h:m:s");
+$data_stamp = date("Y-m-d H:i:s");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["email_id"]))){
         $email_id_err = "Please enter a Email.";

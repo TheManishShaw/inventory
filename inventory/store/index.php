@@ -179,7 +179,9 @@
                     {"data": "uset_address"},
                     {"data": "uset_created_at",
                         "render": function(data,type,row) {
-                            let date = new Date(data);
+                            let originalDate = data.split(' ');
+                            let date = new Date(originalDate[0]);
+                            console.log(data,originalDate,date)
                             date = date.toLocaleString('en-IN',{
                                 day: 'numeric',
                                 year: 'numeric',
