@@ -139,7 +139,7 @@
                                         data-name="Create Payment" id="bill-now" disabled> <i class="fa fa-receipt"></i> Bill Now</button>
                                         <!--end::Send-->
                                         <audio src="../../data/beep.wav" id="beep" hidden></audio>
-                                        <a href="" id="invoice" type="button" target="_blank" hidden>Invoice</a>
+                                        <!-- <a href="" id="invoice" type="button" target="_blank" hidden>Invoice</a> -->
                                     </div>
                                     <!--end::Toolbar-->
                                 </div>
@@ -193,11 +193,49 @@
             <!--end::Wrapper-->
         </div>
         <!--end::Page-->
+        <!-- start::Invoice modal -->
+        <div class="modal fade" id="invoice-modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered mw-900px">			
+				<div class="modal-content" style="width:500px; height:600px; margin:auto;">				
+					<div class="modal-header">					
+						<h1 class="fw-bolder modal-title" id="iframe-title"></h1>						
+						<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">						
+							<span class="svg-icon svg-icon-2x">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+								</svg>
+							</span>				
+						</div>					
+					</div>				
+					<iframe class="iframe-body py-lg-10 px-lg-10" src="" height="100%" id="iframe_body">
+                    </iframe>
+				</div>			
+			</div>
+        </div>
+        <!-- <iframe class="iframe-body modal fade py-lg-10 px-lg-10" src="" height="300px" width="600px" id="iframe_body">
+        </iframe> -->
+        <!-- end::Invoice modal -->
     </div>
     <!--end::Scrolltop-->
 
     <?php include '../../cores/inc/footer_c.php'; ?>
     <script>
+        // function for changing the target url of invoice iframe
+        function showInvoice(dataURL,dataNAME){
+            document.getElementById("iframe-title").innerHTML = dataNAME;
+            document.querySelector('#iframe_body').src = dataURL;
+            $('#invoice-modal').modal({show:true});
+            $('#invoice-modal').modal('show');
+        }
+
+        // function showInvoice(dataURL,dataNAME){
+        //     document.getElementById("modal_title").innerHTML = dataNAME;
+        //     $('.modal-body').load(dataURL,function(){
+        //         $('#modal_show').modal({show:true});
+        //     });
+        // }
+
         function search() {
             var input, filter, container, products, a, i, txtValue;
             input = document.querySelector("#search-bar");

@@ -279,8 +279,9 @@
             );
             modal_hide();
             resetPage();
-            $('#invoice').attr('href',"modal/invoice.php?sale_id="+data.trim());
-            setTimeout(function(){document.querySelector('#invoice').click();},1000);
+            // $('#invoice').attr('href',"modal/invoice.php?sale_id="+data.trim());
+            setTimeout(showInvoice("modal/invoice.php?sale_id="+data.trim(),'Invoice - '+data.trim()),1000);
+            // setTimeout(function(){document.querySelector('#invoice').click();},1000);
         }).fail(function(e) {
             Swal.fire(
                 'Error',

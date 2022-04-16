@@ -294,7 +294,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
 									<label class="form-check form-check-custom form-check-inline form-check-solid" required>
-										<input class="form-check-input" type="checkbox" name="toc"  required />
+										<input class="form-check-input" type="checkbox" name="toc" required/>
 										<span class="form-check-label fw-bold text-gray-700 fs-6">I Agree &amp; 
 										<a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>
 									</label>
