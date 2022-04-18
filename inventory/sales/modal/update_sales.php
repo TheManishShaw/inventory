@@ -93,9 +93,15 @@
                                     <div class="col-12">
                                         <label class="fw-bolder" for="search">Product</label>
                                         <div class="input-group">
-                                            <i class="fas fa-search fs-2 p-3"
-                                                style="border: 1px solid #d2d2d2; border-radius: 10px 0 0 10px"></i>
-                                            <input type="text" class="form-control" id="search-products" placeholder="Choose products by code or name">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search fs-4"></i>
+                                            </span>
+                                            <div class="flex-grow-1">
+                                                <select id="products" class="form-select rounded-start-0" 
+                                                    data-control="select2" data-placeholder="Choose products by code or name.">
+                                                    <option></option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div id="search-results" style="height: 180px;" class="list-group overflow-auto d-none">
                                         </div>
@@ -179,7 +185,7 @@
                                                     value="<?php echo $productsRow['total_amount']/$productsRow['quantity'];?>" hidden/>
                                                 </td>
                                                 <td>
-                                                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                                                    <a title="Delete" data-id="<?php echo $productsRow['product_id'];?>" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
                                                 </td>
                                             </tr>
                                             <?php
@@ -416,37 +422,22 @@
             enableTime: true
         });
 
-        function search(){
-            let input = document.querySelector('#search-products').value.toUpperCase();
-            let productsArray = Array.from(document.querySelector('#search-results').querySelectorAll('a'));
-            let visibleProducts = productsArray;
-            productsArray.forEach(function(item){
-                let itemText = item.innerText.toUpperCase();
-                if (itemText.indexOf(input) > -1) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'
         }).done(function(data) {
             let products = JSON.parse(data).data;
             products.forEach(function(item) {
-                $('#search-results').append(`
-                    <a class="list-group-item list-group-item-action" onclick='addProduct(`+JSON.stringify(item)+`)'
-                    >`+item.name+` - `+item.cat_name+` - `+item.code+`</a>
+                $('#products').append(`
+                    <option value='` + JSON.stringify(item) + `'>` + item.name + ` - ` + item.cat_name + ` - ` + item.code + `</option>
                 `);
             });
         }).fail(function(e) {
             console.log(e.responseText);
         });
 
+        var productsAdded = [];         // An array to contain id of all the products added.
         function addProduct(item){
-            console.log(item)
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
@@ -456,66 +447,77 @@
                 tax = (item.price * item.tax / 100).toFixed(2);
                 subtotal = (Number(item.price) + Number(tax)).toFixed(2);
             }
-            $('tbody').append(`
-            <tr class="text-center product-row" id="product`+item.id+`">
-                <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
-                <input name="product_id[]" value="`+item.id+`" hidden/>
-                <input name="product_code[]" value="`+item.code+`" hidden/>
-                <input name="product_name[]" value="`+item.name+`" hidden/>
-                </td>
-                <td class="product-price">`+item.price+`</td>
-                <td class="product-stock">`+item.quantity+`</td>
-                <td>
-                    <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
-                    <!--begin::Decrease control-->
-                    <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Decrease control-->
-                    <!--begin::Input control-->
-                    <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
-                    <!--end::Input control-->
-                    <!--begin::Increase control-->
-                    <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Increase control-->
-                    </div>
-                </td>
-                <td><span class="product-tax">`+tax+`</span>
-                    <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
-                    <input class="product-tax-single" value="`+tax+`" hidden/>
-                </td>
-                <td><span class="product-subtotal">`+
-                    subtotal+`</span>
-                    <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
-                    <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
-                </td>
-                <td>
-                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
-                </td>
-            </tr>
-            `);
-
+            if (productsAdded.indexOf(item.id)==-1){
+                productsAdded.push(item.id);
+                $('tbody').append(`
+                <tr class="text-center product-row" id="product`+item.id+`">
+                    <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
+                    <input name="product_id[]" value="`+item.id+`" hidden/>
+                    <input name="product_code[]" value="`+item.code+`" hidden/>
+                    <input name="product_name[]" value="`+item.name+`" hidden/>
+                    </td>
+                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-stock">`+item.quantity+`</td>
+                    <td>
+                        <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
+                        <!--begin::Decrease control-->
+                        <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Decrease control-->
+                        <!--begin::Input control-->
+                        <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" name="quantity[]" value="1" />
+                        <!--end::Input control-->
+                        <!--begin::Increase control-->
+                        <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Increase control-->
+                        </div>
+                    </td>
+                    <td><span class="product-tax">`+tax+`</span>
+                        <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
+                        <input class="product-tax-single" value="`+tax+`" hidden/>
+                    </td>
+                    <td><span class="product-subtotal">`+
+                        subtotal+`</span>
+                        <input class="product-subtotal-input" name="subtotal[]" value="`+subtotal+`" hidden/>
+                        <input class="product-subtotal-single" value="`+subtotal+`" hidden/>
+                    </td>
+                    <td>
+                        <a title="Delete" data-id="`+item.id+`" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                    </td>
+                </tr>
+                `);
+            } else {
+                Swal.fire(
+                    'Item Already added!',
+                    'You can increase the quantity of the product.',
+                    'warning'
+                );
+            }
             cartTotal();
-            document.querySelector('#search-products').value = '';
-            document.querySelector('#search-results').classList.add('d-none');
         }
+        
+        $('#products').on('change', function() {
+            addProduct(JSON.parse(this.value));
+            $('#products').val(null);
+        });
 
         function cartTotal(){
             let totalAmount = 0, totalTax = 0;
@@ -606,8 +608,9 @@
         $('table').on('click','.item-remove',function(){
             $(this).closest('tr').remove();
             cartTotal();
+            let id = this.getAttribute('data-id');
+            productsAdded.splice(productsAdded.indexOf(id),1);
         });
-
 
         $("body").on('click','#split',function(){
             $("#split-amount-div").append(`<div class="col-md-4 mb-2">
@@ -675,6 +678,14 @@
 
         document.querySelector('#discount-select').addEventListener('change',function(){
             cartTotal();
+        });
+
+        // code for entering the id of products loaded from server side, to the productsAdded array.
+        $(function(){
+            let products = Array.from(document.querySelectorAll('.item-remove'));
+            products.forEach(function(item){
+                productsAdded.push(item.getAttribute('data-id'));
+            });
         });
     </script>
 </body>

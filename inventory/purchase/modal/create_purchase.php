@@ -68,9 +68,15 @@
                                     <div class="col-12">
                                         <label class="fw-bolder" for="search">Product</label>
                                         <div class="input-group">
-                                            <i class="fas fa-search fs-4 p-3"
-                                                style="border: 1px solid #d2d2d2; border-radius: 10px 0 0 10px"></i>
-                                            <input type="text" class="form-control" id="search-products" placeholder="Choose products by code or name">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search fs-4"></i>
+                                            </span>
+                                            <div class="flex-grow-1">
+                                                <select id="products" class="form-select rounded-start-0" 
+                                                    data-control="select2" data-placeholder="Choose products by code or name.">
+                                                    <option></option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div id="search-results" style="height: 180px;" class="list-group overflow-auto d-none">
                                         </div>
@@ -218,29 +224,14 @@
             minDate: "today"
         });
 
-        function search(){
-            let input = document.querySelector('#search-products').value.toUpperCase();
-            let productsArray = Array.from(document.querySelector('#search-results').querySelectorAll('a'));
-            let visibleProducts = productsArray;
-            productsArray.forEach(function(item){
-                let itemText = item.innerText.toUpperCase();
-                if (itemText.indexOf(input) > -1) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'
         }).done(function(data) {
             let products = JSON.parse(data).data;
             products.forEach(function(item) {
-                $('#search-results').append(`
-                    <a class="list-group-item list-group-item-action" onclick='addProduct(`+JSON.stringify(item)+`)'
-                    >`+item.name+` - `+item.cat_name+` - `+item.code+`</a>
+                $('#products').append(`
+                    <option value='` + JSON.stringify(item) + `'>` + item.name + ` - ` + item.cat_name + ` - ` + item.code + `</option>
                 `);
             });
         }).fail(function(e) {
@@ -324,9 +315,12 @@
                     'warning'
                 );
             }
-            document.querySelector('#search-products').value = '';
-            document.querySelector('#search-results').classList.add('d-none');
         }
+
+        $('#products').on('change', function() {
+            addProduct(JSON.parse(this.value));
+            $('#products').val(null);
+        });
 
         function cartTotal(){
             let totalAmount = 0, totalTax = 0;

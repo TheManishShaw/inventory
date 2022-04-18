@@ -495,7 +495,7 @@
                             <!--end::Increase control-->
                         </div>
                     </td>
-                    <td>$<span class="product-subtotal">` + subtotal + `</span>
+                    <td>&#8377;<span class="product-subtotal">` + subtotal + `</span>
                     <span class="product-tax" hidden>`+tax+`</span>
                     <span class="product-taxtype" hidden>`+element.tax_method+`</span>
                     <span class="product-single-subtotal" hidden>`+subtotal+`</span>

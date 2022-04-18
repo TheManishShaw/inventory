@@ -168,7 +168,7 @@
                                                     <input type="text" name="old_transfer[]" value="<?php echo $productsRow['adj_type'];?>" hidden />
                                                 </td>
                                                 <td>
-                                                    <a title="Delete" data-id='` + item.id + `' class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                                                    <a title="Delete" data-id='<?php echo $productsRow['product_id'];?>' class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
                                                 </td>
                                             </tr>                            
                                             <?php
@@ -292,6 +292,7 @@
 
         $('#products').on('change', function() {
             addProduct(JSON.parse(this.value));
+            $('#products').val(null);
         });
 
         $('table').on('click', '.btn-quantity', function() {
@@ -319,6 +320,13 @@
             $(this).closest('tr').remove();
             let id = this.getAttribute('data-id');
             productsAdded.splice(productsAdded.indexOf(id), 1);
+        });
+
+        $(function(){
+            let products = Array.from(document.querySelectorAll('.item-remove'));
+            products.forEach(function(item){
+                productsAdded.push(item.getAttribute('data-id'));
+            });
         });
 
     </script>

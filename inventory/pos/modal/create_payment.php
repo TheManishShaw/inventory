@@ -19,7 +19,7 @@
                         <div class="col-sm-8 mb-3">
                             <label>Discount Amount</label>
                             <div role="group" class="input-group input-group-solid">
-                                <input type="text" id="discount" class="form-control cart-product-discount" value="0">
+                                <input type="text" id="discount" class="form-control cart-product-discount" value="0" autocomplete="off">
                                 <div class="input-group-append">
                                     <div class="input-group-text">&#8377;</div>
                                 </div>
@@ -118,12 +118,14 @@
 <script>
     function paymentTotal() {
         let discount_type = document.querySelector('#discount-select').value;
-        let discountInput = document.querySelector('#discount').value;
+        let discountInput = document.querySelector('#discount');
         let discount;
         if (discount_type == 'fixed') {
-            discount = Number(discountInput).toFixed(2);
+            discount = Number(discountInput.value).toFixed(2);
+            $(discountInput).next().children().html('&#8377;');
         } else if (discount_type == 'percent') {
-            discount = Number(discountInput * combinedData.totalAmount / 100).toFixed(2);
+            discount = Number(discountInput.value * combinedData.totalAmount / 100).toFixed(2);
+            $(discountInput).next().children().text('%');
         }
         let finalAmount = Number(combinedData.totalAmount - discount).toFixed(2);
         document.querySelector('#discount-td').innerText = discount;
@@ -175,7 +177,7 @@
             <div class="form-group">
                 <button type="button" id="split-remove${counter}" class="btn split-remove btn-danger float-end me-3 mb-3"><i class="fas fa-times la-2x m-0"></i></button>
                 <label for="exampleInputPlaceholder">Amount</label>
-                <input type="text" class="form-control payment-amount" id="amount${counter}" name="amount[]" placeholder="Enter Amount">
+                <input type="text" class="form-control payment-amount" id="amount${counter}" name="amount[]" placeholder="Enter Amount" autocomplete="off">
             </div>
             <div class="form-group mt-2">
                 <div>
@@ -272,16 +274,9 @@
             processData: false,
             contentType: false
         }).done(function(data) {
-            Swal.fire(
-                'Success',
-                'Sale completed successfully!',
-                'success'
-            );
             modal_hide();
             resetPage();
-            // $('#invoice').attr('href',"modal/invoice.php?sale_id="+data.trim());
             setTimeout(showInvoice("modal/invoice.php?sale_id="+data.trim(),'Invoice - '+data.trim()),1000);
-            // setTimeout(function(){document.querySelector('#invoice').click();},1000);
         }).fail(function(e) {
             Swal.fire(
                 'Error',

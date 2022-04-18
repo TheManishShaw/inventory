@@ -91,9 +91,15 @@
                                     <div class="col-12">
                                         <label class="fw-bolder" for="search">Product</label>
                                         <div class="input-group">
-                                            <i class="fas fa-search fs-4 p-3"
-                                                style="border: 1px solid #d2d2d2; border-radius: 10px 0 0 10px"></i>
-                                            <input type="text" class="form-control" id="search-products" placeholder="Choose products by code or name">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search fs-4"></i>
+                                            </span>
+                                            <div class="flex-grow-1">
+                                                <select id="products" class="form-select rounded-start-0" 
+                                                    data-control="select2" data-placeholder="Choose products by code or name.">
+                                                    <option></option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div id="search-results" style="height: 180px;" class="list-group overflow-auto d-none">
                                         </div>
@@ -177,7 +183,7 @@
                                                     value="<?php echo $productsRow['total_amount']/$productsRow['quantity'];?>" hidden/>
                                                 </td>
                                                 <td>
-                                                    <a title="Delete" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
+                                                    <a title="Delete" data-id="<?php echo $productsRow['product_id'];?>" class="item-remove"><i class="fas fa-times-circle fs-2 text-danger"></i></a>
                                                 </td>
                                             </tr>
                                             <?php
@@ -417,44 +423,22 @@
             minDate: "today"
         });
 
-        var productsAdded = [];
-        $(function(){
-            // array of products fetched from database.
-            const previousProducts = Array.from(document.querySelectorAll('[name="product_id[]"]'));
-            previousProducts.forEach(function(item){
-               productsAdded.push(item.value); 
-            });
-        });
-
-        function search(){
-            let input = document.querySelector('#search-products').value.toUpperCase();
-            let productsArray = Array.from(document.querySelector('#search-results').querySelectorAll('a'));
-            let visibleProducts = productsArray;
-            productsArray.forEach(function(item){
-                let itemText = item.innerText.toUpperCase();
-                if (itemText.indexOf(input) > -1) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
+        
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'
         }).done(function(data) {
             let products = JSON.parse(data).data;
             products.forEach(function(item) {
-                $('#search-results').append(`
-                    <a class="list-group-item list-group-item-action" onclick='addProduct(`+JSON.stringify(item)+`)'
-                    >`+item.name+` - `+item.cat_name+` - `+item.code+`</a>
+                $('#products').append(`
+                    <option value='` + JSON.stringify(item) + `'>` + item.name + ` - ` + item.cat_name + ` - ` + item.code + `</option>
                 `);
             });
         }).fail(function(e) {
             console.log(e.responseText);
         });
-
+            
+        var productsAdded = [];
         function addProduct(item){
             let tax = 0;
             let subtotal = 0;
@@ -531,9 +515,12 @@
                     'warning'
                 );
             }
-            document.querySelector('#search-products').value = '';
-            document.querySelector('#search-results').classList.add('d-none');
         }
+
+        $('#products').on('change', function() {
+            addProduct(JSON.parse(this.value));
+            $('#products').val(null);
+        });
 
         function cartTotal(){
             let totalAmount = 0, totalTax = 0;
@@ -692,6 +679,14 @@
 
         document.querySelector('#discount-select').addEventListener('change',function(){
             cartTotal();
+        });
+
+                // code for entering the id of products loaded from server side, to the productsAdded array.
+        $(function(){
+            let products = Array.from(document.querySelectorAll('.item-remove'));
+            products.forEach(function(item){
+                productsAdded.push(item.getAttribute('data-id'));
+            });
         });
     </script>
 </body>

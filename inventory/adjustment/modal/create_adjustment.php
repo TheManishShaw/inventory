@@ -207,6 +207,7 @@ if (!$result) {
 
         $('#products').on('change', function() {
             addProduct(JSON.parse(this.value));
+            $('#products').val(null);
         });
 
         $('table').on('click', '.btn-quantity', function() {
