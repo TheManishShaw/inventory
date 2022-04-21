@@ -55,6 +55,7 @@
                                         <label class="fw-bolder" for="supply">Customer</label>
                                         <select class="form-control" data-control="select2" id="customer"
                                          data-placeholder="Choose customer..." name="customer" required>
+                                            <option value="walk-in">Walk-in Customer</option>
                                         <?php
                                             while($row = mysqli_fetch_assoc($result)){
                                                 echo '<option value="'.$row['u_id'].'"
@@ -325,6 +326,7 @@
             let totalAmount = 0, totalTax = 0;
             let discount = document.querySelector('#discount').value;
             let products = Array.from(document.querySelectorAll('.product-row'));
+            let discountSymbol = $('#discount').next().children();
             products.forEach(function(item){
                 totalAmount += Number($(item).find('.product-subtotal-input').val());
                 totalTax += Number($(item).find('.product-tax-input').val());
@@ -333,10 +335,14 @@
             if ($('#discount-select').val() == 'fixed') {
                 document.querySelector('#total_discount').value = Number(discount).toFixed(2);
                 document.querySelector('#discount_disp').value = Number(discount).toFixed(2);
+                discountSymbol.removeClass('fa-percent');
+                discountSymbol.addClass('fa-rupee-sign');
             } else if ($('#discount-select').val() == 'percent') {
                 discount = (totalAmount * Number(discount) / 100).toFixed(2)
-                document.querySelector('#total_discount').value = Number(discount);
-                document.querySelector('#discount_disp').value = Number(discount);
+                document.querySelector('#total_discount').value = Number(discount).toFixed(2);
+                document.querySelector('#discount_disp').value = Number(discount).toFixed(2);
+                discountSymbol.removeClass('fa-rupee-sign');
+                discountSymbol.addClass('fa-percent');
             }
             totalAmount = totalAmount - discount;
             document.querySelector('#grand_total').value = (totalAmount).toFixed(2);

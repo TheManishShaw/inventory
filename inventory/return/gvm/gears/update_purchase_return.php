@@ -1,18 +1,15 @@
 <?php
 
-    include "../../../cores/inc/config_c.php";
-    include "../../../cores/inc/var_c.php";
-    include "../../../cores/inc/functions_c.php";
-    include "../../../cores/inc/auth_c.php";
+    include "../../../../cores/inc/config_c.php";
+    include "../../../../cores/inc/var_c.php";
+    include "../../../../cores/inc/functions_c.php";
+    include "../../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
     
-    $sale_id = htmlspecialchars($_POST['sale_id']);
-    $saleDate = htmlspecialchars($_POST['date']);
-    $customer = htmlspecialchars($_POST['customer']);
-    if ($customer == 'walk-in') {
-        $customer = 1;
-    }
+    $purchase_id = htmlspecialchars($_POST['purchase_id']);
+    $purchaseDate = htmlspecialchars($_POST['date']);
+    $supplier = htmlspecialchars($_POST['supplier']);
     $total_tax = htmlspecialchars($_POST['total_tax']);
     $total_discount = htmlspecialchars($_POST['total_discount']);
     $grandTotal = htmlspecialchars($_POST['grand_total']);
@@ -31,9 +28,9 @@
         $split_payment_method = htmlspecialchars($_POST['split_payment_method']);
     }
 
-    $sale_id = mysqli_real_escape_string($link,$sale_id);
-    $saleDate = mysqli_real_escape_string($link,$saleDate);
-    $customer = mysqli_real_escape_string($link,$customer);
+    $purchase_id = mysqli_real_escape_string($link,$purchase_id);
+    $purchaseDate = mysqli_real_escape_string($link,$purchaseDate);
+    $supplier = mysqli_real_escape_string($link,$supplier);
     $total_tax = mysqli_real_escape_string($link,$total_tax);
     $total_discount = mysqli_real_escape_string($link,$total_discount);
     $grandTotal = mysqli_real_escape_string($link,$grandTotal);
@@ -59,47 +56,35 @@
     $productCode = $_POST['product_code'];
     $product_name = $_POST['product_name'];
 
-    $productData = array("productIds"=>$productIds,"productCode"=>$productCode,"productName"=>$product_name,
-                        "productQuantity"=>$product_quantity,"productTax"=>$product_tax,
-                        "productSubtotal"=>$product_subtotal
-                    );
-    $invoiceData = array("sale_id"=>$sale_id,"providerName"=>$u_set,"customer"=>$customer,"tax"=>$total_tax,
-                            "amountPaid"=>$amountPaid,"paymentMethod"=>array("main_payment"=>$payment_method,
-                            "split_payment"=>$split_payment_method),
-                            "payment"=>array("main_payment"=>$amount,"split_payment"=>$split_amount),
-                            "discount"=>$total_discount,"grandtotal"=>$grandTotal,"products"=>$productData
-                        );
-
-    $saleDate = date('Y-m-d H:i:s',strtotime($saleDate));
+    $purchaseDate = date('Y-m-d H:i:s',strtotime($purchaseDate));
 
     $date = date('Y-m-d H:i:s');
 
-    $query = "UPDATE `_tblsales` SET `user_id`='$u_id',`date`='$saleDate',`client_id`='$customer',
+    $query = "UPDATE `_tblpurchase_return` SET `user_id`='$u_id',`date`='$purchaseDate',`supplier_id`='$supplier',
     `uset`='$u_set',`net_tax`='$total_tax',`discount`='$discount',`discount_method`='$discount_type',
     `total_amount`='$grandTotal',`paid_amount`='$amount',`payment_method`='$payment_method',
     `payment_status`='$payment_status',`split_amount`='$split_amount',
-    `invoice_data`='".json_encode($invoiceData)."',
     `split_payment_method`='$split_payment_method',`notes`='$notes',`updated_at`='$date' 
-    WHERE `sale_id`='$sale_id'";
+    WHERE `purchase_id`='$purchase_id'";
     $result = mysqli_query($link,$query);
     if (!$result) {
-        die('Could not make sale. '.mysqli_error($link));
+        die('Could not make purchase return. '.mysqli_error($link));
     }
 
-    $query = "UPDATE `_tblsales_details` SET `status`='updated',`updated_at`='$date' WHERE 
-    `sale_id`='$sale_id'";
+    $query = "UPDATE `_tblpurchase_return_details` SET `status`='updated',`updated_at`='$date' WHERE 
+    `purchase_id`='$purchase_id'";
     $result = mysqli_query($link,$query);
     if (!$result) {
-        die("Could not update sale details. ".mysqli_error($link));
+        die("Could not update purchase return details. ".mysqli_error($link));
     }
 
     for($i = 0; $i < count($productIds); $i++) {
-        $query  = "INSERT INTO `_tblsales_details` (`sale_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
-        `u_set`,`status`,`created_at`) VALUES ('$sale_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]',
+        $query  = "INSERT INTO `_tblpurchase_return_details` (`purchase_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
+        `u_set`,`status`,`created_at`) VALUES ('$purchase_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]',
         '$product_quantity[$i]','$u_set','active','$date');";
         $result = mysqli_query($link,$query);
         if (!$result) {
-            die('Could not make sale details. '.mysqli_error($link));
+            die('Could not make purchase return details. '.mysqli_error($link));
         }
 
         if(isset($old_quantity[$i]) && $old_quantity[$i]<$product_quantity[$i]){
@@ -107,11 +92,10 @@
         } else if (isset($old_quantity[$i]) && $old_quantity[$i] > $product_quantity[$i]){
             increaseStock($productIds[$i],$old_quantity[$i] - $product_quantity[$i]);
         } else if (isset($old_quantity[$i]) && $old_quantity[$i] == $product_quantity[$i]) {
-           decreaseStock($productIds[$i],0);
+           increaseStock($productIds[$i],0);    // doesn't matter if we increase or decrease, quantity will remain same.
         } else {
             decreaseStock($productIds[$i],$product_quantity[$i]);
         }
-
     }
 
     header("Location: ../index.php");

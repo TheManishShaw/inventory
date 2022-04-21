@@ -82,7 +82,7 @@
         if (!$result) {
             die('Could not make sale details. '.mysqli_error($link));
         }
-        updateStock($productIds[$i]);
+        increaseStock($productIds[$i],$product_quantity[$i]);
     }
 
     header("Location: ../index.php");

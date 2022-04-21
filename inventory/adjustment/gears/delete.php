@@ -25,7 +25,7 @@
             die("Could not delete adjustment details. ".mysqli_error($link));
         }
 
-        $query = "SELECT `product_id`,`adj_type`,`quantity` FROM `_tbladjustment_details` WHERE `adj_id`='$id'";
+        $query = "SELECT `product_id`,`adj_type`,`quantity` FROM `_tbladjustment_details` WHERE `adj_id`='$id' AND `status`='purged'";
         $result = mysqli_query($link,$query);
         if (!$result){
             die('Could not fetch product id. '.mysqli_error($link));
@@ -34,9 +34,9 @@
 
         foreach($products as $item){
             if($item['adj_type']=="lend") {
-                echo $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`+".$item['quantity']." WHERE `id`='".$item['product_id']."'";
+                increaseStock($item['product_id'],$item['quantity']);
             } else {
-                echo $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`-".$item['quantity']." WHERE `id`='".$item['product_id']."'";
+                decreaseStock($item['product_id'],$item['quantity']);
             }
             if (!mysqli_query($link,$query)){
                 die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));

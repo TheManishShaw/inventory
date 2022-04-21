@@ -1,16 +1,16 @@
 <?php
-   include "../../cores/inc/config_c.php";
-   include "../../cores/inc/functions_c.php";
-   include "../../cores/inc/auth_c.php";
-   include "../../cores/inc/var_c.php";
+   include "../../../cores/inc/config_c.php";
+   include "../../../cores/inc/functions_c.php";
+   include "../../../cores/inc/auth_c.php";
+   include "../../../cores/inc/var_c.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Purchase List – <?php echo $sys_title;?></title>
+    <title>Purchase Return List – <?php echo $sys_title;?></title>
 
-    <?php include "../../cores/inc/header_c.php"; ?>
+    <?php include "../../../cores/inc/header_c.php"; ?>
 </head>
 
 <body id="kt_body" class="aside-enabled">
@@ -20,30 +20,30 @@
                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-                <?php include "../../cores/inc/nav_c.php";?>
+                <?php include "../../../cores/inc/nav_c.php";?>
             </div>
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <?php include "../../cores/inc/top_c.php" ?>
+                <?php include "../../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="">
-                            <h1 class="anchor fw-bolder mb-5">Purchase List</h1>
+                            <h1 class="anchor fw-bolder mb-5">Purchase Return List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search purchase" />
+                                        placeholder="Search purchase return" />
                                 </div>
                                 <!--end::Search-->
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add Purchase -->
-                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
-                                        <i class="fa fa-plus"></i> Add Purchase</a>
-                                    <!-- end:: Add Purchase -->
+                                    <!-- begin:: Add Purchase Return -->
+                                    <a href="modal/create_purchase_return.php" class="btn btn-primary float-end">
+                                        <i class="fa fa-plus"></i> Add Purchase Return</a>
+                                    <!-- end:: Add Purchase Return -->
                                 </div>
                                 <!--end::Toolbar-->
 
@@ -51,7 +51,7 @@
                             <!--end::Wrapper-->
 
                             <!--begin::Datatable-->
-                            <table id="purchase-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <table id="purchase-return-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -61,7 +61,7 @@
                                                  id="checkbox0" />
                                             </div>
                                         </th>
-                                        <th>Purchase ID</th>
+                                        <th>Purchase Return ID</th>
                                         <th>Date</th>
                                         <th>Supplier</th>
                                         <th>Grand Total</th>
@@ -80,11 +80,11 @@
                         </div>
                     </div>
                 </div>
-                <?php include "../../cores/inc/copy_c.php" ?>
+                <?php include "../../../cores/inc/copy_c.php" ?>
             </div>
         </div>
     </div>
-    <?php include "../../cores/inc/footer_c.php" ?>
+    <?php include "../../../cores/inc/footer_c.php" ?>
     <script>
         //   function for adding event to checkboxes and selecting them
         function checkboxEvent(){
@@ -121,10 +121,10 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase -->
-                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
-                                    <i class="fa fa-plus"></i> Add Purchase</a>
-                                    <!-- end:: Add Purchase -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase Return -->
+                                    <a href="modal/create_purchase_return.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add Purchase Return</a>
+                                    <!-- end:: Add Purchase Return -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -137,15 +137,15 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#purchase-tbl').on( 'draw.dt',   function () { 
+            $('#purchase-return-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase -->
-                                    <a href="modal/create_purchase.php" class="btn btn-primary float-end">
-                                    <i class="fa fa-plus"></i> Add Purchase</a>
-                                    <!-- end:: Add Purchase -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add Purchase Return -->
+                                    <a href="modal/create_purchase_return.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add Purchase Return</a>
+                                    <!-- end:: Add Purchase Return -->`;
                 }
             }).dataTable();
 
@@ -158,8 +158,8 @@
         }
 
         $(function(){
-            var table = $("#purchase-tbl").DataTable({
-                "ajax": "gears/purchase_fetch.php",
+            var table = $("#purchase-return-tbl").DataTable({
+                "ajax": "gears/gvm_fetch.php",
                 "deferRender": true,
                 "order":[],
                 "columns": [
@@ -225,7 +225,7 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a class="table-modal menu-link px-3" href="modal/update_purchase.php?id=`+row.purchase_id+`"
+                                        <a class="table-modal menu-link px-3" href="modal/update_purchase_return.php?id=`+row.purchase_id+`"
                                         >Edit</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -253,12 +253,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#purchase-tbl').DataTable().search(e.target.value).draw();
+                $('#purchase-return-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#purchase-tbl').DataTable().ajax.reload();
+            $('#purchase-return-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();

@@ -11,20 +11,20 @@
     $date = date("Y-m-d H:i:s");
 
     foreach($idArray as $id){
-        $query = "UPDATE `_tblpurchase` SET `status`='purged', `deleted_at`='$date' WHERE `purchase_id`='$id'";
+        $query = "UPDATE `_tblsales` SET `status`='purged', `deleted_at`='$date' WHERE `sale_id`='$id'";
         $result = mysqli_query($link,$query);
         if (!$result) {
-            die("Could not delete purchase. ".mysqli_error($link));
+            die("Could not delete sale. ".mysqli_error($link));
         }
 
-        $query = "UPDATE `_tblpurchase_details` SET `status`='purged', `deleted_at`='$date' WHERE 
-        `purchase_id`='$id' AND `status`!='updated'";
+        $query = "UPDATE `_tblsales_details` SET `status`='purged', `deleted_at`='$date' WHERE 
+        `sale_id`='$id' AND `status`!='updated'";
         $result = mysqli_query($link,$query);
         if (!$result){
-            die("Could not delete purchase details. ".mysqli_error($link));
+            die("Could not delete sale details. ".mysqli_error($link));
         }
 
-        $query = "SELECT `product_id`,`quantity` FROM `_tblpurchase_details` WHERE `purchase_id`='$id' AND `status` = 'purged'";
+        $query = "SELECT `product_id`,`quantity` FROM `_tblsales_details` WHERE `sale_id`='$id' AND `status` = 'purged'";
         $result = mysqli_query($link,$query);
         if (!$result){
             die('Could not fetch product id. '.mysqli_error($link));
@@ -32,7 +32,7 @@
         $products = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
         foreach($products as $item) {
-            decreaseStock($item['product_id'],$item['quantity']);
+            increaseStock($item['product_id'],$item['quantity']);
         }
     }
 

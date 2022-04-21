@@ -133,7 +133,7 @@
                                                 </td>
                                                 <td class="product-price"><?php echo $productsRow['price'];?></td>
                                                 <td class="product-stock"><?php echo $productsRow['stock'];?></td>
-                                                <td>
+                                            <td>
                                                     <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                                                     <!--begin::Decrease control-->
                                                     <button type="button" class="btn btn-decrease btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0">
@@ -150,6 +150,7 @@
                                                     <!--begin::Input control-->
                                                     <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" 
                                                     name="quantity[]" value="<?php echo $productsRow['quantity'];?>" />
+                                                    <input name="old_quantity[]" value="<?php echo $productsRow['quantity']; ?>" hidden/>
                                                     <!--end::Input control-->
                                                     <!--begin::Increase control-->
                                                     <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">
@@ -526,6 +527,7 @@
             let totalAmount = 0, totalTax = 0;
             let discount = document.querySelector('#discount').value;
             let products = Array.from(document.querySelectorAll('.product-row'));
+            let discountSymbol = $('#discount').next().children();
             products.forEach(function(item){
                 totalAmount += Number($(item).find('.product-subtotal-input').val());
                 totalTax += Number($(item).find('.product-tax-input').val());
@@ -534,10 +536,14 @@
             if ($('#discount-select').val() == 'fixed') {
                 document.querySelector('#total_discount').value = Number(discount).toFixed(2);
                 document.querySelector('#discount_disp').value = Number(discount).toFixed(2);
+                discountSymbol.removeClass('fa-percent');
+                discountSymbol.addClass('fa-rupee-sign');
             } else if ($('#discount-select').val() == 'percent') {
                 discount = (totalAmount * Number(discount) / 100).toFixed(2)
                 document.querySelector('#total_discount').value = Number(discount);
                 document.querySelector('#discount_disp').value = Number(discount);
+                discountSymbol.removeClass('fa-rupee-sign');
+                discountSymbol.addClass('fa-percent');
             }
             totalAmount = totalAmount - discount;
             document.querySelector('#grand_total').value = (totalAmount).toFixed(2);

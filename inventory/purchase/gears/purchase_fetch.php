@@ -18,7 +18,7 @@
     $result = mysqli_query($link,$query);
     
     if (!$result) {
-        die("Could not fetch product. ".mysqli_error($link));
+        die("Could not fetch purchase. ".mysqli_error($link));
     }
 
     $array= mysqli_fetch_all($result,MYSQLI_ASSOC);

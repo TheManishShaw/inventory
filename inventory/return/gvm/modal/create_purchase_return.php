@@ -1,8 +1,8 @@
 <?php
-    include "../../../cores/inc/config_c.php";
-    include "../../../cores/inc/functions_c.php";
-    include "../../../cores/inc/auth_c.php";
-    include "../../../cores/inc/var_c.php";
+    include "../../../../cores/inc/config_c.php";
+    include "../../../../cores/inc/functions_c.php";
+    include "../../../../cores/inc/auth_c.php";
+    include "../../../../cores/inc/var_c.php";
 
     $u_set = $_SESSION['u_set'];
 
@@ -16,9 +16,9 @@
 <html lang="en">
 
 <head>
-    <title>Create Purchase – <?php echo $sys_title ?></title>
+    <title>Create Purchase Return – <?php echo $sys_title ?></title>
 
-    <?php include "../../../cores/inc/header_c.php";?>
+    <?php include "../../../../cores/inc/header_c.php";?>
 </head>
 
 <body id="kt_body" class="aside-enabled">
@@ -28,23 +28,23 @@
                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
                 data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
                 data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-                <?php include "../../../cores/inc/nav_c.php" ?>
+                <?php include "../../../../cores/inc/nav_c.php" ?>
             </div>
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <?php include "../../../cores/inc/top_c.php" ?>
+                <?php include "../../../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
-                        <!--begin::Create Purchase-->
+                        <!--begin::Create Purchase Return-->
                         <div class=" card-flush  flex-row-fluid ">
                             <!--begin::Card header-->
                             <div class="">
                                 <div class="card-title">
-                                    <h2>Create Purchase</h2>
+                                    <h2>Create Purchase Return</h2>
                                 </div>
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
-                            <form data-toggle="validator" action="../gears/create_purchase.php" method="POST" id="uploadForm"
+                            <form data-toggle="validator" action="../gears/create_purchase_return.php" method="POST" id="uploadForm"
                                 autocomplete="off" enctype="multipart/form-data">
                                 <div class="row my-4">
                                     <div class="col-6">   
@@ -92,7 +92,7 @@
                                             <th scope="col">Net unit Price</th>
                                             <th scope="col">Stock</th>
                                             <th style="width: 110px;" scope="col">Quantity</th>
-                                            <!-- <th scope="col">Discount</th> -->
+                                            <th scope="col">Return Reason</th>
                                             <th scope="col">GST</th>
                                             <th scope="col">Subtotal</th>
                                             <th scope="col">Action</th>
@@ -212,11 +212,11 @@
 
                     </div>
                 </div>
-                <?php include "../../../cores/inc/copy_c.php" ?>
+                <?php include "../../../../cores/inc/copy_c.php" ?>
             </div>
         </div>
     </div>
-	<?php include "../../../cores/inc/footer_c.php" ?>
+	<?php include "../../../../cores/inc/footer_c.php" ?>
     <script>
         $('#date').flatpickr({
             enableTime: true,
@@ -292,6 +292,15 @@
                         <!--end::Increase control-->
                         </div>
                     </td>
+                    <td>
+                        <select class="form-select" name="return_reason[]" data-control="select2"
+                         data-placeholder="Choose return type.">
+                            <option value="short" return-percent="100">Short - 100% return</option>
+                            <option value="extra" return-percent="100">Extra - 100% return</option>
+                            <option value="damage" return-percent="100">Damage - 100% return</option>
+                        </select>
+                        <input name="return_percent[]" value="" hidden />
+                    </td>
                     <td><span class="product-tax">`+tax+`</span>
                         <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
                         <input class="product-tax-single" value="`+tax+`" hidden/>
@@ -306,6 +315,9 @@
                     </td>
                 </tr>
                 `);
+                $('[name="return_reason[]"]').select2({
+                    minimumResultsForSearch: Infinity
+                });
 
                 cartTotal();
             } else {
@@ -338,7 +350,7 @@
                 discountSymbol.removeClass('fa-percent');
                 discountSymbol.addClass('fa-rupee-sign');
             } else if ($('#discount-select').val() == 'percent') {
-                discount = (totalAmount * Number(discount) / 100).toFixed(2)
+                discount = (totalAmount * Number(discount) / 100).toFixed(2);
                 document.querySelector('#total_discount').value = Number(discount).toFixed(2);
                 document.querySelector('#discount_disp').value = Number(discount).toFixed(2);
                 discountSymbol.removeClass('fa-rupee-sign');
@@ -368,7 +380,9 @@
             let stock = $(this).closest('tr').find('.product-stock').text();
 
             if ($(this).hasClass('btn-increase')) {
-                quantity++;
+                if (quantity < stock){
+                    quantity++;
+                }
             } else if ($(this).hasClass('btn-decrease')) {
                 if (quantity > 1){
                     quantity--;
@@ -389,7 +403,6 @@
 
         $('table').on('input',".product-quantity",function(){
             let quantity = this.value;
-            console.log(quantity);
             this.value = this.value.replace(/[^0-9]/,'');
             if (this.value == ''){
                 this.value = 1;
@@ -409,6 +422,11 @@
             $(this).closest("tr").find('.product-tax-input').val(tax);
 
             cartTotal();
+        });
+
+        $('table').on('change','[name="return_reason[]"]',function(){
+            let returnPercent = this.selectedOptions[0].getAttribute('return-percent');
+            $(this).siblings('input').val(returnPercent);
         });
 
         $('table').on('click','.item-remove',function(){

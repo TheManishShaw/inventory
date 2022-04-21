@@ -80,26 +80,20 @@ class DBController {
     }
 }
 
-// A function for updating the stock of one product at a time.
-function updateStock($product){ // $product is the id of the product.
-    global $link;   // global variable for connecting to database, declared in config_c
-    $query = "SELECT SUM(`quantity`) AS `quantity` FROM `_tblpurchase_details` WHERE 
-    `product_id`='$product' AND `status`='active'";     // query to get the current purchased quantity
-    $result = mysqli_query($link,$query);
-    $purchasedQuantity = mysqli_fetch_assoc($result);
+// functions for updating the stock of one product at a time.
+function increaseStock($product,$stock){ // $product is the id of the product.
+    global $link;
+    $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`+$stock WHERE `id`='$product'";
+    if (!mysqli_query($link,$query)){
+        die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));
+    }
+}
 
-    $query = "SELECT SUM(`quantity`) AS `quantity` FROM `_tblsales_details` WHERE 
-    `product_id`='$product' AND `status`='active'";     // query to get sold quantity
-    $result = mysqli_query($link,$query);
-    $soldQuantity = mysqli_fetch_assoc($result);
-
-    $quantity = $purchasedQuantity['quantity'] - $soldQuantity['quantity'];
-
-    // query to update stock.
-    $query = "UPDATE `_tblproducts` SET `quantity`='$quantity' WHERE `id`='$product'";
-    $result = mysqli_query($link, $query);
-    if (!$result) {
-        die('Could not update product stock.'.mysqli_error($link));
+function decreaseStock($product,$stock){
+    global $link;
+    $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`- $stock WHERE `id`='$product'";
+    if (!mysqli_query($link,$query)){
+        die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));
     }
 }
 

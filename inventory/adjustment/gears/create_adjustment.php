@@ -40,12 +40,9 @@
         }
         // stock updation part
         if($transferType[$i]=="lend") {
-            $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`-$product_quantity[$i] WHERE `id`='$productIds[$i]'";
+            decreaseStock($productIds[$i],$product_quantity[$i]);
         } else {
-            $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`+$product_quantity[$i] WHERE `id`='$productIds[$i]'";
-        }
-        if (!mysqli_query($link,$query)){
-            die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));
+            increaseStock($productIds[$i],$product_quantity[$i]);
         }
         // stock updation ends
     }

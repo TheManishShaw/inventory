@@ -152,6 +152,7 @@
                                                     <!--begin::Input control-->
                                                     <input type="text" class="form-control form-control-solid product-quantity border-0 ps-12" placeholder="Amount" 
                                                     name="quantity[]" value="<?php echo $productsRow['quantity'];?>" />
+                                                    <input type="text" name="old_quantity[]" value="<?php echo $productsRow['quantity']; ?>" hidden />
                                                     <!--end::Input control-->
                                                     <!--begin::Increase control-->
                                                     <button type="button" class="btn btn-increase btn-quantity btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0">

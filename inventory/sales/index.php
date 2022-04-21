@@ -163,6 +163,7 @@
             var table = $("#sales-tbl").DataTable({
                 "ajax": "gears/sales_fetch.php",
                 "deferRender": true,
+                "order":[],
                 "columns": [
                     {"data": "id",
                         "render": function(data,type,row) {
@@ -240,7 +241,7 @@
                             `;
                         }
                     }
-                ],
+                ]
             });
             setTimeout(function(){
                 checkboxEvent();
@@ -281,7 +282,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":ids})
+                    $.post("gears/delete.php",{"id_list":ids})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
@@ -315,7 +316,7 @@
                 }
             }).then((result)=> {
                 if(result.isConfirmed) {
-                    $.post("gears/multi_delete.php",{"id_list":id})
+                    $.post("gears/delete.php",{"id_list":id})
                     .done(function(data) {
                         Swal.fire(
                             'Deleted!',
