@@ -14,8 +14,7 @@
     `_tblpurchase_return`.`paid_amount`,`_tblpurchase_return`.`split_amount`,`_tblpurchase_return`.`net_tax`,
     `_tblpurchase_return`.`payment_status` FROM `_tblpurchase_return` INNER JOIN `users_tbl` ON 
     `users_tbl`.`u_id`=`_tblpurchase_return`.`supplier_id` WHERE `uset`='$u_set' AND 
-    `_tblpurchase_return`.`status` = 'active' AND `_tblpurchase_return`.`return_type` = 'gvm'
-     ORDER BY `_tblpurchase_return`.`id` DESC";
+    `_tblpurchase_return`.`status` = 'active' ORDER BY `_tblpurchase_return`.`id` DESC";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

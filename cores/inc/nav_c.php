@@ -132,6 +132,22 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
 									<div class="menu-item">
+										<a class="menu-link" href="<?php echo $sys_link?>/inventory/return/sale/index.php">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">Sale Return</span>
+										</a>
+									</div>
+									<div class="menu-item">
+										<a class="menu-link" href="<?php echo $sys_link?>/inventory/return/purchase/index.php">
+											<span class="menu-bullet">
+												<span class="bullet bullet-dot"></span>
+											</span>
+											<span class="menu-title">Purchase Return</span>
+										</a>
+									</div>
+									<div class="menu-item">
 										<a class="menu-link" href="<?php echo $sys_link?>/inventory/return/gvm/index.php">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>

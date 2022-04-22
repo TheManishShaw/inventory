@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <title>GVM List – <?php echo $sys_title;?></title>
+    <title>GRM List – <?php echo $sys_title;?></title>
 
     <?php include "../../../cores/inc/header_c.php"; ?>
 </head>
@@ -27,23 +27,23 @@
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
                         <div class="">
-                            <h1 class="anchor fw-bolder mb-5">GVM List</h1>
+                            <h1 class="anchor fw-bolder mb-5">GRM List</h1>
                             <!--begin::Wrapper-->
                             <div class="d-flex flex-stack mb-5">
                                 <!--begin::Search-->
                                 <div class="d-flex align-items-center position-relative my-1">
                                     <input type="text" data-kt-docs-table-filter="search"
                                         class="form-control form-control-solid w-250px ps-15"
-                                        placeholder="Search GVM" />
+                                        placeholder="Search GRM" />
                                 </div>
                                 <!--end::Search-->
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" id="btn-div" data-kt-docs-table-toolbar="base">
-                                    <!-- begin:: Add GVM -->
-                                    <a href="modal/create_gvm.php" class="btn btn-primary float-end">
-                                        <i class="fa fa-plus"></i> Add GVM</a>
-                                    <!-- end:: Add GVM -->
+                                    <!-- begin:: Add GRM -->
+                                    <a href="modal/create_grm.php" class="btn btn-primary float-end">
+                                        <i class="fa fa-plus"></i> Add GRM</a>
+                                    <!-- end:: Add GRM -->
                                 </div>
                                 <!--end::Toolbar-->
 
@@ -51,7 +51,7 @@
                             <!--end::Wrapper-->
 
                             <!--begin::Datatable-->
-                            <table id="gvm-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <table id="grm-tbl" class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -61,7 +61,7 @@
                                                  id="checkbox0" />
                                             </div>
                                         </th>
-                                        <th>GVM ID</th>
+                                        <th>GRM ID</th>
                                         <th>Date</th>
                                         <th>Supplier</th>
                                         <th>Grand Total</th>
@@ -121,10 +121,10 @@
                         <span class="me-2" data-kt-docs-table-select="selected_count">`+selectedCheckboxes.length+`</span>Selected</div>
                     <a selected-checkboxes="` + selectedCheckboxes +`" class='btn btn-danger' id="delete-unit">Delete</button>`;
                 } else if (checking == false && document.querySelector("#delete-unit")) {
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add GVM -->
-                                    <a href="modal/create_gvm.php" class="btn btn-primary float-end">
-                                    <i class="fa fa-plus"></i> Add GVM</a>
-                                    <!-- end:: Add GVM -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add GRM -->
+                                    <a href="modal/create_grm.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add GRM</a>
+                                    <!-- end:: Add GRM -->`;
                 }
             } 
             checkboxDeleteButton();
@@ -137,15 +137,15 @@
             }
                     
             //code for attaching event listeners to all checkboxes is datatable redrawn
-            $('#gvm-tbl').on( 'draw.dt',   function () { 
+            $('#grm-tbl').on( 'draw.dt',   function () { 
                 checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
                 checkboxes.forEach(function(item){eventListenerAdder(item)});
                 document.querySelector("#checkbox0").checked = false;
                 if(document.querySelector("#delete-unit")){
-                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add GVM -->
-                                    <a href="modal/create_gvm.php" class="btn btn-primary float-end">
-                                    <i class="fa fa-plus"></i> Add GVM</a>
-                                    <!-- end:: Add GVM -->`;
+                    document.querySelector("#btn-div").innerHTML = `<!-- begin:: Add GRM -->
+                                    <a href="modal/create_grm.php" class="btn btn-primary float-end">
+                                    <i class="fa fa-plus"></i> Add GRM</a>
+                                    <!-- end:: Add GRM -->`;
                 }
             }).dataTable();
 
@@ -158,8 +158,8 @@
         }
 
         $(function(){
-            var table = $("#gvm-tbl").DataTable({
-                "ajax": "gears/gvm_fetch.php",
+            var table = $("#grm-tbl").DataTable({
+                "ajax": "gears/grm_fetch.php",
                 "deferRender": true,
                 "order":[],
                 "columns": [
@@ -225,7 +225,7 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a class="table-modal menu-link px-3" href="modal/update_gvm.php?id=`+row.purchase_id+`"
+                                        <a class="table-modal menu-link px-3" href="modal/update_grm.php?id=`+row.purchase_id+`"
                                         >Edit</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -253,12 +253,12 @@
         function handleSearchDatatable() {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
-                $('#gvm-tbl').DataTable().search(e.target.value).draw();
+                $('#grm-tbl').DataTable().search(e.target.value).draw();
             });
         }
 
         function reloadDatatable() {
-            $('#gvm-tbl').DataTable().ajax.reload();
+            $('#grm-tbl').DataTable().ajax.reload();
             setTimeout(function(){
                 checkboxEvent();
                 handleSearchDatatable();

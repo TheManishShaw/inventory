@@ -19,21 +19,21 @@
     }
     $purchaseRow = mysqli_fetch_assoc($purchaseResult);
 
-    $query = "SELECT `_tblpurchase_return_details`.`quantity`,`_tblpurchase_return_details`.`product_id`,`net_tax`,
-    `total_amount`,`_tblproducts`.`code`,`_tblproducts`.`name`,`_tblproducts`.`price`,
-    `_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_return_details` INNER JOIN `_tblproducts` ON 
-    `_tblpurchase_return_details`.`product_id`=`_tblproducts`.`id` WHERE `purchase_id`='$purchase_id'
-    AND `_tblpurchase_return_details`.`status`='active'";
+    $query = "SELECT `_tblpurchase_return_details`.`quantity`,`_tblpurchase_return_details`.`product_id`,
+    `net_tax`,`total_amount`,`return_reason`,`return_percent`,`_tblproducts`.`code`,`_tblproducts`.`name`,
+    `_tblproducts`.`price`,`_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_return_details` 
+    INNER JOIN `_tblproducts` ON `_tblpurchase_return_details`.`product_id`=`_tblproducts`.`id` WHERE 
+    `purchase_id`='$purchase_id' AND `_tblpurchase_return_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
     if (!$productsResult){
-        die('Could not fetch Purchase Return Details. '.mysqli_error($link));
+        die('Could not fetch GRM Details. '.mysqli_error($link));
     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Update Purchase Return – <?php echo $sys_title ?></title>
+    <title>Update GVM – <?php echo $sys_title ?></title>
 
     <?php include "../../../../cores/inc/header_c.php";?>
 </head>
@@ -51,17 +51,17 @@
                 <?php include "../../../../cores/inc/top_c.php" ?>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div id="kt_content_container" class="container-fluid">
-                        <!--begin::Create Purchase-->
+                        <!--begin::Create GRM-->
                         <div class=" card-flush  flex-row-fluid p-6 ">
                             <!--begin::Card header-->
                             <div class="card-header mb-2">
                                 <div class="card-title">
-                                    <h2>Update Purchase</h2>
+                                    <h2>Update GRM</h2>
                                 </div>
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
-                            <form data-toggle="validator" action="../gears/update_purchase_return.php" method="POST" id="uploadForm"
+                            <form data-toggle="validator" action="../gears/update_grm.php" method="POST" id="uploadForm"
                                 autocomplete="off" enctype="multipart/form-data">
                                 <div class="row my-4">
                                     <div class="col-6">   
@@ -115,7 +115,7 @@
                                             <th scope="col">Net unit Price</th>
                                             <th scope="col">Stock</th>
                                             <th style="width: 110px;" scope="col">Quantity</th>
-                                            <!-- <th scope="col">Discount</th> -->
+                                            <th scope="col">Return Reason</th>
                                             <th scope="col">GST</th>
                                             <th scope="col">Subtotal</th>
                                             <th scope="col">Action</th>
@@ -166,6 +166,21 @@
                                                     </button>
                                                     <!--end::Increase control-->
                                                     </div>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="return_reason[]" data-control="select2"
+                                                        data-placeholder="Choose return type.">
+                                                        <option value="expire" return-percent="75"
+                                                        <?php if($productsRow['return_reason'] == 'expire') echo 'selected';?>
+                                                        >Expire - 75% return</option>
+                                                        <option value="validity" return-percent="100"
+                                                        <?php if($productsRow['return_reason'] == 'validity') echo 'selected';?>
+                                                        >Validity - 100% return</option>
+                                                        <option value="food_spoil" return-percent="100"
+                                                        <?php if($productsRow['return_reason'] == 'food_spoil') echo 'selected';?>
+                                                        >Food Spoil - 100% return</option>
+                                                    </select>
+                                                    <input name="return_percent[]" value="<?php echo $productsRow['return_percent'];?>" hidden />
                                                 </td>
                                                 <td><span class="product-tax"><?php echo $productsRow['net_tax'];?></span>
                                                     <input class="product-tax-input" name="tax[]" 
@@ -256,7 +271,11 @@
                                 <div role="group" class="input-group">
                                     <input type="text" class="form-control" id="discount" name="discount" 
                                     value="<?php echo $purchaseRow['discount'];?>" required>
-                                    <a class="btn bg-primary"><i class="fas text-white fa-rupee-sign"></i></a>
+                                    <a class="btn bg-primary"><i class="fas text-white 
+                                    <?php if($purchaseRow['discount_method']=='fixed') echo 'fa-rupee-sign';
+                                            else echo 'fa-percent';
+                                    ?>
+                                    "></i></a>
                                 </div>
                                 </div>
                             <div class="col-md-4 mb-2">
@@ -452,7 +471,7 @@
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
-                $('tbody').append(`
+                $('tbody').prepend(`
                 <tr class="text-center product-row" id="product`+item.id+`">
                     <td class="px-3"><p>`+item.name+`</p><span class="badge badge-success">`+item.code+`</span>
                     <input name="product_id[]" value="`+item.id+`" hidden/>
