@@ -226,11 +226,14 @@
             minDate: "today"
         });
 
+        var returnReason;
+
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'
         }).done(function(data) {
-            let products = JSON.parse(data).data;
+            let products = JSON.parse(data).products;
+            returnReason = JSON.parse(data).reasons;
             products.forEach(function(item) {
                 $('#products').append(`
                     <option value='` + JSON.stringify(item) + `'>` + item.name + ` - ` + item.cat_name + ` - ` + item.code + `</option>
@@ -240,16 +243,35 @@
             console.log(e.responseText);
         });
 
+        function capitalize(str){
+            let lower = str.toLowerCase();
+            return str.charAt(0).toUpperCase() + lower.slice(1);
+        }
+
+        function addReason(){
+            let options = '';
+            returnReason.forEach((item)=>{
+                                options += `<option value="`+item.return_reason+`" `+
+                                `return-percent="`+item.return_percent+`">`+ capitalize(item.return_reason) + ' - '
+                                    + item.return_percent + '% return'
+                                +`</option>`
+                            });
+            return options;
+        }
+
         var productsAdded = [];
         function addProduct(item){
             let tax = 0;
-            let subtotal = 0;
+            let subtotal = 0,absoluteTax=0;
+            let price = item.price - (item.price*(100 - returnReason[0].return_percent)/100);
             if (item.tax_method == "Inclusive") {
-                tax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(item.price).toFixed(2)
+                absoluteTax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2); // tax without excluding return deduction
+                tax = (price - (Number(price)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(price).toFixed(2) 
             } else if (item.tax_method == "Exclusive") {
-                tax = (item.price * item.tax / 100).toFixed(2);
-                subtotal = (Number(item.price) + Number(tax)).toFixed(2);
+                absoluteTax = (item.price * item.tax / 100).toFixed(2);
+                tax = (price * item.tax / 100).toFixed(2);
+                subtotal = (Number(price) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -296,16 +318,15 @@
                     </td>
                     <td>
                         <select class="form-select" name="return_reason[]" data-control="select2"
-                         data-placeholder="Choose return type.">
-                            <option value="short" return-percent="100">Short - 100% return</option>
-                            <option value="extra" return-percent="100">Extra - 100% return</option>
-                            <option value="damage" return-percent="100">Damage - 100% return</option>
-                        </select>
-                        <input name="return_percent[]" value="" hidden />
+                         data-placeholder="Choose return type.">`+
+                         addReason()
+                        +`</select>
+                        <input name="return_percent[]" value="`+returnReason[0].return_percent+`" hidden />
                     </td>
                     <td><span class="product-tax">`+tax+`</span>
                         <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
-                        <input class="product-tax-single" value="`+tax+`" hidden/>
+                        <input class="product-tax-single" value="`+tax+`" hidden />
+                        <input class="product-tax-absolute" name="absolute_tax[]" value="`+absoluteTax+`" hidden />
                     </td>
                     <td><span class="product-subtotal">`+
                         subtotal+`</span>
@@ -365,26 +386,12 @@
             document.querySelector('#tax_disp').value = (totalTax).toFixed(2);
         }
 
-
-        $('#search-products').on('input',function(){
-            if (this.value == ''){
-                document.querySelector('#search-results').classList.add('d-none');
-            } else {
-                document.querySelector('#search-results').classList.remove('d-none');
-                search();
-            }
-        });
-
         $('table').on('click','.btn-quantity',function(){
             let quantity = $(this).siblings('.product-quantity').val();
             let tax = $(this).closest('tr').find('.product-tax-single').val();
             let subtotal = $(this).closest('tr').find('.product-subtotal-single').val();
-            let stock = $(this).closest('tr').find('.product-stock').text();
-
             if ($(this).hasClass('btn-increase')) {
-                if (quantity < stock){
-                    quantity++;
-                }
+                quantity++;
             } else if ($(this).hasClass('btn-decrease')) {
                 if (quantity > 1){
                     quantity--;
@@ -429,6 +436,28 @@
         $('table').on('change','[name="return_reason[]"]',function(){
             let returnPercent = this.selectedOptions[0].getAttribute('return-percent');
             $(this).siblings('input').val(returnPercent);
+
+            let quantity = Number($(this).closest('tr').find('.product-quantity').val());
+            let price = Number($(this).closest('tr').find('.product-price').text());
+            let tax = Number($(this).closest('tr').find('.product-tax-absolute').val());
+            let taxMethod = $(this).closest('tr').find('.product-tax-method').val();
+
+            tax = tax * returnPercent / 100;
+            price = price * returnPercent / 100;
+
+            $(this).closest("tr").find('.product-subtotal-single').val(price);
+            $(this).closest("tr").find('.product-tax-single').val(tax);
+
+            tax = (tax * quantity).toFixed(2);
+            let subtotal = (price*quantity).toFixed(2);
+
+            $(this).closest("tr").find('.product-subtotal').text(subtotal);
+            $(this).closest("tr").find('.product-subtotal-input').val(subtotal);
+
+            $(this).closest("tr").find('.product-tax').text(tax);
+            $(this).closest("tr").find('.product-tax-input').val(tax);
+
+            cartTotal();
         });
 
         $('table').on('click','.item-remove',function(){

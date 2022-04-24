@@ -8,10 +8,10 @@
     $date = date("Y-m-d H:i:s");
 
     foreach($idArray as $id){
-        $query = "UPDATE `tax_tbl` SET `status`='purged', `deleted_at`='$date' WHERE `tax_id`='$id'";
+        $query = "UPDATE `_tblreturn_reason` SET `status`='purged', `deleted_at`='$date' WHERE `id`='$id'";
         $result = mysqli_query($link,$query);
         if (!$result) {
-            die("Could not delete tax. ".mysqli_error($link));
+            die("Could not delete return reason. ".mysqli_error($link));
         }
     }
 

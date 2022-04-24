@@ -19,10 +19,21 @@
         die("Could not fetch product. ".mysqli_error($link));
     }
 
-    $array= mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $products= mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-    echo '{"data":';
-    echo json_encode($array);
+    $query = "SELECT * FROM `_tblreturn_reason` WHERE `return_type` = 'purchase' AND `status` = 'active' AND 
+    `uset` = '$u_set'";
+    $result = mysqli_query($link,$query);
+    if (!$result) {
+        die("Coudl not fetch return reason. ".mysqli_error($link));
+    }
+
+    $reasons = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+    echo '{"products":';
+    echo json_encode($products);
+    echo ',"reasons":';
+    echo json_encode($reasons);
     echo "}";
 
 ?>

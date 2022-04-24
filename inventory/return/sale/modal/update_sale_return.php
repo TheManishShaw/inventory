@@ -20,13 +20,21 @@
     $saleRow = mysqli_fetch_assoc($saleResult);
 
     $query = "SELECT `_tblsales_return_details`.`quantity`,`_tblsales_return_details`.`product_id`,
-    `net_tax`,`total_amount`,`return_reason`,`return_percent`,`_tblproducts`.`code`,`_tblproducts`.`name`,
-    `_tblproducts`.`price`,`_tblproducts`.`quantity` AS `stock` FROM `_tblsales_return_details` 
-    INNER JOIN `_tblproducts` ON `_tblsales_return_details`.`product_id`=`_tblproducts`.`id` WHERE 
-    `sale_id`='$sale_id' AND `_tblsales_return_details`.`status`='active'";
+    `net_tax`,`total_amount`,`return_reason`,`return_percent`,`absolute_tax`,`_tblproducts`.`code`,
+    `_tblproducts`.`name`,`_tblproducts`.`price`,`_tblproducts`.`quantity` AS `stock` FROM 
+    `_tblsales_return_details` INNER JOIN `_tblproducts` ON 
+    `_tblsales_return_details`.`product_id`=`_tblproducts`.`id` WHERE `sale_id`='$sale_id' 
+    AND `_tblsales_return_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
     if (!$productsResult){
         die('Could not fetch Sale Return Details. '.mysqli_error($link));
+    }
+
+    $query = "SELECT `return_reason`,`return_percent` FROM `_tblreturn_reason` WHERE `return_type`='sale' AND `status`='active' AND 
+    `uset` = '$u_set'";
+    $returnResult = mysqli_query($link,$query);
+    if (!$returnResult) {
+        die("Could not fetch return reasons. ".mysqli_error($link));
     }
 ?>
 <!DOCTYPE html>
@@ -171,15 +179,15 @@
                                                 <td>
                                                     <select class="form-select" name="return_reason[]" data-control="select2"
                                                         data-placeholder="Choose return type.">
-                                                        <option value="short" return-percent="100"
-                                                        <?php if($productsRow['return_reason'] == 'short') echo 'selected';?>
-                                                        >Short - 100% return</option>
-                                                        <option value="extra" return-percent="100"
-                                                        <?php if($productsRow['return_reason'] == 'extra') echo 'selected';?>
-                                                        >Extra - 100% return</option>
-                                                        <option value="damage" return-percent="100"
-                                                        <?php if($productsRow['return_reason'] == 'damage') echo 'selected';?>
-                                                        >Damage - 100% return</option>
+                                                    <?php
+                                                        while($returnRow = mysqli_fetch_assoc($returnResult)){
+                                                            echo "<option value='".$returnRow['return_reason']."'
+                                                             return-percent='".$returnRow['return_percent']."'
+                                                             >".ucwords($returnRow['return_reason']). " - ". 
+                                                             $returnRow['return_percent'] . "% return".
+                                                             "</option>";
+                                                        }
+                                                    ?>
                                                     </select>
                                                     <input name="return_percent[]" value="<?php echo $productsRow['return_percent'];?>" hidden />
                                                 </td>
@@ -188,6 +196,8 @@
                                                     value="<?php echo $productsRow['net_tax'];?>" hidden/>
                                                     <input class="product-tax-single" 
                                                     value="<?php echo $productsRow['net_tax']/$productsRow['quantity'];?>" hidden/>
+                                                    <input class="product-tax-absolute" name="absolute_tax[]" 
+                                                    value="<?php echo $productsRow['absolute_tax']; ?>" hidden />
                                                 </td>
                                                 <td><span class="product-subtotal">
                                                     <?php
@@ -444,12 +454,14 @@
             minDate: "today"
         });
 
-        
+        var returnReason;
+
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'
         }).done(function(data) {
-            let products = JSON.parse(data).data;
+            let products = JSON.parse(data).products;
+            returnReason = JSON.parse(data).reasons;
             products.forEach(function(item) {
                 $('#products').append(`
                     <option value='` + JSON.stringify(item) + `'>` + item.name + ` - ` + item.cat_name + ` - ` + item.code + `</option>
@@ -458,17 +470,36 @@
         }).fail(function(e) {
             console.log(e.responseText);
         });
-            
+        
+        function capitalize(str){
+            let lower = str.toLowerCase();
+            return str.charAt(0).toUpperCase() + lower.slice(1);
+        }
+
+        function addReason(){
+            let options = '';
+            returnReason.forEach((item)=>{
+                                options += `<option value="`+item.return_reason+`" `+
+                                `return-percent="`+item.return_percent+`">`+ capitalize(item.return_reason) + ' - '
+                                    + item.return_percent + '% return'
+                                +`</option>`
+                            });
+            return options;
+        }
+
         var productsAdded = [];
         function addProduct(item){
             let tax = 0;
-            let subtotal = 0;
+            let subtotal = 0,absoluteTax=0;
+            let price = item.price - (item.price*(100 - returnReason[0].return_percent)/100);
             if (item.tax_method == "Inclusive") {
-                tax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(item.price).toFixed(2)
+                absoluteTax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2); // tax without excluding return deduction
+                tax = (price - (Number(price)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(price).toFixed(2) 
             } else if (item.tax_method == "Exclusive") {
-                tax = (item.price * item.tax / 100).toFixed(2);
-                subtotal = (Number(item.price) + Number(tax)).toFixed(2);
+                absoluteTax = (item.price * item.tax / 100).toFixed(2);
+                tax = (price * item.tax / 100).toFixed(2);
+                subtotal = (Number(price) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -513,9 +544,17 @@
                         <!--end::Increase control-->
                         </div>
                     </td>
+                    <td>
+                        <select class="form-select" name="return_reason[]" data-control="select2"
+                         data-placeholder="Choose return type.">`+
+                         addReason()
+                        +`</select>
+                        <input name="return_percent[]" value="`+returnReason[0].return_percent+`" hidden />
+                    </td>
                     <td><span class="product-tax">`+tax+`</span>
                         <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
-                        <input class="product-tax-single" value="`+tax+`" hidden/>
+                        <input class="product-tax-single" value="`+tax+`" hidden />
+                        <input class="product-tax-absolute" value="`+absoluteTax+`" hidden />
                     </td>
                     <td><span class="product-subtotal">`+
                         subtotal+`</span>
@@ -527,6 +566,9 @@
                     </td>
                 </tr>
                 `);
+                $('[name="return_reason[]"]').select2({
+                    minimumResultsForSearch: Infinity
+                });
 
                 cartTotal();
             } else {
@@ -572,16 +614,6 @@
             document.querySelector('#tax_disp').value = (totalTax).toFixed(2);
         }
 
-
-        $('#search-products').on('input',function(){
-            if (this.value == ''){
-                document.querySelector('#search-results').classList.add('d-none');
-            } else {
-                document.querySelector('#search-results').classList.remove('d-none');
-                search();
-            }
-        });
-
         $('table').on('click','.btn-quantity',function(){
             let quantity = $(this).siblings('.product-quantity').val();
             let tax = $(this).closest('tr').find('.product-tax-single').val();
@@ -622,6 +654,32 @@
 
             tax = (tax * quantity).toFixed(2);
             subtotal = (subtotal*quantity).toFixed(2);
+
+            $(this).closest("tr").find('.product-subtotal').text(subtotal);
+            $(this).closest("tr").find('.product-subtotal-input').val(subtotal);
+
+            $(this).closest("tr").find('.product-tax').text(tax);
+            $(this).closest("tr").find('.product-tax-input').val(tax);
+
+            cartTotal();
+        });
+
+        $('table').on('change','[name="return_reason[]"]',function(){
+            let returnPercent = this.selectedOptions[0].getAttribute('return-percent');
+            $(this).siblings('input').val(returnPercent);
+
+            let quantity = Number($(this).closest('tr').find('.product-quantity').val());
+            let price = Number($(this).closest('tr').find('.product-price').text());
+            let tax = Number($(this).closest('tr').find('.product-tax-absolute').val());
+            let taxMethod = $(this).closest('tr').find('.product-tax-method').val();
+
+            tax = tax * returnPercent / 100;
+            price = price * returnPercent / 100;
+            $(this).closest("tr").find('.product-tax-single').val(tax);
+            $(this).closest("tr").find('.product-subtotal-single').val(price);
+
+            tax = (tax * quantity).toFixed(2);
+            let subtotal = (price*quantity).toFixed(2);
 
             $(this).closest("tr").find('.product-subtotal').text(subtotal);
             $(this).closest("tr").find('.product-subtotal-input').val(subtotal);

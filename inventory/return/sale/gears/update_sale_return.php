@@ -63,6 +63,7 @@
     $product_name = $_POST['product_name'];
     $return_reason = $_POST['return_reason'];
     $return_percent = $_POST['return_percent'];
+    $absolute_tax = $_POST['absolute_tax'];
 
     $saleDate = date('Y-m-d H:i:s',strtotime($saleDate));
 
@@ -87,9 +88,10 @@
     }
 
     for($i = 0; $i < count($productIds); $i++) {
-        $query  = "INSERT INTO `_tblsales_return_details` (`sale_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
-        `return_reason`,`return_percent`,`u_set`,`status`,`created_at`) VALUES ('$sale_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]',
-        '$product_quantity[$i]','$return_reason[$i]','$return_percent[$i]','$u_set','active','$date');";
+        $query  = "INSERT INTO `_tblsales_return_details` (`sale_id`,`product_id`,`net_tax`,`total_amount`,
+        `quantity`,`return_reason`,`return_percent`,`absolute_tax`,`u_set`,`status`,`created_at`) 
+        VALUES ('$sale_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]','$product_quantity[$i]',
+        '$return_reason[$i]','$return_percent[$i]','$absolute_tax[$i]','$u_set','active','$date');";
         $result = mysqli_query($link,$query);
         if (!$result) {
             die('Could not make sale return details. '.mysqli_error($link));

@@ -278,6 +278,14 @@
 												<span class="menu-title">Tax</span>
 											</a>
 										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="<?php echo $sys_link?>/inventory/setting/return_reason/index.php">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Return Reason</span>
+											</a>
+										</div>
 									</div>
 								</div>							
 								<?php if($_SESSION['u_type']=='GRP00'){?>
