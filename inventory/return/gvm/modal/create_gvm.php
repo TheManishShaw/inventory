@@ -89,7 +89,7 @@
                                         <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <!-- <th scope="col">ID</th> -->
                                             <th class="px-3">Product</th>
-                                            <th scope="col">Net unit Price</th>
+                                            <th scope="col">Net unit cost</th>
                                             <th scope="col">Stock</th>
                                             <th style="width: 110px;" scope="col">Quantity</th>
                                             <th scope="col">Return Reason</th>
@@ -243,11 +243,11 @@
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
-                tax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(item.price).toFixed(2)
+                tax = (item.cost - (Number(item.cost)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(item.cost).toFixed(2)
             } else if (item.tax_method == "Exclusive") {
-                tax = (item.price * item.tax / 100).toFixed(2);
-                subtotal = (Number(item.price) + Number(tax)).toFixed(2);
+                tax = (item.cost * item.tax / 100).toFixed(2);
+                subtotal = (Number(item.cost) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -258,7 +258,7 @@
                     <input name="product_code[]" value="`+item.code+`" hidden/>
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
-                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-cost">`+item.cost+`</td>
                     <td class="product-stock">`+item.quantity+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
@@ -362,16 +362,6 @@
             document.querySelector('#total_tax').value = (totalTax).toFixed(2);
             document.querySelector('#tax_disp').value = (totalTax).toFixed(2);
         }
-
-
-        $('#search-products').on('input',function(){
-            if (this.value == ''){
-                document.querySelector('#search-results').classList.add('d-none');
-            } else {
-                document.querySelector('#search-results').classList.remove('d-none');
-                search();
-            }
-        });
 
         $('table').on('click','.btn-quantity',function(){
             let quantity = $(this).siblings('.product-quantity').val();

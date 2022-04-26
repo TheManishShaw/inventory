@@ -89,7 +89,7 @@
                                         <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <!-- <th scope="col">ID</th> -->
                                             <th class="px-3">Product</th>
-                                            <th scope="col">Net unit Price</th>
+                                            <th scope="col">Net unit cost</th>
                                             <th scope="col">Stock</th>
                                             <th style="width: 110px;" scope="col">Quantity</th>
                                             <th scope="col">Return Reason</th>
@@ -261,15 +261,15 @@
         function addProduct(item){
             let tax = 0;
             let subtotal = 0,absoluteTax=0;
-            let price = item.price - (item.price*(100 - returnReason[0].return_percent)/100);
+            let cost = item.cost - (item.cost*(100 - returnReason[0].return_percent)/100);
             if (item.tax_method == "Inclusive") {
-                absoluteTax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2); // tax without excluding return deduction
-                tax = (price - (Number(price)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(price).toFixed(2) 
+                absoluteTax = (item.cost - (Number(item.cost)*100)/(100+Number(item.tax))).toFixed(2); // tax without excluding return deduction
+                tax = (cost - (Number(cost)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(cost).toFixed(2) 
             } else if (item.tax_method == "Exclusive") {
-                absoluteTax = (item.price * item.tax / 100).toFixed(2);
-                tax = (price * item.tax / 100).toFixed(2);
-                subtotal = (Number(price) + Number(tax)).toFixed(2);
+                absoluteTax = (item.cost * item.tax / 100).toFixed(2);
+                tax = (cost * item.tax / 100).toFixed(2);
+                subtotal = (Number(cost) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -280,7 +280,7 @@
                     <input name="product_code[]" value="`+item.code+`" hidden/>
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
-                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-cost">`+item.cost+`</td>
                     <td class="product-stock">`+item.quantity+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
@@ -436,18 +436,18 @@
             $(this).siblings('input').val(returnPercent);
 
             let quantity = Number($(this).closest('tr').find('.product-quantity').val());
-            let price = Number($(this).closest('tr').find('.product-price').text());
+            let cost = Number($(this).closest('tr').find('.product-cost').text());
             let tax = Number($(this).closest('tr').find('.product-tax-absolute').val());
             let taxMethod = $(this).closest('tr').find('.product-tax-method').val();
 
             tax = tax * returnPercent / 100;
-            price = price * returnPercent / 100;
+            cost = cost * returnPercent / 100;
 
-            $(this).closest("tr").find('.product-subtotal-single').val(price);
+            $(this).closest("tr").find('.product-subtotal-single').val(cost);
             $(this).closest("tr").find('.product-tax-single').val(tax);
 
             tax = (tax * quantity).toFixed(2);
-            let subtotal = (price*quantity).toFixed(2);
+            let subtotal = (cost*quantity).toFixed(2);
 
             $(this).closest("tr").find('.product-subtotal').text(subtotal);
             $(this).closest("tr").find('.product-subtotal-input').val(subtotal);

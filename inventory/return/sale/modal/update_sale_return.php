@@ -765,7 +765,7 @@
             cartTotal();
         });
 
-                // code for entering the id of products loaded from server side, to the productsAdded array.
+        // code for entering the id of products loaded from server side, to the productsAdded array.
         $(function(){
             let products = Array.from(document.querySelectorAll('.item-remove'));
             products.forEach(function(item){

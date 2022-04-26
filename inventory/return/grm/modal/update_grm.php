@@ -21,7 +21,7 @@
 
     $query = "SELECT `_tblpurchase_return_details`.`quantity`,`_tblpurchase_return_details`.`product_id`,
     `net_tax`,`total_amount`,`return_reason`,`return_percent`,`_tblproducts`.`code`,`_tblproducts`.`name`,
-    `_tblproducts`.`price`,`_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_return_details` 
+    `_tblproducts`.`cost`,`_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_return_details` 
     INNER JOIN `_tblproducts` ON `_tblpurchase_return_details`.`product_id`=`_tblproducts`.`id` WHERE 
     `purchase_id`='$purchase_id' AND `_tblpurchase_return_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
@@ -112,7 +112,7 @@
                                         <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <!-- <th scope="col">ID</th> -->
                                             <th class="px-3">Product</th>
-                                            <th scope="col">Net unit Price</th>
+                                            <th scope="col">Net unit cost</th>
                                             <th scope="col">Stock</th>
                                             <th style="width: 110px;" scope="col">Quantity</th>
                                             <th scope="col">Return Reason</th>
@@ -131,7 +131,7 @@
                                                 <input name="product_code[]" value="<?php echo $productsRow['code'];?>" hidden/>
                                                 <input name="product_name[]" value="<?php echo $productsRow['name'];?>" hidden/>
                                                 </td>
-                                                <td class="product-price"><?php echo $productsRow['price'];?></td>
+                                                <td class="product-cost"><?php echo $productsRow['cost'];?></td>
                                                 <td class="product-stock"><?php echo $productsRow['stock'];?></td>
                                             <td>
                                                     <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
@@ -463,11 +463,11 @@
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
-                tax = (item.price - (Number(item.price)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(item.price).toFixed(2)
+                tax = (item.cost - (Number(item.cost)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(item.cost).toFixed(2)
             } else if (item.tax_method == "Exclusive") {
-                tax = (item.price * item.tax / 100).toFixed(2);
-                subtotal = (Number(item.price) + Number(tax)).toFixed(2);
+                tax = (item.cost * item.tax / 100).toFixed(2);
+                subtotal = (Number(item.cost) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -478,7 +478,7 @@
                     <input name="product_code[]" value="`+item.code+`" hidden/>
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
-                    <td class="product-price">`+item.price+`</td>
+                    <td class="product-cost">`+item.cost+`</td>
                     <td class="product-stock">`+item.quantity+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
@@ -512,6 +512,15 @@
                         <!--end::Increase control-->
                         </div>
                     </td>
+                    <td>
+                        <select class="form-select" name="return_reason[]" data-control="select2"
+                         data-placeholder="Choose return type.">
+                            <option value="expire" return-percent="75" selected>Expire - 75% return</option>
+                            <option value="validity" return-percent="100">Validity - 100% return</option>
+                            <option value="food_spoil" return-percent="100">Food Spoil - 100% return</option>
+                        </select>
+                        <input name="return_percent[]" value="75" hidden />
+                    </td>
                     <td><span class="product-tax">`+tax+`</span>
                         <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
                         <input class="product-tax-single" value="`+tax+`" hidden/>
@@ -526,6 +535,10 @@
                     </td>
                 </tr>
                 `);
+
+                $('[name="return_reason[]"]').select2({
+                    minimumResultsForSearch: Infinity
+                });
 
                 cartTotal();
             } else {
@@ -571,14 +584,9 @@
             document.querySelector('#tax_disp').value = (totalTax).toFixed(2);
         }
 
-
-        $('#search-products').on('input',function(){
-            if (this.value == ''){
-                document.querySelector('#search-results').classList.add('d-none');
-            } else {
-                document.querySelector('#search-results').classList.remove('d-none');
-                search();
-            }
+        $('table').on('change','[name="return_reason[]"]',function(){
+            let returnPercent = this.selectedOptions[0].getAttribute('return-percent');
+            $(this).siblings('input').val(returnPercent);
         });
 
         $('table').on('click','.btn-quantity',function(){
