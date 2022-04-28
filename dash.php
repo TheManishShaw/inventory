@@ -26,7 +26,7 @@ include "cores/inc/var_c.php";
 							<?php include "cores/inc/dash_c.php" ?>	
 							
 							
-							
+							<?php include "cores/snips/widgets.php";?>
 								
 
 							</div>				
@@ -36,5 +36,100 @@ include "cores/inc/var_c.php";
 				</div>
 			</div>
 		</div>		
-	</body><?php include "cores/inc/footer_c.php" ?>
+		<?php include "cores/inc/footer_c.php" ?>
+		<script>
+			var monthlySale;
+			var label = [],perDaySale = [];
+			$(function(){
+				$.ajax({
+					url: "cores/snips/gears/fetch_data.php",
+					dataType: 'html'
+				}).done((data)=>{
+					const sale = JSON.parse(data).sale;
+					const purchase = JSON.parse(data).purchase;
+					const order = JSON.parse(data).order;
+
+					console.log(order);
+					monthlySale = JSON.parse(data).monthlySale;
+					monthlySale.forEach((item)=>{
+						label.push(item.day);
+						perDaySale.push(Number(item.sales));
+					});
+					let saleToday = 0,totalSales = 0,totalPurchase = 0;
+
+					let currentTime = Math.round(new Date().getTime()/1000);
+					let saleTime;
+					
+					sale.forEach((item)=>{
+						saleTime = Math.round(new Date(item.created_at).getTime()/1000);
+						if(currentTime - saleTime < 84000)	// number of seconds in a day
+							saleToday += Number(item.total_amount);
+						totalSales += Number(item.total_amount);
+					});
+
+					purchase.forEach((item)=>{
+						totalPurchase += Number(item.total_amount);
+					});
+
+					let totalEarning = totalSales - totalPurchase;
+
+					document.querySelector('#today-sale').innerText = saleToday;
+					document.querySelector('#total-sales').innerText = totalSales;
+					document.querySelector('#total-earnings').innerText = totalEarning;
+					document.querySelector('#total-orders').innerText = order;
+				}).fail((e)=>{
+					console.error(e.responseText);
+				});
+			});
+
+			$(function(){
+				$('#sale-history').DataTable({
+					"ajax": "cores/snips/gears/fetch_recent_sales.php",
+					"order":[],
+					"pageLength":5,
+					"columns":[
+						{"data":"sale_id"},
+						{"data":"total_amount"},
+						{"data":"date"}
+					]
+				});
+			});
+
+			$(function(){
+				setTimeout(function(){
+					const context = 'sale-chart';
+					const myChart = new Chart(context, {
+						type: 'line',
+						data: {
+							labels: label,
+							datasets: [{
+								label: 'SALES PER DAY',
+								data:perDaySale,
+							}]
+						},
+						options: {
+							scales: {
+								y: {
+									beginAtZero: true,
+									title: {
+										text:'SALES'
+									},
+									display: true,
+									align:'center'
+								},
+								x:{
+									title: {
+										text:'DAY'
+									},
+									display:true,
+									align:'center'
+								}
+							}
+						}
+					});
+				},300);
+
+			});
+		</script>
+	</body>
 </html>

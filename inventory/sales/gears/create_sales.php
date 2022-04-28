@@ -67,6 +67,8 @@
 
     $date = date('Y-m-d H:i:s');
 
+    $saleDate = date('Y-m-d H:i:s',strtotime($saleDate));
+
     $query = "INSERT INTO `_tblsales` (`user_id`,`date`,`sale_id`,`is_pos`,`client_id`,`uset`,`net_tax`,
     `discount`,`discount_method`,`total_amount`,`paid_amount`,`payment_method`,`payment_status`,`split_amount`,
     `split_payment_method`,`notes`,`invoice_data`,`created_at`,`status`) VALUES ('$u_id','$saleDate','$sale_id',

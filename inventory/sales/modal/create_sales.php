@@ -49,7 +49,7 @@
                                 <div class="row my-4">
                                     <div class="col-6">   
                                         <label class="fw-bolder" for="date">Date</label>
-                                        <input type="text" id="date" placeholder="Enter Date" class="form-control"  name="date">
+                                        <input type="text" id="date" placeholder="Enter Date" class="form-control" value="<?php echo date('d-m-Y H:i:s');?>" name="date">
                                     </div>
                                     <div class="col-6">
                                         <label class="fw-bolder" for="supply">Customer</label>

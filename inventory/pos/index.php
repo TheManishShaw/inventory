@@ -229,13 +229,6 @@
             $('#invoice-modal').modal('show');
         }
 
-        // function showInvoice(dataURL,dataNAME){
-        //     document.getElementById("modal_title").innerHTML = dataNAME;
-        //     $('.modal-body').load(dataURL,function(){
-        //         $('#modal_show').modal({show:true});
-        //     });
-        // }
-
         function search() {
             var input, filter, container, products, a, i, txtValue;
             input = document.querySelector("#search-bar");
@@ -266,7 +259,7 @@
                         });
                     }
                 }).fail(function(e) {
-                    e.responseText
+                    e.responseText; 
                 });
             }
         }
