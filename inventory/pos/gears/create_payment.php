@@ -85,7 +85,7 @@
         if (!$result) {
             die('Could not make sale details. '.mysqli_error($link));
         }
-        updateStock($productIds[$i]);
+        decreaseStock($productIds[$i],$product_quantity[$i]);
     }
 
     die($sale_id);

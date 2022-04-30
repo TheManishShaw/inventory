@@ -48,8 +48,6 @@ include "cores/inc/var_c.php";
 					const sale = JSON.parse(data).sale;
 					const purchase = JSON.parse(data).purchase;
 					const order = JSON.parse(data).order;
-
-					console.log(order);
 					monthlySale = JSON.parse(data).monthlySale;
 					monthlySale.forEach((item)=>{
 						label.push(item.day);
@@ -127,7 +125,7 @@ include "cores/inc/var_c.php";
 							}
 						}
 					});
-				},300);
+				},400);
 
 			});
 		</script>
