@@ -103,6 +103,7 @@ include "cores/inc/var_c.php";
 							datasets: [{
 								label: 'SALES PER DAY',
 								data:perDaySale,
+								borderColor:'#936B52'
 							}]
 						},
 						options: {

@@ -3,8 +3,8 @@
         <h3 class="card-title text-gray-700 m-4 text-end">Today Sale</h3>
         <div class="card-body d-flex justify-content-between align-items-center">
             <div class="h-70px w-70px rounded-circle justify-content-center 
-            ms-3 d-flex align-items-center bg-primary">
-                <i class="fas fa-shopping-cart text-success fs-2hx"></i>
+            ms-3 d-flex align-items-center" style="background-color: #eeece5;">
+                <i class="fas fa-shopping-cart text-primary fs-2hx"></i>
             </div>
             <span class="fw-bolder text-end fs-2hx me-3" id="today-sale"></span>
         </div>
@@ -13,8 +13,8 @@
     <h3 class="card-title text-gray-700 m-4 text-end">Total Sales</h3>
         <div class="card-body d-flex justify-content-between align-items-center">
             <div class="h-70px w-70px rounded-circle justify-content-center
-             ms-3 d-flex align-items-center bg-primary">
-                <i class="fas fa-shopping-bag text-success fs-2hx"></i>
+             ms-3 d-flex align-items-center" style="background-color: #eeece5;">
+                <i class="fas fa-shopping-bag text-primary fs-2hx"></i>
             </div>
             <span class="fw-bolder text-end fs-2hx me-3" id="total-sales"></span>
         </div>
@@ -23,8 +23,8 @@
         <h3 class="card-title text-gray-700 m-4 text-end">Total Earnings</h3>
         <div class="card-body d-flex justify-content-between align-items-center">
             <div class="h-70px w-70px rounded-circle justify-content-center 
-            ms-3 d-flex align-items-center bg-primary">
-                <i class="fas fa-dollar-sign text-success fs-2hx"></i>
+            ms-3 d-flex align-items-center" style="background-color: #eeece5;">
+                <i class="fas fa-dollar-sign text-primary fs-2hx"></i>
             </div>
             <span class="fw-bolder text-end fs-2hx me-3" id="total-earnings"></span>
         </div>
@@ -33,8 +33,8 @@
     <h3 class="card-title text-gray-700 m-4 text-end">Total Orders</h3>
         <div class="card-body d-flex justify-content-between align-items-center">
             <div class="h-70px w-70px rounded-circle justify-content-center 
-            ms-3 d-flex align-items-center bg-primary">
-                <i class="fas fa-cubes text-success fs-2hx"></i>
+            ms-3 d-flex align-items-center" style="background-color: #eeece5;">
+                <i class="fas fa-cubes text-primary fs-2hx"></i>
             </div>
             <span class="fw-bolder text-end fs-2hx me-3" id="total-orders"></span>
         </div>
