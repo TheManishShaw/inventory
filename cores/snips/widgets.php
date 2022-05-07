@@ -56,8 +56,8 @@
             </tbody>
         </table>
     </div>
-    <div class="card col">
-        <h2 class="p-2 text-center">Monthly sales</h2>
-        <canvas id="sale-chart"></canvas>
-    </div>
+</div>
+<div class="card col">
+    <h2 class="p-2 text-center">Monthly sales</h2>
+    <canvas id="sale-chart"></canvas>
 </div>

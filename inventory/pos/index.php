@@ -107,7 +107,7 @@
 
                                         <table class="table table-row-bordered">
                                             <thead class="">
-                                                <tr class="fw-bold fs-4 bg-secondary  text-white border-bottom border-gray-200 ">
+                                                <tr class="fw-bold fs-4 bg-secondary text-white border-bottom border-gray-200">
                                                     <th>Product</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>

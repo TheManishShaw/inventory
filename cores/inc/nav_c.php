@@ -18,6 +18,7 @@
 										<span class="menu-title">Dashboard</span>
 									</a>
 								</div>
+								<?php if ($u_store_stats == 'done') {?>
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -313,6 +314,7 @@
 										</div>	
 									</div>
 								</div>
+								<?php }?>							
 								<?php }?>							
 							</div>
 						</div>

@@ -23,10 +23,14 @@ include "cores/inc/var_c.php";
 							<div class="row g-5 g-xl-8">
 								
 							
-							<?php include "cores/inc/dash_c.php" ?>	
-							
-							
-							<?php include "cores/snips/widgets.php";?>
+							<?php
+								if ($u_store_stats == 'done'){
+									include "cores/inc/dash_c.php";
+									include "cores/snips/widgets.php";
+								} else {
+									include "cores/snips/no_store.php";
+								}
+							?>
 								
 
 							</div>				
@@ -47,7 +51,8 @@ include "cores/inc/var_c.php";
 				}).done((data)=>{
 					const sale = JSON.parse(data).sale;
 					const purchase = JSON.parse(data).purchase;
-					const order = JSON.parse(data).order;
+					let order = 0;
+					order = JSON.parse(data).order;
 					monthlySale = JSON.parse(data).monthlySale;
 					monthlySale.forEach((item)=>{
 						label.push(item.day);

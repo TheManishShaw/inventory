@@ -3,7 +3,7 @@
 							<div id="kt_header"  class="header align-items-stretch">
 						<div class="header-brand">
 							<a class="w-100 text-center" href="<?php echo $sys_link ?>">
-								<?php if($uset_pic != ''){
+								<?php if(isset($uset_pic) && $uset_pic != ''){
 								?>
 									<img alt="Logo" src="<?php echo $sys_link?>/data/store_img/<?php echo $uset_pic ?>" class="h-40px" />
 								<?php
@@ -31,12 +31,13 @@
 								<div class="d-flex align-items-center overflow-auto pt-3 pt-sm-0">
 									
 									<div class="d-flex">
-									
+									<?php if($u_store_stats == 'done') {?>
 										<div class="d-flex align-items-center me-4">
 											<a href="<?php echo $sys_link ?>/inventory/pos/index.php" id="kt_drawer_chat_toggle" class="btn btn-primary btn-active-light" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 												
 											POS</a>
-										</div>										
+										</div>							
+									<?php }?>			
 									</div>
 								</div>
 							</div>

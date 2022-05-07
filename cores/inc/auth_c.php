@@ -24,6 +24,7 @@ $u_mstats = $_SESSION["m_stats"];
 $u_estats = $_SESSION["e_stats"];
 $u_set = $_SESSION['u_set'];
 $uset_pic = $_SESSION['uset_image'];
+$u_store_stats = $_SESSION['u_store_stats'];
 $ref_url = $_SERVER['REQUEST_URI'];
 if($mob_check == "enabled"){
 if(!isset($_SESSION["$sys_session"]) || $_SESSION["m_stats"] !== "done"){
