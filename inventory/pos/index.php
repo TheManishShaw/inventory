@@ -31,9 +31,21 @@
                         <img alt="Logo" src="<?php echo $sys_link?>/<?php echo $sys_dark_logo ?>" class="h-35px" />
                         <?php } ?>
                     </a>
+                    <div class="ms-20">
+                        <a href="#" class="btn btn-primary" data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-start"
+                        style=" margin-left:10px">Invoices</a>
+                        <div class="menu menu-sub menu-sub-dropdown w-25 p-1" style="overflow:auto;max-height:400px;"
+                        data-kt-menu="true">
+                            <div class="d-flex w-100">
+                                <div class="dropdown-item" id="invoice-dropdown"
+                                style="overflow:auto;max-height:300px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class=" float-end d-flex justify-content-end">
-                    <a href="#" onclick="productFetch($('#store-select').val())" class="btn btn-primary" style="margin-left:10px">All </a>
+                    <a href="#" onclick="productFetch($('#store-select').val())" class="btn btn-primary" style="margin-left:10px">All</a>
                     <div>
                         <a href="#" class="btn btn-primary" data-kt-menu-trigger="click"
                         data-kt-menu-placement="bottom-start"
@@ -244,6 +256,26 @@
                     products[i].parentElement.style.display = "none";
                 }
             }
+        }
+
+        function invoiceFetch(store) {
+            $.ajax({
+                url: "gears/fetch_invoice.php?store="+store,
+                dataType: "html"
+            }).done(function(data){
+                let sale_ids = JSON.parse(data).data;
+                if(sale_ids.length > 0) {
+                    sale_ids.forEach((item)=>{
+                        $('#invoice-dropdown').append(`
+                        <div class="d-flex border-gray-300 border-bottom-dashed
+                        align-items-center py-1 justify-content-between my-2">
+                            <p class="text-gray-800 fs-2 fw-boldest m-0">`+item.sale_id+`</p>
+                                <button class="btn btn-warning dropdown-invoice-btn" data-id="`+item.sale_id+`">Show Invoice</button>
+                        </div>
+                        `);
+                    });
+                }
+            }).fail();
         }
 
         function storeFetch() {
@@ -637,6 +669,7 @@
 
         function resetPage() {
             clearCart();
+            invoiceFetch($('#store-select').val());
             // customerFetch();
             // fetchFilters();
             productFetch($("#store-select").val());
@@ -648,6 +681,7 @@
             productFetch($('#store-select').val());
             fetchFilters();
             customerFetch($('#store-select').val());
+            invoiceFetch($('#store-select').val());
             $("body").on('change', '#store-select', function() {
                 var storeId = $("option:selected", this).val();
                 // currencySelector(storeId);
@@ -739,6 +773,11 @@
                 $("#add-customer-btn").attr("data-href", "modal/add_customer.php?store=" + $('#store-select').val());
                 $("#add-customer-btn").attr("onclick", "modal_show()");
             }
+
+            $('#invoice-dropdown').on('click','.dropdown-invoice-btn',function(){
+                let sale_id = this.getAttribute('data-id');
+                showInvoice('modal/invoice.php?sale_id='+sale_id,'Invoice - '+sale_id);
+            });
         });
     </script>
 </body>

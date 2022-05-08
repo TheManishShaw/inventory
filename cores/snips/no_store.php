@@ -3,9 +3,9 @@
 				<!--begin::Content-->
 				<div class="d-flex flex-row-fluid flex-column flex-column-fluid text-center p-10 py-lg-20">
 					<!--begin::Logo-->
-					<a href="../../index-2.html" class="pt-lg-10 mb-12">
+					<p class="pt-lg-10 mb-12">
 						<img alt="Logo" src="assets/media/logos/dark_logo.png" class="h-40px" />
-					</a>
+                    </p>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
 					<div class="text-center">
@@ -19,7 +19,7 @@
 						<!--end::Message-->
 						<!--begin::Link-->
 						<div class="mb-10">
-							<a href="../sign-in/basic.html" class="btn btn-lg btn-primary">Create Store</a>
+							<a href="inventory/store/chain_selection.php" class="btn btn-lg btn-primary">Create Store</a>
 						</div>
 						<!--end::Link-->
 					</div>

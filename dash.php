@@ -1,8 +1,8 @@
 <?php
-include "cores/inc/config_c.php";
-include "cores/inc/functions_c.php";
-include "cores/inc/auth_c.php";
-include "cores/inc/var_c.php";
+	include "cores/inc/config_c.php";
+	include "cores/inc/functions_c.php";
+	include "cores/inc/auth_c.php";
+	include "cores/inc/var_c.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@ include "cores/inc/var_c.php";
 				</div>
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 					<?php include "cores/inc/top_c.php" ?>
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content d-flex flex-column9 flex-column-fluid" id="kt_content">
 						<div id="kt_content_container" class="container-fluid">
 							<div class="row g-5 g-xl-8">
 								
@@ -93,7 +93,17 @@ include "cores/inc/var_c.php";
 					"columns":[
 						{"data":"sale_id"},
 						{"data":"total_amount"},
-						{"data":"date"}
+						{"data":"date",
+							"render": function(data,type,row){
+                            let date = new Date(data);
+                            date = date.toLocaleString('en-IN',{
+                                day: 'numeric',
+                                year: 'numeric',
+                                month: 'numeric',
+                            });
+                            return date;
+                        	}
+						}
 					]
 				});
 			});
@@ -131,7 +141,7 @@ include "cores/inc/var_c.php";
 							}
 						}
 					});
-				},400);
+				},500);
 
 			});
 		</script>

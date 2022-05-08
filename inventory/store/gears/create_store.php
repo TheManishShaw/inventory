@@ -10,6 +10,7 @@
     $email = htmlspecialchars($_POST['email']);
     $pincode = htmlspecialchars($_POST['pincode']);
     $gst = htmlspecialchars($_POST['gstno']);
+    $chain_id = htmlspecialchars($_POST['chain_id']);
 
     $name = mysqli_real_escape_string($link,$name);
     $phone = mysqli_real_escape_string($link,$phone);
@@ -17,6 +18,7 @@
     $email = mysqli_real_escape_string($link,$email);
     $pincode = mysqli_real_escape_string($link,$pincode);
     $gst = mysqli_real_escape_string($link,$gst);
+    $chain_id = mysqli_real_escape_string($link,$chain_id);
 
     $tmp_name = $_FILES['image']['tmp_name'];
     $extn = explode('.',$_FILES['image']['name']); // returns an array with extension at 1st position
@@ -25,8 +27,8 @@
     
     $date = date("Y-m-d H:i:s");
 
-    $query = "INSERT INTO `uset_tbl` (`uset_name`,`uset_email`,`uset_phone`,`uset_address`,`uset_pincode`,`uset_gst_no`,
-    `uset_image`,`uset_created_at`) VALUES ('$name','$email','$phone','$address','$pincode','$gst','$imageName','$date');";
+    echo $query = "INSERT INTO `uset_tbl` (`uset_name`,`uset_email`,`uset_phone`,`uset_chain`,`uset_address`,`uset_pincode`,`uset_gst_no`,
+    `uset_image`,`uset_created_at`) VALUES ('$name','$email','$phone','$chain_id','$address','$pincode','$gst','$imageName','$date');";
     $result = mysqli_query($link,$query);
 
     if (!$result) {
