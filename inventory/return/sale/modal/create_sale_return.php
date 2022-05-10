@@ -261,6 +261,9 @@
 
         var productsAdded = [];
         function addProduct(item){
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             let tax = 0;
             let subtotal = 0,absoluteTax=0;
             let price = item.price - (item.price*(100 - returnReason[0].return_percent)/100);
@@ -283,7 +286,7 @@
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
                     <td class="product-price">`+item.price+`</td>
-                    <td class="product-stock">`+item.quantity+`</td>
+                    <td class="product-stock">`+item.stock+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

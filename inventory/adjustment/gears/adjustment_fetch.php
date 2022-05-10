@@ -7,8 +7,10 @@
 
     $u_set = $_SESSION['u_set'];
 
-    $query = "SELECT `id`,`user_id`,`date`,`adj_id`,`items`,`_tbladjustment`.`status`,CONCAT(`users_tbl`.`f_name`,' ',`users_tbl`.`l_name`) AS `supplier_name` FROM 
-    `_tbladjustment` INNER JOIN `users_tbl` ON `users_tbl`.`u_id` = `_tbladjustment`.`user_id` WHERE
+    $query = "SELECT `id`,`user_id`,`date`,`adj_id`,( SELECT SUM(`quantity`) FROM `_tbladjustment_details` 
+    WHERE `_tbladjustment_details`.`adj_id`=`_tbladjustment`.`adj_id` AND `status`='active') AS `items`,
+    `_tbladjustment`.`status`,CONCAT(`users_tbl`.`f_name`,' ',`users_tbl`.`l_name`) AS `supplier_name` 
+    FROM `_tbladjustment` INNER JOIN `users_tbl` ON `users_tbl`.`u_id` = `_tbladjustment`.`user_id` WHERE
      `uset_id`='$u_set' AND `_tbladjustment`.`status`='active'";
     $result = mysqli_query($link,$query);
     if (!$result) {

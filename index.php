@@ -57,7 +57,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     if(empty($email_id_err) && empty($password_err)){
         $sql = "SELECT `u_id`, `f_name`, `l_name`, `email_id`, `tel_no`, `pass_id`, `u_type`, `u_stats`, 
-		`u_pic`, `u_mstats`, `u_estats`,`u_set`,`uset_image`,`u_store_stats` FROM `users_tbl` WHERE `email_id` = ?";
+		`u_pic`, `u_mstats`, `u_estats`,`u_set`,`users_tbl`.`uset_image`,`u_store_stats`,
+		`chain_id` FROM `users_tbl` WHERE `email_id` = ?";
         if($stmt = mysqli_prepare($link, $sql)){
 			
             mysqli_stmt_bind_param($stmt, "s", $param_email_id);
@@ -65,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $u_id, $f_name, $l_name,  $email_id,  $tel_no,  $hashed_password,  $u_type,  $u_stats, $u_pic, $u_mstats, $u_estats,$u_set,$uset_pic,$u_store_stats);
+                    mysqli_stmt_bind_result($stmt, $u_id, $f_name, $l_name,  $email_id,  $tel_no,  $hashed_password,  $u_type,  $u_stats, $u_pic, $u_mstats, $u_estats,$u_set,$uset_pic,$u_store_stats,$chain_id);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             session_start();
@@ -82,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["e_stats"] = $u_estats;
                             $_SESSION["u_set"] = $u_set;
                             $_SESSION["uset_image"] = $uset_pic;
+                            $_SESSION["chain_id"] = $chain_id;
                             $_SESSION["u_store_stats"] = $u_store_stats;
                             $_SESSION["auth_token"] = authkey("32");
                             $_SESSION["login_ip"] = getUserIP();

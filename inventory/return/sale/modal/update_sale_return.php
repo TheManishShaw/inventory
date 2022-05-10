@@ -21,10 +21,10 @@
 
     $query = "SELECT `_tblsales_return_details`.`quantity`,`_tblsales_return_details`.`product_id`,
     `net_tax`,`total_amount`,`return_reason`,`return_percent`,`absolute_tax`,`_tblproducts`.`code`,
-    `_tblproducts`.`name`,`_tblproducts`.`price`,`_tblproducts`.`quantity` AS `stock` FROM 
-    `_tblsales_return_details` INNER JOIN `_tblproducts` ON 
-    `_tblsales_return_details`.`product_id`=`_tblproducts`.`id` WHERE `sale_id`='$sale_id' 
-    AND `_tblsales_return_details`.`status`='active'";
+    `_tblproducts`.`name`,`_tblproducts`.`price`,`stock_tbl`.`stock` FROM `_tblsales_return_details` 
+    INNER JOIN `_tblproducts` ON `_tblsales_return_details`.`product_id`=`_tblproducts`.`id`
+    LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblsales_return_details`.`product_id`
+    AND `stock_tbl`.`store_id`='$u_set' WHERE `sale_id`='$sale_id' AND `_tblsales_return_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
     if (!$productsResult){
         die('Could not fetch Sale Return Details. '.mysqli_error($link));
@@ -489,6 +489,9 @@
 
         var productsAdded = [];
         function addProduct(item){
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             let tax = 0;
             let subtotal = 0,absoluteTax=0;
             let price = item.price - (item.price*(100 - returnReason[0].return_percent)/100);
@@ -511,7 +514,7 @@
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
                     <td class="product-price">`+item.price+`</td>
-                    <td class="product-stock">`+item.quantity+`</td>
+                    <td class="product-stock">`+item.stock+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

@@ -181,7 +181,14 @@
 						{"data": "brand_name"},
 						{"data": "cost"},
 						{"data": "price"},
-						{"data": "quantity"},
+						{"data": "stock",
+							"render": function(data,type,row) {
+								if (data != null) {
+									return data;
+								}
+								return 0;
+							}
+						},
 						{"data": "status",
 							"render": function(data,type,row) {
 								if (data == 'active') 

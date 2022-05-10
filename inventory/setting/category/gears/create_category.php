@@ -6,6 +6,7 @@
     include "../../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
 
     $brand = htmlspecialchars($_POST['brand']);
     $cat_name = htmlspecialchars($_POST['cat_name']);
@@ -16,8 +17,8 @@
     $date = date("Y-m-d H:i:s");
     $status = "active";
 
-    $query = "INSERT INTO `category_tbl`(`cat_brand`, `cat_name`, `cat_uset`,`created_at`, `status`) 
-    VALUES ('$brand','$cat_name','$u_set','$date','$status')";
+    $query = "INSERT INTO `category_tbl`(`cat_brand`, `cat_name`, `cat_uset`,`chain_id`,`created_at`, `status`) 
+    VALUES ('$brand','$cat_name','$u_set','$chain_id','$date','$status')";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

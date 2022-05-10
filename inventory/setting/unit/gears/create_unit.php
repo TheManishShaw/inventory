@@ -6,6 +6,7 @@
     include "../../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
 
     $unit_name = htmlspecialchars($_POST['u_name']);
     $unit_shortname = htmlspecialchars($_POST['u_shortname']);
@@ -20,8 +21,8 @@
     $date = date("Y-m-d H:i:s");
     $u_id = $_SESSION["u_id"];
     $status = "active";
-    $query = "INSERT INTO `_tblunits`(`name`, `ShortName`, `u_set`, `operator`, `operator_value`, `created_at`, `status`) 
-    VALUES ('$unit_name','$unit_shortname','$u_set','$operator','$operator_value','$date','$status')";
+    $query = "INSERT INTO `_tblunits`(`name`, `ShortName`, `u_set`,`chain_id`,`operator`, `operator_value`, `created_at`, `status`) 
+    VALUES ('$unit_name','$unit_shortname','$u_set','$chain_id','$operator','$operator_value','$date','$status')";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

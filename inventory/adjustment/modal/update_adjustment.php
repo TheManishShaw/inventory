@@ -5,6 +5,7 @@
     include "../../../cores/inc/var_c.php";
 
     $u_set = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
     $adj_id = $_GET['id'];
 
     $query = "SELECT * FROM `users_tbl` WHERE `u_type`='GRP02' AND `u_set`='$u_set' AND `u_stats`='active'";
@@ -20,9 +21,11 @@
     $adjRow = mysqli_fetch_assoc($adjResult);
 
     $query = "SELECT `_tbladjustment_details`.`quantity`,`_tbladjustment_details`.`product_id`,`adj_type`,
-    `_tblproducts`.`code`,`_tblproducts`.`name`,`_tblproducts`.`quantity` AS `stock` FROM 
+    `_tblproducts`.`code`,`_tblproducts`.`name`,`stock_tbl`.`stock` FROM 
     `_tbladjustment_details` INNER JOIN `_tblproducts` ON `_tbladjustment_details`.`product_id`=
-    `_tblproducts`.`id` WHERE `adj_id`='$adj_id' AND `_tbladjustment_details`.`status`='active'";
+    `_tblproducts`.`id` LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tbladjustment_details`.`product_id`
+    AND `stock_tbl`.`store_id`='$u_set' WHERE `adj_id`='$adj_id' AND 
+    `_tbladjustment_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
     if (!$productsResult){
         die('Could not fetch adjustment Details. '.mysqli_error($link));
@@ -222,6 +225,9 @@
         var productsAdded = [];
 
         function addProduct(item) {
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             if (productsAdded.indexOf(item.id) == -1) {
                 productsAdded.push(item.id);
                 $('tbody').append(`
@@ -231,7 +237,7 @@
                         <span class="badge badge-success">` + item.code + `</span>
                         <input type="text" name="product_id[]" value="`+item.id+`" hidden/>
                     </td>
-                    <td class="product-stock">` + item.quantity + `</td>
+                    <td class="product-stock">` + item.stock + `</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

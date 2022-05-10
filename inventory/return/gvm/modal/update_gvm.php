@@ -21,9 +21,10 @@
 
     $query = "SELECT `_tblpurchase_return_details`.`quantity`,`_tblpurchase_return_details`.`product_id`,
     `net_tax`,`total_amount`,`return_reason`,`return_percent`,`_tblproducts`.`code`,`_tblproducts`.`name`,
-    `_tblproducts`.`cost`,`_tblproducts`.`quantity` AS `stock` FROM `_tblpurchase_return_details` 
-    INNER JOIN `_tblproducts` ON `_tblpurchase_return_details`.`product_id`=`_tblproducts`.`id` WHERE 
-    `purchase_id`='$purchase_id' AND `_tblpurchase_return_details`.`status`='active'";
+    `_tblproducts`.`cost`,`stock_tbl`.`stock` FROM `_tblpurchase_return_details` INNER JOIN `_tblproducts`
+     ON `_tblpurchase_return_details`.`product_id`=`_tblproducts`.`id` LEFT JOIN `stock_tbl` ON 
+     `stock_tbl`.`product_id`=`_tblpurchase_return_details`.`product_id` AND `stock_tbl`.`store_id`='$u_set'
+      WHERE `purchase_id`='$purchase_id' AND `_tblpurchase_return_details`.`status`='active'";
     $productsResult = mysqli_query($link,$query);
     if (!$productsResult){
         die('Could not fetch GVM Details. '.mysqli_error($link));
@@ -460,6 +461,9 @@
             
         var productsAdded = [];
         function addProduct(item){
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
@@ -479,7 +483,7 @@
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
                     <td class="product-cost">`+item.cost+`</td>
-                    <td class="product-stock">`+item.quantity+`</td>
+                    <td class="product-stock">`+item.stock+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

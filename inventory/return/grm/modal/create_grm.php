@@ -241,14 +241,20 @@
 
         var productsAdded = [];
         function addProduct(item){
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             let tax = 0;
-            let subtotal = 0;
+            let subtotal = 0,absoluteTax=0;
+            let cost = item.cost - (item.cost*(100 - 75)/100);  // 75 is the value of first return reason option.
             if (item.tax_method == "Inclusive") {
-                tax = (item.cost - (Number(item.cost)*100)/(100+Number(item.tax))).toFixed(2);
-                subtotal = Number(item.cost).toFixed(2)
+                absoluteTax = (item.cost - (Number(item.cost)*100)/(100+Number(item.tax))).toFixed(2); // tax without excluding return deduction
+                tax = (cost - (Number(cost)*100)/(100+Number(item.tax))).toFixed(2);
+                subtotal = Number(cost).toFixed(2) 
             } else if (item.tax_method == "Exclusive") {
-                tax = (item.cost * item.tax / 100).toFixed(2);
-                subtotal = (Number(item.cost) + Number(tax)).toFixed(2);
+                absoluteTax = (item.cost * item.tax / 100).toFixed(2);
+                tax = (cost * item.tax / 100).toFixed(2);
+                subtotal = (Number(cost) + Number(tax)).toFixed(2);
             }
             if (productsAdded.indexOf(item.id)==-1){
                 productsAdded.push(item.id);
@@ -260,7 +266,7 @@
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
                     <td class="product-cost">`+item.cost+`</td>
-                    <td class="product-stock">`+item.quantity+`</td>
+                    <td class="product-stock">`+item.stock+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->
@@ -305,6 +311,7 @@
                     <td><span class="product-tax">`+tax+`</span>
                         <input class="product-tax-input" name="tax[]" value="`+tax+`" hidden/>
                         <input class="product-tax-single" value="`+tax+`" hidden/>
+                        <input class="product-tax-absolute" name="absolute_tax[]" value="`+absoluteTax+`" hidden />
                     </td>
                     <td><span class="product-subtotal">`+
                         subtotal+`</span>
@@ -418,6 +425,28 @@
         $('table').on('change','[name="return_reason[]"]',function(){
             let returnPercent = this.selectedOptions[0].getAttribute('return-percent');
             $(this).siblings('input').val(returnPercent);
+
+            let quantity = Number($(this).closest('tr').find('.product-quantity').val());
+            let cost = Number($(this).closest('tr').find('.product-cost').text());
+            let tax = Number($(this).closest('tr').find('.product-tax-absolute').val());
+            let taxMethod = $(this).closest('tr').find('.product-tax-method').val();
+
+            tax = tax * returnPercent / 100;
+            cost = cost * returnPercent / 100;
+
+            $(this).closest("tr").find('.product-subtotal-single').val(cost);
+            $(this).closest("tr").find('.product-tax-single').val(tax);
+
+            tax = (tax * quantity).toFixed(2);
+            let subtotal = (cost*quantity).toFixed(2);
+
+            $(this).closest("tr").find('.product-subtotal').text(subtotal);
+            $(this).closest("tr").find('.product-subtotal-input').val(subtotal);
+
+            $(this).closest("tr").find('.product-tax').text(tax);
+            $(this).closest("tr").find('.product-tax-input').val(tax);
+
+            cartTotal();
         });
 
         $('table').on('click','.item-remove',function(){

@@ -22,9 +22,10 @@
 
     $query = "SELECT `_tblsales_details`.`quantity`,`_tblsales_details`.`product_id`,`net_tax`,
     `total_amount`,`_tblproducts`.`code`,`_tblproducts`.`name`,`_tblproducts`.`price`,
-    `_tblproducts`.`quantity` AS `stock` FROM `_tblsales_details` INNER JOIN `_tblproducts` ON 
-    `_tblsales_details`.`product_id`=`_tblproducts`.`id` WHERE `sale_id`='$sale_id'
-    AND `_tblsales_details`.`status`='active'";
+    `stock_tbl`.`stock` FROM `_tblsales_details` INNER JOIN `_tblproducts` ON 
+    `_tblsales_details`.`product_id`=`_tblproducts`.`id` LEFT JOIN `stock_tbl` ON 
+    `_tblsales_details`.`product_id`=`stock_tbl`.`product_id` AND `stock_tbl`.`store_id`='$u_set'
+     WHERE `sale_id`='$sale_id' AND `_tblsales_details`.`status`='active'";
     $productResult = mysqli_query($link,$query);
     if (!$productResult) {
         die("Could not fetch Sales Details. ".mysqli_error($link));
@@ -320,7 +321,7 @@
                                         ?>
                                         <label class="btn btn-outline-info <?php echo $active;?>" data-kt-button="true">
                                             <input class="btn-check" type="radio" name="payment_method" id="upi" value="upi" 
-                                            <?php echo $selected;?> autocomplete="off"> UPI
+                                            <?php echo $checked;?> autocomplete="off"> UPI
                                         </label>
                                     </div>
                                 </div>
@@ -376,7 +377,7 @@
                                                             ?>
                                                             <label class="btn btn-outline-primary <?php echo $active;?>" data-kt-button="true">
                                                                 <input class="btn-check" type="radio" name="split_payment_method" value="card" 
-                                                                <?php echo $selected;?> autocomplete="off"> Card
+                                                                <?php echo $checked;?> autocomplete="off"> Card
                                                             </label>
                                                             <?php
                                                                 $active = '';
@@ -388,7 +389,7 @@
                                                             ?>
                                                             <label class="btn btn-outline-info <?php echo $active;?>" data-kt-button="true">
                                                                 <input class="btn-check" type="radio" name="split_payment_method" value="upi" 
-                                                                <?php echo $selected;?> autocomplete="off" checked> UPI
+                                                                <?php echo $checked;?> autocomplete="off" checked> UPI
                                                             </label>
                                                         </div>
                                                     </div>
@@ -439,6 +440,9 @@
 
         var productsAdded = [];         // An array to contain id of all the products added.
         function addProduct(item){
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             let tax = 0;
             let subtotal = 0;
             if (item.tax_method == "Inclusive") {
@@ -458,7 +462,7 @@
                     <input name="product_name[]" value="`+item.name+`" hidden/>
                     </td>
                     <td class="product-price">`+item.price+`</td>
-                    <td class="product-stock">`+item.quantity+`</td>
+                    <td class="product-stock">`+item.stock+`</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

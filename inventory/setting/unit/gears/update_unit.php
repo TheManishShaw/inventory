@@ -18,7 +18,7 @@
     $unit_shortname = mysqli_real_escape_string($link, $unit_shortname);
     $date = date("Y-m-d");
 
-    $query = "UPDATE `_tblunits` SET `name`='$unit_name', `ShortName`='$unit_shortname', `u_set`='$u_set', `operator`='$operator',
+    $query = "UPDATE `_tblunits` SET `name`='$unit_name', `ShortName`='$unit_shortname', `operator`='$operator',
      `operator_value`='$operator_value', `updated_at`='$date' WHERE `id`='$id'";
     $result = mysqli_query($link,$query);
 

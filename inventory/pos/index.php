@@ -274,6 +274,11 @@
                         </div>
                         `);
                     });
+                } else {
+                    $('#invoice-dropdown').append(`
+                    <div class="d-flex align-items-center" style="height:300px;">
+                        <p class="text-gray-500 fs-2 fw-boldest">No invoice available.</p>
+                    </div>`);
                 }
             }).fail();
         }
@@ -623,19 +628,6 @@
                 productSubtotal: subtotal
             }
             
-            // var taxPercent = parseFloat($("#tax").val());
-            // if(isNaN(taxPercent)){
-            //     taxPercent = 0;
-            // }
-            // var totalDiscount = parseFloat($("#discount").val());
-            // if(isNaN(totalDiscount)){
-            //     totalDiscount = 0;
-            // }
-            // var totalShipping = parseFloat($("#shipping").val());
-            // if(isNaN(totalShipping)){
-            //     totalShipping = 0;
-            // }
-            
             var originalAmount = 0;
             products.forEach(function(item){
                 originalAmount += parseFloat($(item).text());
@@ -649,9 +641,6 @@
                     totalTax: totalTax.toFixed(2),
                     storeId: store,
                     customerId: customer,
-                    // taxPercentage: taxPercent,
-                    // combinedDiscount: totalDiscount,
-                    // shipping: totalShipping,
                     untaxedAmount: originalAmount,
                     totalAmount: grandTotal
                 }
@@ -671,7 +660,7 @@
             clearCart();
             invoiceFetch($('#store-select').val());
             // customerFetch();
-            // fetchFilters();
+            fetchFilters();
             productFetch($("#store-select").val());
             document.querySelector('#search-bar').value = "";
         }

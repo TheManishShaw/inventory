@@ -6,6 +6,7 @@
     include "../../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
 
     $name = htmlspecialchars($_POST['name']);
     $percent = htmlspecialchars($_POST['percent']);
@@ -26,8 +27,8 @@
         }
     }
 
-    $query = "INSERT INTO `tax_tbl`(`tax_name`, `tax_percent`, `u_set`, `default`,`created_at`, `status`) 
-    VALUES ('$name','$percent','$u_set','$default','$date','$status')";
+    $query = "INSERT INTO `tax_tbl`(`tax_name`, `tax_percent`, `u_set`,`chain_id`, `default`,`created_at`, `status`) 
+    VALUES ('$name','$percent','$u_set','$chain_id','$default','$date','$status')";
     $result = mysqli_query($link,$query);
 
     if (!$result) {

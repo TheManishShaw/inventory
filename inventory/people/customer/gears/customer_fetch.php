@@ -6,8 +6,10 @@
     include "../../../../cores/inc/auth_c.php";
 
     $u_set = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
 
-    $query = "SELECT * FROM `users_tbl` WHERE `u_type`='GRP03' AND `u_stats`='active' AND `u_set`='$u_set'";
+    $query = "SELECT * FROM `users_tbl` WHERE `u_type`='GRP03' AND `u_stats`='active' AND 
+    (`u_set`='$u_set' OR `chain_id`='$chain_id')";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die("Could not fetch customers. ".mysqli_error($link));

@@ -137,6 +137,9 @@ if (!$result) {
         var productsAdded = [];
 
         function addProduct(item) {
+            if (item.stock == null) {
+                item.stock = 0;
+            }
             if (productsAdded.indexOf(item.id) == -1) {
                 productsAdded.push(item.id);
                 $('tbody').append(`
@@ -146,7 +149,7 @@ if (!$result) {
                         <span class="badge badge-success">` + item.code + `</span>
                         <input type="text" name="product_id[]" value="`+item.id+`" hidden/>
                     </td>
-                    <td class="product-stock">` + item.quantity + `</td>
+                    <td class="product-stock">` + item.stock + `</td>
                     <td>
                         <div class="position-relative w-md-100px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="50000" data-kt-dialer-step="1" data-kt-dialer-prefix="" data-kt-dialer-decimals="0">
                         <!--begin::Decrease control-->

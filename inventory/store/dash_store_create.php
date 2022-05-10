@@ -141,10 +141,6 @@
                 processData: false,
                 contentType: false
             }).done(function (data) {
-                $.ajax({
-                    type:'POST',
-                    url: "gears/update_user.php"
-                }).done(function(data){
                     Swal.fire({
                         title: "Store created succesfully.",
                         html: "You will be signed out after <b>10</b> seconds.",
@@ -175,7 +171,6 @@
                                 document.location.reload();
                             });
                         }
-                    });
                 }).fail(function(e){
                     Swal.fire(
                         'Error',

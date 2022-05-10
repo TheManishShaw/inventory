@@ -83,17 +83,21 @@ class DBController {
 // functions for updating the stock of one product at a time.
 function increaseStock($product,$stock){ // $product is the id of the product.
     global $link;
-    $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`+$stock WHERE `id`='$product'";
+    $query = "INSERT INTO `stock_tbl` (`product_id`,`store_id`,`stock`,`created_at`) 
+    VALUES('$product','".$_SESSION['u_set']."','$stock','".date('Y-m-d H:i:s')."') ON DUPLICATE KEY 
+    UPDATE `stock`=`stock`+$stock,`updated_at`=VALUES(`created_at`)";
     if (!mysqli_query($link,$query)){
-        die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));
+        die("Could not update stock. ".mysqli_error($link));
     }
 }
 
 function decreaseStock($product,$stock){
     global $link;
-    $query = "UPDATE `_tblproducts` SET `quantity` = `quantity`- $stock WHERE `id`='$product'";
+    $query = "INSERT INTO `stock_tbl` (`product_id`,`store_id`,`stock`,`created_at`) 
+    VALUES('$product','".$_SESSION['u_set']."','$stock','".date('Y-m-d H:i:s')."') ON DUPLICATE KEY 
+    UPDATE `stock`=`stock`-$stock,`updated_at`=VALUES(`created_at`)";
     if (!mysqli_query($link,$query)){
-        die("Could not update stock. Please run stock updation script manually. ".mysqli_error($link));
+        die("Could not update stock. ".mysqli_error($link));
     }
 }
 

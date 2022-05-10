@@ -6,6 +6,7 @@
     include "../../../../cores/inc/auth_c.php";
 
     $uset = $_SESSION['u_set'];
+    $chain_id = $_SESSION['chain_id'];
 
     $type = htmlspecialchars($_POST['type']);
     $reason = htmlspecialchars($_POST['reason']);
@@ -19,8 +20,8 @@
 
     $date = date('Y-m-d H:i:s');
 
-    $query = "INSERT INTO `_tblreturn_reason` (`user_id`,`uset`,`return_type`,`return_reason`,`return_percent`
-    ,`status`,`created_at`) VALUES ('$u_id','$uset','$type','$reason','$percent','active','$date');";
+    $query = "INSERT INTO `_tblreturn_reason` (`user_id`,`uset`,`chain_id`,`return_type`,`return_reason`,`return_percent`
+    ,`status`,`created_at`) VALUES ('$u_id','$uset','$chain_id','$type','$reason','$percent','active','$date');";
     $result = mysqli_query($link,$query);
     
     if (!$result){

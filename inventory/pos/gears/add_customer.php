@@ -1,5 +1,10 @@
 <?php
     include "../../../cores/inc/config_c.php";
+    include "../../../cores/inc/var_c.php";
+    include "../../../cores/inc/functions_c.php";
+    include "../../../cores/inc/auth_c.php";
+
+    $chain_id = $_SESSION['chain_id'];
 
     $timestamp= date('Y-m-d H:i:s') ;
     
@@ -40,8 +45,8 @@
     $status="active";
     
     $query="INSERT INTO `users_tbl` (`f_name`,`l_name`,`email_id`, `tel_no`,`u_type`, `business_name`,
-    `gst_num`,`address`,`u_set`,`u_stats`,`u_timestamp`) VALUES('$first_name','$last_name','$email','$phone'
-    ,'GRP03','$business','$gst','$address','$u_set','$status','$timestamp')";
+    `gst_num`,`address`,`u_set`,`chain_id`,`u_stats`,`u_timestamp`) VALUES('$first_name','$last_name','$email','$phone'
+    ,'GRP03','$business','$gst','$address','$u_set','$chain_id','$status','$timestamp')";
     $result = mysqli_query($link,$query);
     if (!$result) {
         $error = mysqli_error($link);
