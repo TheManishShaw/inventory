@@ -267,6 +267,11 @@
                         validators: {
                             notEmpty: {
                                 message: "Text input required."
+                            },
+                            stringLength: {
+                                min:12,
+                                max:12,
+                                message: "Enter a 12 digit GST number."
                             }
                         }
                     },

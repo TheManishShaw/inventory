@@ -48,7 +48,7 @@
     $chain_id = $store['uset_chain'];
 
     // query for updating store id and store image in users_tbl
-    $query = "UPDATE `users_tbl` SET `u_set`='$store_id',`chain_id`='$chain_id' `uset_image`='$imageName',`u_store_stats`='done' WHERE `u_id`='$u_id'";
+    $query = "UPDATE `users_tbl` SET `u_set`='$store_id',`chain_id`='$chain_id',`uset_image`='$imageName',`u_store_stats`='done' WHERE `u_id`='$u_id'";
     if(!mysqli_query($link,$query)) {
         die("Could not update user store. ".mysqli_error($link));
     }
