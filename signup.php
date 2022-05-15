@@ -282,7 +282,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								<!--end::Input group-->
 								<!--begin::Actions-->
 								<div class="text-center">
-									<button type="submit"  class="btn btn-lg btn-primary">
+									<button type="submit" id="signup-submit" class="btn btn-lg btn-primary" disabled>
 										<span class="indicator-label">Submit</span>
 										<span class="indicator-progress">Please wait... 
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -309,6 +309,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			<!--end::Authentication - Sign-up-->
 		</div>
 		<?php include "cores/inc/footer_c.php"  ?>
+		<script>
+			$('[name="toc"]').on('change',function(){
+				if (this.checked == true) {
+					document.querySelector('#signup-submit').disabled = false;
+				} else {
+					document.querySelector('#signup-submit').disabled = true;
+				}
+			});
+		</script>
 	</body>
 	<!--end::Body-->
 </html>

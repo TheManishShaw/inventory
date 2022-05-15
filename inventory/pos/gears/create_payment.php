@@ -77,16 +77,23 @@
     if (!$result) {
         die('Could not make sale. '.mysqli_error($link));
     }
+    $query  = "INSERT INTO `_tblsales_details` (`sale_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
+    `u_set`,`status`,`created_at`) VALUES ('$sale_id',?,?,?,?,'$u_set','active','$date');";
+    
+    $stmt = mysqli_prepare($link,$query);
+    mysqli_stmt_bind_param($stmt,'ssss',$id,$tax,$subtotal,$quantity);
+
     for($i = 0; $i < count($productIds); $i++) {
-        $query  = "INSERT INTO `_tblsales_details` (`sale_id`,`product_id`,`net_tax`,`total_amount`,`quantity`,
-        `u_set`,`status`,`created_at`) VALUES ('$sale_id','$productIds[$i]','$product_tax[$i]','$product_subtotal[$i]',
-        '$product_quantity[$i]','$u_set','active','$date');";
-        $result = mysqli_query($link,$query);
-        if (!$result) {
+        $id = $productIds[$i];
+        $tax= $product_tax[$i];
+        $subtotal= $product_subtotal[$i];
+        $quantity= $product_quantity[$i];
+        if(!mysqli_stmt_execute($stmt)){
             die('Could not make sale details. '.mysqli_error($link));
         }
         decreaseStock($productIds[$i],$product_quantity[$i]);
     }
+    mysqli_stmt_close($stmt);
 
     die($sale_id);
 

@@ -23,38 +23,48 @@
     $array=[];
 
     if(!empty($brand_id)){
+        $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
+        AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
+        brand_name,`stock_tbl`.`stock` FROM `_tblproducts` LEFT JOIN `stock_tbl` ON 
+        `stock_tbl`.`product_id`=`_tblproducts`.`id`  AND `stock_tbl`.`store_id`='$store_id'
+            WHERE `id` = ? AND (`u_set` = '$store_id' OR `chain_id`='$chain_id') 
+        AND `brand_id` = '$brand_id' AND `status` = 'active' AND `stock` > '0'";
+
+        $stmt = mysqli_prepare($link,$query1);
+        mysqli_stmt_bind_param($stmt,'s',$item);
+
         foreach($product_array as $item){
-            $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
-            AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
-            brand_name,`stock_tbl`.`stock` FROM `_tblproducts` LEFT JOIN `stock_tbl` ON 
-            `stock_tbl`.`product_id`=`_tblproducts`.`id`  AND `stock_tbl`.`store_id`='$store_id'
-             WHERE `id` = '$item' AND (`u_set` = '$store_id' OR `chain_id`='$chain_id') 
-            AND `brand_id` = '$brand_id' AND `status` = 'active' AND `stock` > '0'";
-            $sql1 = mysqli_query($link,$query1);
-            if(!$sql1){
+            if(!mysqli_stmt_execute($stmt)){
                 die("Query Failed".mysqli_error($link));
             }
 
-            while($row=mysqli_fetch_assoc($sql1)){
-                $array[] = $row;
-            }
+            $sql1 = mysqli_stmt_get_result($stmt);
         }
     } else if(!empty($cat_id)) {
+        $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
+        AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
+        brand_name,`stock_tbl`.`stock` FROM `_tblproducts` LEFT JOIN `stock_tbl` ON 
+        `stock_tbl`.`product_id`=`_tblproducts`.`id` AND `stock_tbl`.`store_id`='$store_id'
+            WHERE `id` = ? AND (`u_set` = '$store_id' OR `chain_id`='$chain_id') 
+        AND `category_id` = '$cat_id' AND `status` = 'active' AND `stock` > '0'";
+
+        $stmt = mysqli_prepare($link,$query1);
+        mysqli_stmt_bind_param($stmt,'s',$item);
+
         foreach($product_array as $item){
-            $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
-            AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
-            brand_name,`stock_tbl`.`stock` FROM `_tblproducts` LEFT JOIN `stock_tbl` ON 
-            `stock_tbl`.`product_id`=`_tblproducts`.`id` AND `stock_tbl`.`store_id`='$store_id'
-             WHERE `id` = '$item' AND (`u_set` = '$store_id' OR `chain_id`='$chain_id') 
-            AND `category_id` = '$cat_id' AND `status` = 'active' AND `stock` > '0'";
-            $sql1 = mysqli_query($link,$query1);
-            if(!$sql1){
+            if(!mysqli_stmt_execute($stmt)){
                 die("Query Failed".mysqli_error($link));
             }
-            while($row=mysqli_fetch_assoc($sql1)){
-                $array[] = $row;
-            }
+            var_dump($stmt);
+            echo $stmt->id;
+
+            $sql1 = mysqli_stmt_get_result($stmt);
         }
+    }
+    mysqli_stmt_close($stmt);
+
+    while($row=mysqli_fetch_assoc($sql1)){
+        $array[] = $row;
     }
 
     echo '{"data":';

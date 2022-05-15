@@ -233,6 +233,14 @@
 
     <?php include '../../cores/inc/footer_c.php'; ?>
     <script>
+        // stopping reloading of page
+        function closeIt()
+        {
+        return "Are you sure you want to exit?";
+        }
+        window.onbeforeunload = closeIt;
+    </script>
+    <script>
         // function for changing the target url of invoice iframe
         function showInvoice(dataURL,dataNAME){
             document.getElementById("iframe-title").innerHTML = dataNAME;
@@ -342,6 +350,7 @@
                 url: "gears/fetch_filtered_products.php?store="+store+"&brand="+brand+"&cat="+cat,
                 dataType: "html"
             }).done(function(data) {
+                console.log(data)
                 let products = JSON.parse(data).data;
                 if (products.length > 0) {
                     $('#products-div').html('');
@@ -350,7 +359,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 mb-1">
                                 <div class="card card-bordered ribbon ribbon-top product-card ribbon-vertical">
                                 <div class="ribbon-label bg-danger">
-                                    ` + item.quantity + `
+                                    ` + item.stock + `
                                 </div>
                                 <img class="card-img-top" width="100px" onclick='addProduct(` + JSON.stringify(item) + `)'
                                 height="120px" src="../../data/product_img/` + item.image + `" alt="` + item.name + `">                                              
@@ -763,6 +772,7 @@
                 $("#add-customer-btn").attr("onclick", "modal_show()");
             }
 
+            // shows invoice modal
             $('#invoice-dropdown').on('click','.dropdown-invoice-btn',function(){
                 let sale_id = this.getAttribute('data-id');
                 showInvoice('modal/invoice.php?sale_id='+sale_id,'Invoice - '+sale_id);
