@@ -12,7 +12,7 @@ if($link === false){
 }
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
 //System Variables
-$sys_link = "http://localhost/inventory";
+$sys_link = "http://localhost/testing/inventory";
 $sys_name = "Inventory";
 $sys_title = "Trapo Inventory With POS";
 $sys_fav = "data/sys/logo_mins.png";
