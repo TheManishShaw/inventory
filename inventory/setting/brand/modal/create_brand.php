@@ -11,33 +11,49 @@
             <textarea name="description" id="description" cols="30" rows="5" 
             placeholder="Enter Brand Description" class="form-control form-control-solid"></textarea>
         </div>
-        <div class="fv-row form-group my-4">
-            <!--begin::Form-->
-<form class="form" action="#" method="post">
-    <!--begin::Input group-->
-    <div class="fv-row">
-        <!--begin::Dropzone-->
-        <div class="dropzone" id="kt_dropzonejs_example_1">
-            <!--begin::Message-->
-            <div class="dz-message needsclick">
-                <!--begin::Icon-->
-                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-                <!--end::Icon-->
+        <div class="fv-row form-group text-center my-4">
+            <!--begin::Image input-->
+            <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url(../../../data/no-image.png)">
+                <!--begin::Image preview wrapper-->
+                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(../../../data/no-image.png)"></div>
+                <!--end::Image preview wrapper-->
 
-                <!--begin::Info-->
-                <div class="ms-4">
-                    <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop files here or click to upload.</h3>
-                    <span class="fs-7 fw-bold text-gray-400">Upload up to 10 files</span>
-                </div>
-                <!--end::Info-->
+                <!--begin::Edit button-->
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                    data-kt-image-input-action="change"
+                    data-bs-toggle="tooltip"
+                    data-bs-dismiss="click"
+                    title="Change logo">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+
+                    <!--begin::Inputs-->
+                    <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="avatar_remove" />
+                    <!--end::Inputs-->
+                </label>
+                <!--end::Edit button-->
+
+                <!--begin::Cancel button-->
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                    data-kt-image-input-action="cancel"
+                    data-bs-toggle="tooltip"
+                    data-bs-dismiss="click"
+                    title="Cancel logo">
+                    <i class="bi bi-x fs-2"></i>
+                </span>
+                <!--end::Cancel button-->
+
+                <!--begin::Remove button-->
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                    data-kt-image-input-action="remove"
+                    data-bs-toggle="tooltip"
+                    data-bs-dismiss="click"
+                    title="Remove Logo">
+                    <i class="bi bi-x fs-2"></i>
+                </span>
+                <!--end::Remove button-->
             </div>
-        </div>
-        <!--end::Dropzone-->
-    </div>
-    <!--end::Input group-->
-</form>
-<!--end::Form-->
-            <input type="file" id="image" name="image" required/>
+            <!--end::Image input-->
             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Please provide a logo image of the brand."></i>
         </div>
         <button class="btn btn-primary" id="submit" type="submit">Submit</button>	 
@@ -121,21 +137,9 @@
         }
     );
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
-var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
-    url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-    paramName: "file", // The name that will be used to transfer the file
-    maxFiles: 10,
-    maxFilesize: 10, // MB
-    addRemoveLinks: true,
-    accept: function(file, done) {
-        if (file.name == "wow.jpg") {
-            done("Naha, you don't.");
-        } else {
-            done();
-        }
-    }
-});
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+    KTImageInput.createInstances();
 </script>

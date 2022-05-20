@@ -134,13 +134,13 @@
     <script>
         function submitForm(formData){                
             $.ajax({
-                type:'POST',
-                url: "gears/create_store.php",
-                data: formData,
-                enctype: 'multipart/form-data',
+                type:'POST',                    // method used. could be POST or GET
+                url: "gears/create_store.php",  // url of the backend code
+                data: formData,                 // the data to be passed
+                enctype: 'multipart/form-data', // required for images
                 processData: false,
                 contentType: false
-            }).done(function (data) {
+            }).done(function (data) {           // data is the data returned from the backend page
                     Swal.fire({
                         title: "Store created succesfully.",
                         html: "You will be signed out after <b>10</b> seconds.",
@@ -187,14 +187,16 @@
                 console.log(e.responseText);
             });
         }
+        // capturing and validating form data
         $(function(){
             document.querySelector("#submit").addEventListener("click",function(e){
                 e.preventDefault();
-                let formData = new FormData($('form')[0]);
+                let formData = new FormData($('form')[0]);  // Capture form data
+                // validating using FormValidation library
                 if (validator) {
                     validator.validate().then(function(status) {
                         if (status == "Valid") {
-                            submitForm(formData);
+                            submitForm(formData);   // passing the form data to another function
                         }
                     });
                 }

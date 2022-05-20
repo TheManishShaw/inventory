@@ -173,6 +173,9 @@
                     {"data":"id"},
                     {"data": "image",
                         'render': function(data,type,row){
+                            if (data == ''){
+                                return '<img src="../../../data/no-image.png" style="zoom:1.5;" width="30px" height="30px" />';
+                            }
                             return '<img src="../../../data/brand_img/'+row.image+'" width="30px" height="30px" />';
                         }
                     },

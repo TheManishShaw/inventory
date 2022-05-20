@@ -23,6 +23,11 @@
         $extn = explode('.',$_FILES['image']['name']);  // returns an array with extension at 1st position
         $imageName = time().".".$extn[1];
         $folder = "../../../../data/brand_img/".$imageName;
+        if(!move_uploaded_file($tmp_name,$folder)){
+            echo "Could not upload image!";
+        }
+    } else if ($_POST['avatar_remove']==1) {
+        $imageName = '';
     } else {
         $imageName = $oldImage;
     }
@@ -36,10 +41,6 @@
 
     if (!$result) {
         die("Could not create unit. ".mysqli_error($link));
-    }
-
-    if(!move_uploaded_file($tmp_name,$folder)){
-        echo "Could not upload image!";
     }
 
 ?>

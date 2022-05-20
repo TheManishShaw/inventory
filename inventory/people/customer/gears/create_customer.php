@@ -46,16 +46,18 @@
     $query="INSERT INTO `users_tbl` (`f_name`,`l_name`,`email_id`, `tel_no`,`u_type`, `business_name`,
     `gst_num`,`address`,`u_set`,`chain_id`,`u_stats`,`u_timestamp`) VALUES('$first_name','$last_name','$email','$phone'
     ,'GRP03','$business','$gst','$address','$u_set','$chain_id','$status','$timestamp')";
-    $result = mysqli_query($link,$query);
-    if (!$result) {
-        $error = mysqli_error($link);
-        if(strstr($error,'Duplicate')){
-            if(strstr($error,'tel_no')){
-                die('number');
-            } else if (strstr($error, 'email_id')){
-                die("email");
+    try {
+        $result = mysqli_query($link,$query);
+    } catch (Exception $e) {
+        if ($e->getMessage()) {
+            $error = $e->getMessage();
+            if(strstr($error,'Duplicate')){
+                if(strstr($error,'tel_no')){
+                    die('number');
+                } else if (strstr($error, 'email_id')){
+                    die("email");
+                }
             }
         }
     }
-
 ?>
