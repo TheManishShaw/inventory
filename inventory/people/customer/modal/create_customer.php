@@ -43,7 +43,6 @@
             processData: false,
             contentType: false
         }).done(function (data) {
-            console.log(data)
             if (data.trim() == 'number' || data.trim() == 'email') {
                 Swal.fire(
                     'Duplicate Value',

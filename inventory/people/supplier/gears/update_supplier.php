@@ -48,8 +48,20 @@
      `tel_no`='$phone', `business_name`='$business',`gst_num`='$gst',`address`='$address' WHERE 
     `u_id`='$id'";
     $result = mysqli_query($link,$query);
-    if (!$result) {
-        $error = mysqli_error($link);
+    try {
+        $result = mysqli_query($link,$query);
+        if (!$result) {
+            $error = mysqli_error($link);
+            if(strstr($error,'Duplicate')){
+                if(strstr($error,'tel_no')){
+                    die('number');
+                } else if (strstr($error, 'email_id')){
+                    die("email");
+                }
+            }
+        }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
         if(strstr($error,'Duplicate')){
             if(strstr($error,'tel_no')){
                 die('number');

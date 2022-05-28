@@ -47,8 +47,20 @@
     `gst_num`,`address`,`u_set`,`chain_id`,`u_stats`,`u_timestamp`) VALUES('$first_name','$last_name','$email','$phone'
     ,'GRP02','$business','$gst','$address','$u_set','$chain_id','$status','$timestamp')";
     $result = mysqli_query($link,$query);
-    if (!$result) {
-        $error = mysqli_error($link);
+    try {
+        $result = mysqli_query($link,$query);
+        if (!$result) {
+            $error = mysqli_error($link);
+            if(strstr($error,'Duplicate')){
+                if(strstr($error,'tel_no')){
+                    die('number');
+                } else if (strstr($error, 'email_id')){
+                    die("email");
+                }
+            }
+        }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
         if(strstr($error,'Duplicate')){
             if(strstr($error,'tel_no')){
                 die('number');
