@@ -11,6 +11,23 @@
 <head>
     <title>POS – <?php echo $sys_title; ?></title>
     <?php include '../../cores/inc/header_c.php'; ?>
+    <style>
+        ::-webkit-scrollbar {
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        * {
+            scrollbar-width: thin;
+        }
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->

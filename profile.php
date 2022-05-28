@@ -237,7 +237,7 @@ if (is_array($fetch_profile) || is_object($fetch_profile))
 				}).done(function (data) {
 					Swal.fire(
 						'Success',
-						'Profile updated successfully!',
+						'Profile updated successfully! Reload to apply changes.',
 						'success'
 					);
 				}).fail(function(e){

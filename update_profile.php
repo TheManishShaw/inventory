@@ -31,7 +31,7 @@
     $store_gst_no = mysqli_real_escape_string($link,$store_gst_no);
     $old_store_image = mysqli_real_escape_string($link,$old_store_image);
 
-    $user_query = "UPDATE `users_tbl` SET `f_name`=?,`l_name`=?,`tel_no`=?,`u_pic`=? WHERE `u_id`=?";
+    $user_query = "UPDATE `users_tbl` SET `f_name`=?,`l_name`=?,`tel_no`=?,`u_pic`=?,`uset_image`=? WHERE `u_id`=?";
     $uset_query = "UPDATE `uset_tbl` SET `uset_name`=?,`uset_email`=?,`uset_phone`=?,`uset_address`=?,
     `uset_site`=?,`uset_gst_no`=?,`uset_image`=? WHERE `uset_id`=?";
 
@@ -46,6 +46,8 @@
         $profile_img = $old_profile_image;
     }
 
+    $_SESSION['u_pic'] = $profile_img;
+
     $store_img = '';
     if(isset($_FILES['store_img']) && $_FILES['store_img']['size']!=0){
         $image_temp = $_FILES['store_img']['tmp_name'];
@@ -57,15 +59,18 @@
         $store_img = $old_store_image;
     }
 
+    $_SESSION['uset_image'] = $store_img;
+
     if($stmt1 = mysqli_prepare($link,$user_query)) {
-        mysqli_stmt_bind_param($stmt1,'sssss',$f_name,$l_name,$phone,$profile_img,$u_id);
+        mysqli_stmt_bind_param($stmt1,'ssssss',$f_name,$l_name,$phone,$profile_img,$store_img,$u_id);
         if($stmt2 = mysqli_prepare($link,$uset_query)){
             mysqli_stmt_bind_param($stmt2,'ssssssss',$store_name,$store_email,$store_phone,$store_address,$site,$store_gst_no,$store_img,$u_set);
         }
         mysqli_stmt_execute($stmt1);
         mysqli_stmt_execute($stmt2);
-    } else {
+    } else { 
         die("Could not update user info. ".mysqli_error($link));
     }
+
 
 ?>

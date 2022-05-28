@@ -51,6 +51,7 @@
 					url: "cores/snips/gears/fetch_data.php",
 					dataType: 'html'
 				}).done((data)=>{
+					
 					const sale = JSON.parse(data).sale;
 					const purchase = JSON.parse(data).purchase;
 					let order = 0;
