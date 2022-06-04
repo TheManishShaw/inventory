@@ -145,6 +145,7 @@
                                     class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Customer</a>
                                     <!-- end:: Add Customer -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

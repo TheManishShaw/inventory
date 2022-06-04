@@ -39,14 +39,13 @@
     
     if($email == "")
     {
-        $email = "customer". rand('122232','784599') . "@trapo.in";
+        $email = "supplier". rand('122232','784599') . "@trapo.in";
     }
     $status="active";
     
     $query="INSERT INTO `users_tbl` (`f_name`,`l_name`,`email_id`, `tel_no`,`u_type`, `business_name`,
     `gst_num`,`address`,`u_set`,`chain_id`,`u_stats`,`u_timestamp`) VALUES('$first_name','$last_name','$email','$phone'
     ,'GRP02','$business','$gst','$address','$u_set','$chain_id','$status','$timestamp')";
-    $result = mysqli_query($link,$query);
     try {
         $result = mysqli_query($link,$query);
         if (!$result) {
@@ -54,7 +53,7 @@
             if(strstr($error,'Duplicate')){
                 if(strstr($error,'tel_no')){
                     die('number');
-                } else if (strstr($error, 'email_id')){
+                } else if (strstr($error,'email_id')){
                     die("email");
                 }
             }

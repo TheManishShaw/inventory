@@ -144,6 +144,7 @@
 						<a data-href="modal/create.php" onclick="modal_show()" class="openPopup btn btn-primary float-end"
 									data-name="Add Product" href="javascript:void(0);"><i class="fa fa-plus"></i> Add Product</a>`;
 					}
+					KTMenu.createInstances();
 				}).dataTable();
 	
 				$("#checkbox0").on("change", function () {
@@ -257,7 +258,6 @@
 				const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
 				filterSearch.addEventListener('keyup', function (e) {
 					$('#active-product-tbl').DataTable().search(e.target.value).draw();
-					KTMenu.createInstances();
 				});
 			}
 	

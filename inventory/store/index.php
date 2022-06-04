@@ -147,6 +147,7 @@
                                     class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Store</a>
                                     <!-- end:: Add Store -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

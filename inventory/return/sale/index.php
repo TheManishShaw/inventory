@@ -147,6 +147,7 @@
                                     <i class="fa fa-plus"></i> Add Sale Return</a>
                                     <!-- end:: Add Sale Return -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

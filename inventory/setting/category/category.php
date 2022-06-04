@@ -144,6 +144,7 @@
                                     class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Category</a>
                                     <!-- end:: Add Category -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

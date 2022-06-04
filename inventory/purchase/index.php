@@ -147,6 +147,7 @@
                                     <i class="fa fa-plus"></i> Add Purchase</a>
                                     <!-- end:: Add Purchase -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {
@@ -201,7 +202,15 @@
 						}
 					},
                     {"data": "net_tax"},
-                    {"data": "payment_status"},
+                    {"data": "payment_status",
+                        "render": function(data,type,row) {
+                            if (data == 'paid') {
+                                return `<div class="text-center"><span class="badge bg-success">Paid</span></div>`;
+                            } else if (data == 'pending') {
+                                return `<div class="text-center"><span class="badge bg-warning">Pending</span></div>`;
+                            }
+                        }
+                    },
                     {"data": null}
                 ],
                 "columnDefs": [

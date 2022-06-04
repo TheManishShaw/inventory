@@ -142,6 +142,7 @@
                                     <i class="fa fa-plus"></i> Add Adjustment</a>
                                     <!-- end:: Add Adjustment -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

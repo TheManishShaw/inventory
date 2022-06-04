@@ -145,6 +145,7 @@
 									data-name="Add Product" href="javascript:void(0);"><i class="fa fa-plus"></i> Add Product</a>
 										<!-- end:: Add Product -->`;
 					}
+					KTMenu.createInstances();
 				}).dataTable();
 	
 				$("#checkbox0").on("change", function () {
@@ -258,7 +259,6 @@
 				const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
 				filterSearch.addEventListener('keyup', function (e) {
 					$('#inactive-product-tbl').DataTable().search(e.target.value).draw();
-					KTMenu.createInstances();
 				});
 			}
 	

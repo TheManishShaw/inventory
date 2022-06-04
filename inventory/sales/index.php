@@ -149,6 +149,7 @@
                                     class=" openPopup btn btn-primary float-end"><i class="fa fa-plus"></i> Add Sales</a>
                                     <!-- end:: Add Sales -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

@@ -147,6 +147,7 @@
                                     <i class="fa fa-plus"></i> Add GRM</a>
                                     <!-- end:: Add GRM -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

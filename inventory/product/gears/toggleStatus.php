@@ -8,7 +8,7 @@
     $u_set = $_SESSION['u_set'];
 
     $idlist = $_POST['id_list'];
-    echo $currentStatus = $_POST['current'];
+    $currentStatus = $_POST['current'];
 
     $idArray = explode(",",$idlist);
 

@@ -47,7 +47,6 @@
     $query="UPDATE `users_tbl` SET `f_name`='$first_name',`l_name`='$last_name',`email_id`='$email',
      `tel_no`='$phone', `business_name`='$business',`gst_num`='$gst',`address`='$address' WHERE 
     `u_id`='$id'";
-    $result = mysqli_query($link,$query);
     try {
         $result = mysqli_query($link,$query);
         if (!$result) {

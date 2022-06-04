@@ -147,6 +147,7 @@
                                     <i class="fa fa-plus"></i> Add GVM</a>
                                     <!-- end:: Add GVM -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {

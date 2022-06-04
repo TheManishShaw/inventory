@@ -147,6 +147,7 @@
                                     <i class="fa fa-plus"></i> Add Purchase Return</a>
                                     <!-- end:: Add Purchase Return -->`;
                 }
+                KTMenu.createInstances();
             }).dataTable();
 
             $("#checkbox0").on("change", function () {
