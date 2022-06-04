@@ -36,6 +36,7 @@
     $product_array = array_unique($product_array);
 
     $query = "SELECT `_tblproducts`.`id`,`_tblproducts`.`name`,`stock_tbl`.`stock` AS `quantity`,
+        `stock_tbl`.`discount_type`,`stock_tbl`.`discount`,
         `_tblproducts`.`image`,`_tblproducts`.`code`,`_tblproducts`.`price`,`_tblproducts`.`tax`,
         `_tblproducts`.`tax_method`,`_tblproducts`.`note`,`category_tbl`.`cat_name` AS category_name,
         `_brands`.`name` AS `brand_name` FROM `_tblproducts` INNER JOIN `_brands` ON 
@@ -43,7 +44,7 @@
         `_tblproducts`.`category_id` LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id`
         AND `stock_tbl`.`store_id`='$store_id' WHERE `_tblproducts`.`id` = ? AND 
          (`_tblproducts`.`u_set` = $store_id OR `_tblproducts`.`chain_id`) AND 
-         `_tblproducts`.`status`='active' AND `stock` > '0'";
+         `_tblproducts`.`status`!='purged' AND `stock_tbl`.`status`='active' AND `stock` > '0'";
 
     $stmt = mysqli_prepare($link,$query);
     mysqli_stmt_bind_param($stmt,'s',$item);

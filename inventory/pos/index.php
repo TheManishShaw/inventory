@@ -499,17 +499,24 @@
         function addProduct(element) {
             if (productsAdded.indexOf(element.id) == -1){
                 productsAdded.push(element.id);
-                let tax = 0,
-                    subtotal = 0;;
-                if (element.tax_method == 'Inclusive') {
-                    tax = element.price - (element.price * 100 / (Number(element.tax) + 100));
-                    subtotal = element.price;
+                let tax = 0, subtotal = 0;
+
+                if (element.discount_type == 'percent') {
+                    subtotal = element.price -  (element.price * Number(element.discount) / 100);
                 } else {
-                    tax = Number(element.price) * Number(element.tax) / 100;
-                    subtotal = Number(element.price) + tax;
+                    subtotal = element.price - Number(element.discount);
                 }
+
+                if (element.tax_method == 'Inclusive') {
+                    tax = subtotal - (subtotal * 100 / (Number(element.tax) + 100));
+                    subtotal = subtotal;
+                } else {
+                    tax = Number(subtotal) * Number(element.tax) / 100;
+                    subtotal = Number(subtotal) + tax;
+                }
+
                 $('#pos-table').prepend(`
-                <tr class="products" style="height:80px !important;min-height:80px;">
+                <tr class="products" id='product-tr-`+element.id+`' style="height:80px !important;min-height:80px;">
                     <td><span class="product-name">` + element.name + `</span>
                         <span class="product-id" hidden>`+element.id+`</span>
                         <span class="product-stock" hidden>`+element.quantity+`</span>
@@ -552,12 +559,18 @@
                         </div>
                     </td>
                     <td>&#8377;<span class="product-subtotal">` + subtotal + `</span>
-                    <span class="product-tax" hidden>`+tax+`</span>
-                    <span class="product-taxtype" hidden>`+element.tax_method+`</span>
-                    <span class="product-single-subtotal" hidden>`+subtotal+`</span>
-                    <span class="product-single-tax" hidden>`+tax+`</span></td>
+                        <span class="product-tax" hidden>`+tax+`</span>
+                        <span class="product-tax-percent" hidden>`+element.tax+`</span>
+                        <span class="product-taxtype" hidden>`+element.tax_method+`</span>
+                        <span class="product-single-subtotal" hidden>`+subtotal+`</span>
+                        <span class="product-single-tax" hidden>`+tax+`</span>
+                        <span class="product-discount-type" hidden>`+element.discount_type+`</span>
+                        <span class="product-discount" hidden>`+element.discount+`</span>
+                    </td>
                     <td>
-                    <a href="javascript:void(0);" onclick="modal_show()" data-href="modal/edit.php" data-name="Edit Product" class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Edit Product">
+                    <a href="javascript:void(0);" data-href="modal/edit_product.php?id=`+element.id+`"
+                    class="openPopup btn btn-icon border-0 btn-custom flex-shrink-0 btn-active-light-primary w-30px h-30px me-3"
+                    data-name="Edit Product" onclick="modal_show()" data-bs-toggle="tooltip" title="Edit Product">
                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
                     <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
                             <span class="svg-icon svg-icon-3 svg-icon-light-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -596,6 +609,34 @@
             let subtotal = $(element).closest('tr').find('.product-single-subtotal').text();
             $(element).closest('tr').find('.product-subtotal').text((subtotal*quantity).toFixed(2));
             $(element).closest('tr').find('.product-tax').text((tax*quantity).toFixed(2));
+        }
+
+        function updateDiscount(product_id,discount_type,discount) {
+            let element = '#product-tr-'+product_id;
+            $(element).find('.product-discount-type').text(discount_type);
+            $(element).find('.product-discount').text(discount);
+
+            let tax = Number($(element).find('.product-tax-percent').text());
+            let tax_method = $(element).find('.product-taxtype').text();
+            let subtotal = Number($(element).find('.product-price').text());
+            if (discount_type == 'percent') {
+                subtotal = subtotal -  (subtotal * Number(discount) / 100);
+            } else {
+                subtotal = subtotal - Number(discount);
+            }
+
+            if (tax_method == 'Inclusive') {
+                tax = subtotal - ((subtotal * 100) / (Number(tax) + 100));
+            } else {
+                tax = Number(subtotal) * Number(tax) / 100;
+                subtotal = Number(subtotal) + tax;
+            }
+            
+            let quantity = $(element).find('.quantity-input').val();
+            $(element).find('.product-single-tax').text(tax);
+            $(element).find('.product-single-subtotal').text(subtotal);
+            productTotal(element,quantity);
+            cartTotal();
         }
 
         function cartTotal(){
@@ -767,7 +808,7 @@
             });
 
             $('body').on('click', '.btn-remove', function() {
-                let id = $(this).closest("tr").find(".product-id").text();
+                let id = Number($(this).closest("tr").find(".product-id").text());
                 $(this).closest("tr").remove();
                 productsAdded.splice(productsAdded.indexOf(id), 1);
                 cartTotal();

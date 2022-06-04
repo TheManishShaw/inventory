@@ -191,7 +191,7 @@
 						},
 						{"data": "status",
 							"render": function(data,type,row) {
-								if (data == 'active') 
+								if (data == 'active' || data == null) 
 									return "Active";
 								else 
 									return "Inactive";
@@ -257,6 +257,7 @@
 				const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
 				filterSearch.addEventListener('keyup', function (e) {
 					$('#active-product-tbl').DataTable().search(e.target.value).draw();
+					KTMenu.createInstances();
 				});
 			}
 	

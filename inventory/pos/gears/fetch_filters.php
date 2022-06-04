@@ -11,12 +11,14 @@
     $query1 = "SELECT `cat_id`,`cat_name`,(SELECT COUNT(`_tblproducts`.`name`) FROM `_tblproducts`
     INNER JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id` AND 
     `stock_tbl`.`store_id`='$store_id' WHERE `_tblproducts`.`category_id`=`category_tbl`.`cat_id` 
-    AND `status`='active' AND (`u_set`='$store_id' OR `chain_id`='$chain_id') AND `stock`>0) AS `quantity` 
+    AND `_tblproducts`.`status`!='purged' AND `stock_tbl`.`status`='active' AND 
+    (`u_set`='$store_id' OR `chain_id`='$chain_id') AND `stock`>0) AS `quantity` 
     FROM `category_tbl` WHERE `category_tbl`.`status` = 'active' AND (`cat_uset` = '$store_id' OR `chain_id`='$chain_id');";
     $sql1 = mysqli_query($link,$query1);
     $query2 = "SELECT `name`,`image`,`id`,`description`,(SELECT COUNT(`_tblproducts`.`name`) FROM 
     `_tblproducts` INNER JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id` AND 
-    `stock_tbl`.`store_id`='$store_id' WHERE `_tblproducts`.`brand_id`=`_brands`.`id` AND `status`='active' 
+    `stock_tbl`.`store_id`='$store_id' WHERE `_tblproducts`.`brand_id`=`_brands`.`id` AND 
+    `_tblproducts`.`status`!='purged' AND `stock_tbl`.`status`='active'
     AND (`u_set`='$store_id' OR `chain_id`='$chain_id') AND `stock`>0) AS `quantity` FROM `_brands` 
     WHERE `status` = 'active' AND (`u_set` = '$store_id' OR `chain_id`='$chain_id')";
     $sql2 = mysqli_query($link,$query2);

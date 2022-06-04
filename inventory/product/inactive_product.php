@@ -258,6 +258,7 @@
 				const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
 				filterSearch.addEventListener('keyup', function (e) {
 					$('#inactive-product-tbl').DataTable().search(e.target.value).draw();
+					KTMenu.createInstances();
 				});
 			}
 	
@@ -308,7 +309,7 @@
 				e.preventDefault();
 				let ids = $(this).attr('selected-checkboxes');
 				Swal.fire({
-					html: `Are you sure you want to mark these items as In-active?`,
+					html: `Are you sure you want to mark these items as Active?`,
 					icon: 'warning',
 					showConfirmButton: true,
 					showCancelButton: true,
@@ -323,7 +324,7 @@
 						.done(function(data) {
 							Swal.fire(
 								'Stauts changed!',
-								'Items have been marked In-active.',
+								'Items have been marked Active.',
 								'success'
 							);
 							reloadDatatable();
@@ -376,7 +377,7 @@
 				e.preventDefault();
 				let id = $(this).attr('product-id');
 				Swal.fire({
-					html: `Are you sure you want to mark this item as In-active?`,
+					html: `Are you sure you want to mark this item as Active?`,
 					icon: 'warning',
 					showConfirmButton: true,
 					showCancelButton: true,
@@ -389,9 +390,10 @@
 					if(result.isConfirmed) {
 						$.post("gears/toggleStatus.php",{"id_list":id,"current":'inactive'})
 						.done(function(data) {
+							console.log(data)
 							Swal.fire(
 								'Status changed!',
-								'Item has been marked In-active.',
+								'Item has been marked Active.',
 								'success'
 							);
 							reloadDatatable();
