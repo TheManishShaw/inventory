@@ -31,10 +31,6 @@
 									include "cores/snips/no_store.php";
 								}
 							?>
-								
-									<h1>testing github
-										
-									</h1>
 							</div>				
 						</div>						
 					</div>

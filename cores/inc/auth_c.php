@@ -38,6 +38,22 @@ if(!isset($_SESSION["$sys_session"]) || $_SESSION["e_stats"] !== "done"){
     exit;
 }
 }
+
+if ($u_store_stats != 'done') {
+    $dash = $sys_link."/dash.php";
+    $access_denied = $sys_link."/access_denied.php";
+    $chain_selection = $sys_link."/inventory/store/chain_selection.php";
+    $dash_store_create = $sys_link."/inventory/store/dash_store_create.php";
+    $create_store = $sys_link."/inventory/store/gears/create_store.php";
+    $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $curr_url = $protocol."".$_SERVER['HTTP_HOST']."".$_SERVER['REQUEST_URI'];
+    if ($curr_url != $dash && $curr_url != $chain_selection && $curr_url != $dash_store_create
+        && $curr_url != $create_store && $curr_url != $access_denied) {
+        header("location: ".$sys_link."/access_denied.php");
+        exit;
+    }
+}
+
 // if($kyc_check == "enabled"){
 // if(!isset($_SESSION["$sys_session"]) || $_SESSION["kyc_stats"] !== "done"){
 //     header("location: ".$sys_link."/plugins/kyc/kyc_form.php");

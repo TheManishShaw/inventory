@@ -1,8 +1,8 @@
 <?php
     include "../../cores/inc/config_c.php";
+    include "../../cores/inc/var_c.php";
     include "../../cores/inc/functions_c.php";
     include "../../cores/inc/auth_c.php";
-    include "../../cores/inc/var_c.php";
 
     $query = "SELECT * FROM `chain_tbl` WHERE `status` = 'active'";
     $result = mysqli_query($link,$query);
