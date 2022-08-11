@@ -8,7 +8,7 @@
     $u_set = $_SESSION['u_set'];
     $chain_id = $_SESSION['chain_id'];
 
-    $query = "SELECT * FROM `_brands` WHERE (`u_set`='$u_set' OR `chain_id`='$chain_id') AND `status`='active'";
+    $query = "SELECT * FROM `_brands` WHERE (`u_set`='$u_set' OR (`chain_id`='$chain_id' AND `chain_id`!=0)) AND `status`='active'";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die("Could not fetch brands. ".mysqli_error($link));

@@ -26,10 +26,10 @@
     if(!empty($brand_id)){
         $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
         AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
-        brand_name,`stock_tbl`.`stock`,`stock_tbl`.`discount_type`,`stock_tbl`.`discount` FROM `_tblproducts` 
+        brand_name,`stock_tbl`.`stock` AS `quantity`,`stock_tbl`.`discount_type`,`stock_tbl`.`discount` FROM `_tblproducts` 
         LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id`  AND 
         `stock_tbl`.`store_id`='$store_id' WHERE `id` = ? AND (`u_set` = '$store_id' OR 
-        `chain_id`='$chain_id') AND `brand_id` = '$brand_id' AND `_tblproducts`.`status` != 'purged'
+        (`chain_id`='$chain_id' AND `chain_id`!=0)) AND `brand_id` = '$brand_id' AND `_tblproducts`.`status` != 'purged'
         AND `stock_tbl`.`status`='active' AND `stock` > '0'";
 
         $stmt = mysqli_prepare($link,$query1);
@@ -48,9 +48,10 @@
     } else if(!empty($cat_id)) {
         $query1 = "SELECT *,(SELECT `cat_name` FROM `category_tbl` WHERE `category_tbl`.`cat_id`=`_tblproducts`.`category_id`)
         AS category_name,(SELECT `name` FROM `_brands` WHERE `_brands`.`id`=`_tblproducts`.`brand_id`) AS 
-        brand_name,`stock_tbl`.`stock`,`stock_tbl`.`discount_type`,`stock_tbl`.`discount` FROM 
+        brand_name,`stock_tbl`.`stock` AS `quantity`,`stock_tbl`.`discount_type`,`stock_tbl`.`discount` FROM 
         `_tblproducts` LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id` AND 
-        `stock_tbl`.`store_id`='$store_id' WHERE `id` = ? AND (`u_set` = '$store_id' OR `chain_id`='$chain_id') 
+        `stock_tbl`.`store_id`='$store_id' WHERE `id` = ? AND (`u_set` = '$store_id' OR 
+        (`chain_id`='$chain_id' AND `chain_id`!=0)) 
         AND `category_id` = '$cat_id' AND `_tblproducts`.`status` != 'purged' AND 
         `stock_tbl`.`status`='active' AND `stock` > '0'";
 

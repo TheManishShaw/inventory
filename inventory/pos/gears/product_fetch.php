@@ -43,7 +43,8 @@
         `_brands`.`id`=`_tblproducts`.`brand_id` INNER JOIN `category_tbl` ON `category_tbl`.`cat_id`=
         `_tblproducts`.`category_id` LEFT JOIN `stock_tbl` ON `stock_tbl`.`product_id`=`_tblproducts`.`id`
         AND `stock_tbl`.`store_id`='$store_id' WHERE `_tblproducts`.`id` = ? AND 
-         (`_tblproducts`.`u_set` = $store_id OR `_tblproducts`.`chain_id`) AND 
+         (`_tblproducts`.`u_set` = $store_id OR 
+         (`_tblproducts`.`chain_id`='$chain_id' AND `_tblproducts`.`chain_id`!='0')) AND 
          `_tblproducts`.`status`!='purged' AND `stock_tbl`.`status`='active' AND `stock` > '0'";
 
     $stmt = mysqli_prepare($link,$query);

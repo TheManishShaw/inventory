@@ -8,7 +8,8 @@
     $u_set = $_SESSION['u_set'];
     $chain_id = $_SESSION['chain_id'];
 
-    $query = "SELECT * FROM `_tblreturn_reason` WHERE (`uset`='$u_set' OR `chain_id`='$chain_id') AND `status`='active'";
+    $query = "SELECT * FROM `_tblreturn_reason` WHERE (`uset`='$u_set' OR (`chain_id`='$chain_id' AND 
+    `chain_id`!=0)) AND `status`='active'";
     $result = mysqli_query($link,$query);
     if (!$result) {
         die("Could not fetch return reasons. ".mysqli_error($link));

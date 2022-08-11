@@ -5,17 +5,19 @@ include "../../../cores/inc/auth_c.php";
 include "../../../cores/inc/var_c.php";
 
 $u_set = $_SESSION['u_set'];
+$chain_id = $_SESSION['chain_id'];
 
-$query = "SELECT * FROM `category_tbl` WHERE `cat_uset`='$u_set' AND `status`='active'";
+$query = "SELECT * FROM `category_tbl` WHERE `cat_uset`='$u_set' OR (`chain_id`='$chain_id' AND `chain_id`!=0)
+ AND `status`='active'";
 $cat_result = mysqli_query($link,$query);
 
-$query = "SELECT * FROM `_brands` WHERE `u_set`='$u_set' AND `status`='active'";
+$query = "SELECT * FROM `_brands` WHERE `u_set`='$u_set' OR (`chain_id`='$chain_id' AND `chain_id`!=0) AND `status`='active'";
 $brand_result = mysqli_query($link,$query);
 
-$query = "SELECT * FROM `_tblunits` WHERE `u_set`='$u_set' AND `status`='active'";
+$query = "SELECT * FROM `_tblunits` WHERE `u_set`='$u_set' OR (`chain_id`='$chain_id' AND `chain_id`!=0) AND `status`='active'";
 $unit_result = mysqli_query($link,$query);
 
-$query = "SELECT * FROM `tax_tbl` WHERE `u_set`='$u_set' AND `status`='active'";
+$query = "SELECT * FROM `tax_tbl` WHERE `u_set`='$u_set' OR (`chain_id`='$chain_id' AND `chain_id`!=0)   AND `status`='active'";
 $tax_result = mysqli_query($link,$query);
 
 ?>
@@ -38,9 +40,12 @@ $tax_result = mysqli_query($link,$query);
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group fv-row">
-                                            <label class="required form-label">HSN Code </label>
-                                            <input type="text" class="form-control" placeholder="Enter HSN Code"
-                                                data-errors="Please Enter Code." name="code" id="code" required>
+                                            <label class="form-label">Bar Code </label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Enter Bar Code"
+                                                data-errors="Please Enter Code." name="code" id="code">
+                                                <button class="btn btn-primary" id="code-generator">Generate</button>
+                                            </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -246,13 +251,6 @@ $tax_result = mysqli_query($link,$query);
                             }
                         }
                     },
-                    code: {
-                        validators: {
-                            notEmpty: {
-                                message: "Text input required."
-                            }
-                        }
-                    },
                     category: {
                         validators: {
                             notEmpty: {
@@ -336,5 +334,11 @@ $tax_result = mysqli_query($link,$query);
 
         $('[data-control="select2"]').select2({
             dropdownParent: $('#modal_show')
+        });
+
+        $('#code-generator').on('click',(e)=>{
+            e.preventDefault();
+            let code = Math.floor((Math.random()*100000000000)+10000000000);
+            document.querySelector('#code').value = code;
         });
     </script>
