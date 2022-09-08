@@ -266,6 +266,7 @@
             $('#invoice-modal').modal('show');
         }
 
+        // function to search products.
         function search() {
             var input, filter, container, products, a, i, txtValue;
             input = document.querySelector("#search-bar");
@@ -288,6 +289,7 @@
                 url: "gears/fetch_invoice.php?store="+store,
                 dataType: "html"
             }).done(function(data){
+                $('#invoice-dropdown').html('');
                 let sale_ids = JSON.parse(data).data;
                 if(sale_ids.length > 0) {
                     sale_ids.forEach((item)=>{
@@ -699,8 +701,9 @@
             products.forEach(function(item){
                 originalAmount += parseFloat($(item).text());
             })
-            var store = $("#store-select").val();
-            var customer = $("#customer-select").val();
+            let store = $("#store-select").val();
+            let customer = $("#customer-select").val();
+            let customerName = document.querySelector('#customer-select').selectedOptions[0].innerText;
             
             var completeData = {
                 individualData: data,
@@ -708,6 +711,7 @@
                     totalTax: totalTax.toFixed(2),
                     storeId: store,
                     customerId: customer,
+                    customerName: customerName,
                     untaxedAmount: originalAmount,
                     totalAmount: grandTotal
                 }

@@ -5,6 +5,7 @@ include "../../../cores/inc/functions_c.php";
 include "../../../cores/inc/auth_c.php";
 
 $sale_id = $_GET['sale_id'];
+
 $query = "SELECT `invoice_data` FROM `_tblsales` WHERE `sale_id`='$sale_id'";
 $result = mysqli_query($link, $query);
 if (!$result) {
@@ -21,6 +22,8 @@ $payment_method1 = $invoiceData->paymentMethod->split_payment;
 $halfPayment = $invoiceData->payment->main_payment;
 $halfPayment1 = $invoiceData->payment->split_payment;
 $amountPaid = $invoiceData->amountPaid;
+$transaction_type = $invoiceData->transaction_type;
+$transaction_id = $invoiceData->transaction_id;
 
 $uset = $_SESSION['u_set'];
 
@@ -61,7 +64,7 @@ foreach ($invoiceData->products->productIds as $item) {
 <html>
 
 <head>
-    <title>INVOICE - Sale <?php echo $sale_id; ?></title>
+    <title>INVOICE - Sale <?php echo $transaction_id; ?></title>
     <?php include "../../../cores/inc/header_c.php"; ?>
     <link rel="stylesheet" href="invoice.css">
     <style>
@@ -85,8 +88,6 @@ foreach ($invoiceData->products->productIds as $item) {
             width: 120mm;
             height: 100mm
         }
-
-        ;
 
         hr {
             border-top: 2px solid black;
@@ -134,6 +135,7 @@ foreach ($invoiceData->products->productIds as $item) {
                             echo "<h6>GST Number : " . $row2['gst_num'] . "</h6>";
                         }
                     } ?>
+                    <h6>Transaction Type: <?php echo ucfirst($transaction_type); ?></h6>
                 </div>
 
                 <table style="margin-bottom:0;" class=" col-sm-12 mt-3">
@@ -216,7 +218,7 @@ foreach ($invoiceData->products->productIds as $item) {
                     </tbody>
                 </table>
                 <div class="m-2 pt-3 text-center">
-                    <img class="barcode" alt="product_barcode" src="barcode.php?codetype=code128&size=40&text=<?php echo $sale_id ?>&print=true$color" />
+                    <img class="barcode" alt="product_barcode" src="barcode.php?codetype=code128&size=40&text=<?php echo $sale_id; ?>&print=true$color" />
                     <h3><?php echo $sale_id; ?></h3>
                     <!--  ----------- put the barcode code here----------->
                 </div>
