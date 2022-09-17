@@ -151,13 +151,13 @@
                 "ajax": "gears/credit_fetch.php",
                 "deferRender": true,
                 "columns": [
-                    {"data": "credit_id",
+                    {"data": "transaction_id",
                         "render": function(data,type,row) {
                             return `<div
                                         class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" id="checkbox`+row.credit_id+`" />
+                                            data-kt-check-target="#kt_datatable_example_1 form-check-input"
+                                            value="1" id="checkbox`+row.transaction_id+`" />
                                     </div>`;
                         }
                     },
@@ -204,13 +204,13 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="openPopup table-modal menu-link px-3" onclick="modal_show()"
-                                        data-href="modal/update_credit.php?id=`+row.credit_id+`" data-name="Update Credit">Edit</a>
+                                        <a href="modal/update_credit.php?id=`+row.transaction_id+`" class="table-modal menu-link px-3"
+                                        >Edit</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.credit_id+`" 
+                                        <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.transaction_id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
                                     </div>
                                     <!--end::Menu item-->
@@ -246,6 +246,9 @@
             },2000);
         }
 
+        // This event and the one below are almost same, but they had to me made separately,
+        // so that I don't have to deal with any edge cases caused due to checkboxes being selected
+        // and the user deleting individual items using the action button.
         $('body').on('click','#delete-unit',function(e) {
             e.preventDefault();
             let ids = $(this).attr('selected-checkboxes');

@@ -8,12 +8,13 @@
     $uset = $_SESSION['u_set'];
 
     $query = "SELECT 
-                `credit_id`,`store`,`borrower`,`lender`,`second_party_id`,`second_party_table`,`total_amount`,
-                `amount_paid`,`status`,`created_at`,`due_date`
+                `credit_id`,`transaction_id`,`store`,`borrower`,`lender`,`second_party_id`,`second_party_table`,
+                `total_amount`,`amount_paid`,`status`,`created_at`,`due_date`
               FROM 
                 `credit_tbl`
               WHERE
-                `store` = '$uset' AND `transaction_type` = 'credit' ORDER BY `id` DESC;";
+                `store` = '$uset' AND `transaction_type` = 'credit'
+                AND `status` != 'purged' ORDER BY `id` DESC;";
     $result = mysqli_query($link,$query);
 
     if (!$result) {
