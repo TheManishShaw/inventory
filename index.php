@@ -141,15 +141,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to <?php echo $sys_name ?></h1>
 							<!--end::Title-->
 							<!--begin::Description-->
-							<p class="fw-bold fs-2 text-white">Plan your blog post by choosing a topic creating 
-							<br />an outline and checking facts
-							
-						</p>
+							<p class="fw-bold fs-2 text-white"> 
+								POS that manage stocks and billing for restaurants
+								<br />and commercial shops
+							</p>
 							<!--end::Description-->
 						</div>
 						<!--end::Header-->
 						<!--begin::Illustration-->
-						<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-200px min-h-lg-450px" style="background-image: url(assets/media/images/banner.svg)"></div>
+						<!-- <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-200px min-h-lg-450px" style="background-image: url(assets/media/images/banner.svg)"></div> -->
 						<!--end::Illustration-->
 					</div>
 					<!--end::Wrapper-->

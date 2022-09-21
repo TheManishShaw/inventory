@@ -62,6 +62,7 @@
                                         <th>Due Date</th>
                                         <th>Lender</th>
                                         <th>Borrower</th>
+                                        <th>Transaction Type</th>
                                         <th>Amount</th>
                                         <th>Status</th>
                                         <th class="text-end min-w-100px">Actions</th>
@@ -179,6 +180,12 @@
                     },
                     {"data":"lender"},
                     {"data":"borrower"},
+                    {"data":"transaction_type",
+                        render: function(data,type,row) {
+                            if (row.transaction_type === 'advance') return 'Advance';
+                            return 'Credit';
+                        }
+                    },
                     {"data":"total_amount"},
                     {"data":"status"},
                     {"data": null}

@@ -65,7 +65,7 @@
                                     <div class="col-6">
                                         <label class="fw-bolder" for="date">Date</label>
                                         <input type="text" id="date" value="<?php echo date('d-m-Y H:i:s',strtotime($adjRow['date']));?>"
-                                         placeholder="Enter Date" class="form-control" name="date">
+                                         placeholder="Enter Date" class="form-control" name="date" readonly>
                                     </div>
                                     <div class="col-6">
                                         <label class="fw-bolder" for="supply">Supplier</label>
@@ -202,12 +202,6 @@
     </div>
     <?php include "../../../cores/inc/footer_c.php" ?>
     <script>
-        $('#date').flatpickr({
-            enableTime: true,
-            dateFormat: 'd-m-Y H:i:s',
-            minDate: "today"
-        });
-
         $.ajax({
             url: "../gears/product_fetch.php",
             dataType: 'html'

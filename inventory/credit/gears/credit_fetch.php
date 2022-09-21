@@ -9,11 +9,11 @@
 
     $query = "SELECT 
                 `credit_id`,`transaction_id`,`store`,`borrower`,`lender`,`second_party_id`,`second_party_table`,
-                `total_amount`,`amount_paid`,`status`,`created_at`,`due_date`
+                `transaction_type`,`total_amount`,`amount_paid`,`status`,`created_at`,`due_date`
               FROM 
                 `credit_tbl`
               WHERE
-                `store` = '$uset' AND `transaction_type` = 'credit'
+                `store` = '$uset' 
                 AND `status` != 'purged' ORDER BY `id` DESC;";
     $result = mysqli_query($link,$query);
 
