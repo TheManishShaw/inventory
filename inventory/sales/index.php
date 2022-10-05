@@ -204,7 +204,12 @@
 						}
 					},
                     {"data": "net_tax"},
-                    {"data": "payment_status"},
+                    {"data": "payment_status",
+                        render: function(data,type,row) {
+                            if (data === 'paid') return 'Paid';
+                            return 'Pending';
+                        }
+                    },
                     {"data": null}
                 ],
                 "columnDefs": [

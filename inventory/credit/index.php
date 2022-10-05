@@ -217,6 +217,12 @@
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
+                                        <a href="javascript:void(0);" class="menu-link px-3 toggle-type" data-id="${row.transaction_id}" 
+                                         data-type="${row.transaction_type}" >Toggle Type</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
                                         <a href="javascript:void(0);" class="menu-link px-3 delete-action" delete-id="`+row.transaction_id+`" 
                                         data-kt-customer-table-filter="delete_row">Delete</a>
                                     </div>
@@ -290,6 +296,7 @@
             });
         });
 
+        // event handler for cliking delete in the action dropdown
         $('body').on('click','.delete-action',function(e){
             e.preventDefault();
             let id = $(this).attr('delete-id');
@@ -310,6 +317,48 @@
                         Swal.fire(
                             'Deleted!',
                             'Item has been deleted.',
+                            'success'
+                        );
+                        reloadDatatable();
+                    }).fail(function() {
+                        Swal.fire(
+                            'Error',
+                            "An error occured, please try again!",
+                            'error'
+                        );
+                    });
+                }
+            });
+        });
+
+        // event handler for clicking toggle type button in action dropdown
+        $('body').on('click','.toggle-type', event => {
+            event.preventDefault();
+            let id = event.target.getAttribute('data-id')
+            let type= event.target.getAttribute('data-type')
+            let new_type
+            if (type === 'credit')
+                new_type = 'Advance'
+            else 
+                new_type = 'Credit'
+            Swal.fire({
+                html: `Do you wish to change Transaction Type to ${new_type}?`,
+                icon: 'warning',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                customClass: {
+                    confirmButton: "btn btn-danger",
+                    cancelButton: "btn btn-secondary"
+                }
+            }).then((result)=> {
+                if(result.isConfirmed) {
+                    $.post("gears/toggle_transaction_type.php",
+                    {transaction_id:id,transaction_type:type})
+                    .done(function(data) {
+                        Swal.fire(
+                            'Updated!',
+                            `Transaction type has been changed to ${new_type}.`,
                             'success'
                         );
                         reloadDatatable();

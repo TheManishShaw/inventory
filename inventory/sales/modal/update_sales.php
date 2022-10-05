@@ -269,7 +269,7 @@
                                 <?php if($saleRow['payment_status']=='paid') echo 'selected';?>>Paid</option>
                                 <!--<option value="2">Partial</option>-->
                                 <option value="pending" 
-                                <?php if($saleRow['payment_status']=='pending') echo 'selected';?>>Pending</option>
+                                <?php if($saleRow['payment_status']!=='paid') echo 'selected';?>>Pending</option>
                                 </select>
                             </div>
 

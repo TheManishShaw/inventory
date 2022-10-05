@@ -175,7 +175,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 									<div class="alert alert-success">You have successfully signed up with <?php echo $sys_title ?></div>
 									<?php } ?>
 									<?php if(!empty($error) && strlen($error) >= 1){?>
-									<div class="alert alert-danger"><?php echo $error ?></div>
+									<div class="alert alert-danger"><?php if ($error == 'changeip') {
+										echo "Your IP Address has changed. Please login again.";
+									} else {
+										echo $error;
+									} ?></div>
 									<?php } ?></p>
 									<!--end::Link-->
 								</div>								
